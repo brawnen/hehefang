@@ -1,0 +1,110 @@
+/**
+ * style module
+ * 
+ * @project		
+ * @copyright	
+ * @author		zhanghaibin
+ * @version 	1.0
+ * 
+ * @colordef 	#333 				article text
+ * @colordef	#316cd6				link & visible
+ * @colordef	#ff5c00				hover & active
+ */
+
+/**
+ * CSS Menu
+ * 
+ * Tips
+ * - fruitless
+ * TipsPop
+ * 
+ * 
+ */
+
+/* Tips Module
+ ---------------------------------------- */
+
+.mod-tips {
+	padding: 10px 25px;
+	background: #fff2df;
+	border: 1px solid #ffdfb4;
+	color: #333;
+	font-size: 12px;
+}
+
+/* fruitless */
+.mod-tips.fruitless {
+	padding: 50px 0;
+	text-align: center;
+}
+
+/* TipsPop Module
+ ---------------------------------------- */
+
+.mod-tipsPop {
+	position:relative;
+	top: -2px;
+	*top: 0;
+	left:0;
+	z-index: 50;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+}
+.mod-tipsPop .icon{
+	display:block;
+	width:14px;
+	height:14px;
+	background-position:-28px -29px;
+	cursor:pointer;
+}
+.mod-tipsPop .tip{
+	position:absolute;
+	left: 7px;
+	bottom:16px;
+	z-index: -1;
+	visibility: hidden;
+	opacity: 0;
+	max-width:300px;
+	padding:4px 10px;
+	background:#fff;
+	border:1px solid #e4e4e4;
+	-webkit-box-shadow:2px 2px 4px #999;
+	box-shadow:2px 2px 4px #999;
+	color:#666;
+	line-height:18px;
+	font-weight: normal;
+}
+/* tipsPop hover */
+.mod-tipsPop:hover .icon{
+	background-position:-42px -29px;
+}
+.mod-tipsPop:hover .tip{
+	z-index: 51;
+	visibility: visible;
+	opacity: 1;
+}
+/* tip direction */
+.mod-tipsPop.tip-rb .tip {
+	top: 16px;
+	bottom: auto;
+}
+.mod-tipsPop.tip-lt .tip {
+	right: 7px;
+	left: auto;
+}
+.mod-tipsPop.tip-lb .tip {
+	right: 7px;
+	left: auto;
+	top: 16px;
+	bottom: auto;	
+}
+/* tipsPop theme */
+.mod-tipsPop.tips-help .icon {
+	background-position:0 -29px;
+}
+.mod-tipsPop.tips-help:hover .icon {
+	background-position:-14px -29px;
+}
+

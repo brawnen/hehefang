@@ -1,0 +1,83 @@
+/**
+ * style popup
+ *
+ * @project
+ * @copyright
+ * @author      zhanghaibin
+ * @version 	1.0
+ *
+ */
+
+/**
+ * CSS Menu
+ *
+ * Popup
+ * Theme
+ * 
+ * Layout
+ */
+
+/* Popup
+ ---------------------------------------- */
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 990;
+	background: #fff;
+	border: 1px solid #d2d2d2;
+	-webkit-box-shadow:2px 2px 4px #333;
+	-moz-box-shadow:2px 2px 4px #333;
+	box-shadow:2px 2px 4px #333;
+}
+.popup .close {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	display: block;
+	width: 16px;
+	height: 16px;
+	background-position: -35px -10px;
+	cursor: pointer;
+}
+.popup .close:hover {
+	background-position: -52px -10px;
+}
+.popup .hd {
+	height: 30px;
+	padding: 0 30px 0 8px;
+	background: #eee;
+	line-height: 30px;
+	cursor: default ;
+}
+.popup .hd h2 {
+	color: #333;
+	font-size: 14px;
+}
+.popup .bd {
+	*zoom: 1;
+}
+.popup .bd:after {
+	display: table;
+	clear: both;
+	content: " ";
+}
+.popup .btn-wrap {
+	padding: 10px 0;
+	text-align: center;
+}
+
+/* Theme
+ ---------------------------------------- */
+
+.popup-primary .hd{
+	background: #eee;
+}
+.popup-info .hd {
+	background: none;
+}
+
+
+/* Layout
+ ---------------------------------------- */

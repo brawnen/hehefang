@@ -1,0 +1,137 @@
+/**
+ * style product
+ * 
+ * @project		
+ * @copyright	
+ * @author		zhanghaibin
+ * @version 	1.0
+ * 
+ * @colordef 	#333 				article text
+ * @colordef	#316cd6				link & visible
+ * @colordef	#ff5c00				hover & active
+ */
+
+/**
+ * CSS Menu
+ * 
+ * IssueProduct
+ * ProductGlobal
+ * AddCategory
+ * Layout
+ * 
+ */
+
+
+/* Product Global
+ ---------------------------------------- */
+
+.product .mainCaption {
+	margin: 0 0 10px;
+}
+.product .mod-tipsPop {
+	margin: 0 2px;
+}
+
+/* AddCategory
+ ---------------------------------------- */
+
+.addCategory {
+	background: #fff;
+	border: 1px solid #e5e5e5;
+}
+.addCategory fieldset {
+	padding: 32px;
+}
+.addCategory .legend {
+	margin: 0;
+	font: 18px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+}
+
+/* IssueProduct
+ ---------------------------------------- */
+
+.issueProduct {
+	background: #fff;
+	border: 1px solid #e5e5e5;
+}
+.issueProduct fieldset {
+	padding: 32px;
+}
+.issueProduct .legend {
+	margin: 0;
+	font: 18px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+}
+
+/* AddCategory
+ ---------------------------------------- */
+
+.addCategory .legend {
+	margin: 0 0 40px;
+}
+.addCategory .formGroup {
+	width: 876px;
+	margin: 0 auto;
+}
+
+.addCategory .categoryList {
+	*zoom: 1;
+	margin-bottom: 18px;
+}
+.categoryList:after {
+	display: table;
+	clear: both;
+	content: " ";
+}
+.categoryList .cl-item {
+	float: left;
+	width: 282px;
+	margin: 0 5px;
+}
+.categoryList ul {
+	overflow-y: scroll;
+	height: 278px;
+	padding: 6px 5px;
+	border: 1px solid #dcdcdc;
+}
+.categoryList li {
+	height: 30px;
+	margin: 2px 0;
+	padding: 0 10px;
+	line-height: 30px;
+	cursor: pointer;
+}
+.categoryList li span {
+	float: right;
+	font-family: simsun;
+}
+.categoryList li:hover,
+.categoryList li.curr {
+	background-color: #e5f2fe;
+	font-weight: 700;
+}
+
+.addCategory .mod-tips {
+	margin: 0 5px;
+	padding: 7px 15px;
+	color: #333;
+}
+.addCategory .mod-tips span {
+	padding: 0 10px;
+	font-family: simsun;
+}
+.addCategory .mod-tips b {
+	padding: 0 5px;
+}
+.addCategory .btnWrap {
+	padding: 32px 0 0;
+	text-align: center;
+}
+
+/* Layout
+ ---------------------------------------- */
+
+/* applyBrand */
+.mainCaption .applyBrand {
+	float: right;
+	margin: 4px 0 0;
+}
