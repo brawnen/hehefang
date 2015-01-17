@@ -34,7 +34,7 @@
 }
 #asideNav li {
 	margin: 0  0 10px;
-	font: 16px/32px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+	font: 16px/32px 'Helvetica Neue', Helvetica, 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
 	white-space: nowrap;
 }
 #asideNav li a {
@@ -64,6 +64,7 @@
 .mainCaption {
 	padding: 4px 10px 0;
 	background: #fff;
+	border: 1px solid #e5e5e5;
 	border-bottom: 2px solid #7a39b2;
 	line-height: 38px;
 	*zoom: 1;
@@ -76,8 +77,11 @@
 .mainCaption h2 {
 	float: left;
 	color: #7a39b2;
-	font: 700 18px/38px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+	font: 700 18px/38px 'Helvetica Neue', Helvetica, 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
 	cursor: default;
+}
+.mainCaption.mc-mb {
+	margin-bottom: 10px;
 }
 
 /* Screening
@@ -86,7 +90,7 @@
 .screening {
 	position: relative;
 	margin: 0 0 10px;
-	padding: 25px 0 0;
+	padding: 25px 0 0 10px;
 	background: #fff;
 	border: 1px solid #e5e5e5;
 	color: #666;
@@ -95,7 +99,7 @@
 	display: none;
 }
 .screening .formGroup {
-	width: 910px;
+	width: 900px;
 }
 .screening .item-label {
 	color: #666;
@@ -291,6 +295,7 @@
 }
 
 /* operate */
-.table .td-operate a {
+.table .td-operate a,
+.table .td-operate span {
 	margin: 0 5px;
 }

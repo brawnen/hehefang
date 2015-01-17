@@ -38,11 +38,11 @@
 	display: block;
 	width: 16px;
 	height: 16px;
-	background-position: -35px -10px;
+	background-position: 0 0;
 	cursor: pointer;
 }
 .popup .close:hover {
-	background-position: -52px -10px;
+	background-position: -16px 0;
 }
 .popup .hd {
 	height: 30px;

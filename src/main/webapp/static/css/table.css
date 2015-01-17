@@ -22,7 +22,6 @@
  ---------------------------------------- */
 
 .table {
-	width: 100%;
 	max-width: 100%;
 	margin-bottom: 10px;
 	border: 1px solid #e5e5e5;
@@ -49,7 +48,14 @@ table th,table td {
 .table-line td {
 	border-width: 1px 0 0 0;
 }
+.table tbody {
+	color: #666;
+}
 
+/* table full */
+.table-full {
+	width: 100% !important;
+}
 /* noborder */
 .noborder {
 	border: 0 !important;
@@ -182,6 +188,7 @@ table.table-center>tfoot>tr>td,
 
 .table-product {
 	margin-bottom: 0;
+	width: 100%;
 }
 .table-product th,
 .table-product td {

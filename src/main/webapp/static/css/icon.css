@@ -58,12 +58,12 @@
 .i-dangerSM {/* samll */
 	width: 26px;
 	height: 26px;
-	background-position: -53px -77px;
+	background-position: 0 -83px;
 }
 .i-danger {
 	width: 40px;
 	height: 40px;
-	background-position: -120px -103px;
+	background-position: 0 -43px;
 }
 .i-dangerLG {/* large */
 	width: 74px;
@@ -93,6 +93,9 @@
 	
 }
 
+/* 16*16
+ ---------------------------------------- */
+
 /* 18*18
  ---------------------------------------- */
 
@@ -116,7 +119,9 @@
 /* 20*20
  ---------------------------------------- */
 
-.i-warn, .i-cartSM {
+.i-warn, .i-cartSM,
+.i-gold, .i-clock, .i-ok, .i-err,
+.i-zoom {
 	width: 20px;
 	height: 20px;
 }
@@ -127,6 +132,21 @@
 	background-position: -62px -57px;
 }
 
+.i-clock {
+	background-position: -40px 0;
+}
+.i-gold {
+	background-position: -60px 0;
+}
+.i-ok {
+	background-position: -80px 0;
+}
+.i-err {
+	background-position: -100px 0;
+}
+.i-zoom {
+	background-position: -120px 0;
+}
 
 /* 24*24
  ---------------------------------------- */

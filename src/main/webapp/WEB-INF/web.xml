@@ -39,4 +39,20 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+
+	<filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>
+             com.opensymphony.module.sitemesh.filter.PageFilter
+        </filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+         <url-pattern>/product/*</url-pattern>
+        <url-pattern>/order/*</url-pattern>
+        <url-pattern>/freight/*</url-pattern>
+        <url-pattern>/account/*</url-pattern>
+    </filter-mapping> 
+    
 </web-app>

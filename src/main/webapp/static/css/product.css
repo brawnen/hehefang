@@ -14,9 +14,13 @@
 /**
  * CSS Menu
  * 
+ * ProductGlobal
+ * BrandGlobal
+ * 
  * IssueProduct
  * ProductGlobal
  * AddCategory
+ * BrandForm
  * Layout
  * 
  */
@@ -25,12 +29,18 @@
 /* Product Global
  ---------------------------------------- */
 
-.product .mainCaption {
-	margin: 0 0 10px;
-}
 .product .mod-tipsPop {
 	margin: 0 2px;
 }
+
+/* Brand Global
+ ---------------------------------------- */
+
+.wrap-brand .section {
+	background: #fff;
+	border: 1px solid #e5e5e5;
+}
+
 
 /* AddCategory
  ---------------------------------------- */
@@ -44,7 +54,7 @@
 }
 .addCategory .legend {
 	margin: 0;
-	font: 18px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+	font: 18px 'Helvetica Neue', Helvetica, 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
 }
 
 /* IssueProduct
@@ -58,8 +68,58 @@
 	padding: 32px;
 }
 .issueProduct .legend {
-	margin: 0;
-	font: 18px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+	margin: 0 0 20px;
+	font: 18px 'Helvetica Neue', Helvetica, 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+}
+.issueProduct .form-item {
+	margin: 0 0 20px;
+}
+.issueProduct .item-label label {
+	vertical-align: baseline;
+}
+.issueProduct .categoryTxt {
+	margin: 0 30px 0 0;
+}
+.issueProduct .categoryTxt em {
+	margin: 0 5px;
+	font-family: simsun;
+}
+.issueProduct .item-color .mod-attrChk li {
+	min-width: 158px;
+}
+.issueProduct .editer {
+	max-width: 750px;
+}
+.issueProduct .sku-attr table {
+	width: 650px;
+}
+.issueProduct .sku-attr tbody td {
+	background: #fdfdfd;
+	color: #666;
+}
+/* uploadSKUImg */
+.issueProduct .uploadSKUImg {
+	width: 650px;
+}
+.issueProduct .uploadSKUImg>.wrap {
+	padding: 14px;
+	background: #fdfdfd;
+	border: 1px solid #e5e5e5;
+}
+.issueProduct .uploadSKUImg li {
+	float: left;
+	width: 120px;
+	margin: 0 50px 0 10px;
+	padding: 10px 0;
+	text-align: center;
+}
+.issueProduct .uploadSKUImg .mod-upload {
+	margin: 0 0 10px;
+}
+.issueProduct .uploadSKUImg p {
+	margin: 0 0 5px;
+	line-height: 18px;
+	text-align: center;
 }
 
 /* AddCategory
@@ -111,8 +171,11 @@
 }
 
 .addCategory .mod-tips {
-	margin: 0 5px;
-	padding: 7px 15px;
+	margin: 0 90px;
+	padding: 10px 15px;
+	background: #ffffe5;
+	border: 1px solid #ffcc7f;
+	line-height: 16px;
 	color: #333;
 }
 .addCategory .mod-tips span {
@@ -125,6 +188,62 @@
 .addCategory .btnWrap {
 	padding: 32px 0 0;
 	text-align: center;
+}
+
+/* Brand Form
+ ---------------------------------------- */
+
+.form-brand .mod-tips {
+	margin: 10px 15px 0;
+	padding: 5px 20px;
+}
+.form-brand .mod-tips dd {
+	padding-top: 5px;
+	line-height: 20px;
+}
+.form-brand fieldset {
+	padding: 30px;
+}
+.form-brand .legend {
+	margin-bottom: 20px;
+}
+.form-brand .form-item {
+	margin: 0 0 20px;
+}
+.form-brand .item-label {
+	width: 190px;
+	line-height: 32px;
+}
+.form-brand .item-cont {
+	margin-left: 200px;
+	line-height: 32px;
+}
+.form-brand .legend h3 {
+	padding: 0 10px;
+	font: 700 18px/24px 'Helvetica Neue', Helvetica, 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+}
+.form-brand .item-category .table {
+	margin-top: 15px;
+}
+.form-brand .brandResult {
+	overflow-y: scroll;
+	border: 1px solid #c5c5c5;
+	border-top: 0;
+	width: 238px;
+	height: 134px;
+	color: #666;
+}
+.form-brand .brandResult ul {
+	padding: 6px 0;
+}
+.form-brand .brandResult li {
+	margin-bottom: 2px;
+	padding: 0 6px;
+	line-height: 24px;
+	cursor: pointer;
+}
+.form-brand .brandResult li:hover {
+	background: #e5e5e5;
 }
 
 /* Layout

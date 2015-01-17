@@ -13,6 +13,8 @@
  *
  * Form
  * Theme
+ * 
+ * 
  */
 
 /* Form
@@ -43,6 +45,7 @@
 	float: left;
 	clear: left;
 	width: 100px;
+	min-height: 1px;
 	margin-right: 10px;
 	color: #333;
 	line-height: 26px;
@@ -72,8 +75,8 @@
 .form .item-cont>label {
 	margin-right: 20px;
 }
-.form .item-cont .fixedTel,
-.form .item-cont .or{
+.form .item-cont .txt-tel,
+.form .item-cont .txt-section {
 	margin-right: 10px;
 }
 /* form-inline */
@@ -87,3 +90,4 @@
 
 /* Theme
  ---------------------------------------- */
+

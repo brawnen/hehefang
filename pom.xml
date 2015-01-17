@@ -16,4 +16,13 @@
 	<build>
 		<finalName>afd_seller</finalName>
 	</build>
+
+	<dependencies>
+		<!-- sitemesh begin -->
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+		</dependency>
+		<!-- sitemesh end -->
+	</dependencies>
 </project>

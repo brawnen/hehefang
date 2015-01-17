@@ -64,26 +64,35 @@
 	</style>
 </head>
 <body>
-	<h2>Tips</h2>
+	<h2>全局样式</h2>
+	<div class="content">
+		<p><b>符号样式（宋体）</b></p>
+		<p><b>
+			.textMark {
+				font-family: simsun !important;
+			}</b>
+		</p>
+		<p><img src="global-css.jpg"/></p>
+	</div>
+	<h2>颜色</h2>
 	<div class="content">
 		<p class="lightColor">浅色</p>
 		<p class="tipColor">提示色</p>
 		<p class="warnColor">警告色</p>
 	</div>
-	<h2>箭头</h2>
 	<h2>按钮</h2>
 	<div class="content">
 		<h3>button &amp; input</h3>
 		<input type="button" value="按钮" class="btn btn-def xl" />
 		<input type="button" value="按钮" class="btn btn-primary xl" />
 		<input type="button" value="按钮" class="btn btn-bezelFree xl" />
-		<span>height : 46px</span>
+		<span>height : 38px</span>
 		<br />
 		<br />
 		<input type="button" value="按钮" class="btn btn-def lg" />
 		<input type="button" value="按钮" class="btn btn-primary lg" />
 		<input type="button" value="按钮" class="btn btn-bezelFree lg" />
-		<span>height : 28px</span>
+		<span>height : 30px</span>
 		<br />
 		<br />
 		<input type="button" value="按钮" class="btn btn-def" />
@@ -114,31 +123,37 @@
 		<a href="#" class="btn btn-def sm">按钮</a>
 		<a href="#" class="btn btn-primary sm">按钮</a>
 		<a href="#" class="btn btn-bezelFree sm">按钮</a>
+		<br /><br />
+		<h3>padding</h3>
+		<input type="button" value="按钮" class="btn btn-primary lg p-lg" /><span>padding: 0 35px</span>
 	</div>
 	<h2>输入框</h2>
 	<div class="content">
-		<input type="text" class="txt sm w-sm" /><span class="note"> 80px</span>
+		<input type="text" class="txt sm w-sm" /><span class="note"> 70px</span>
 		<br />
 		<br />
 		<input type="text" class="txt" /><span class="note"> 116px</span>
 		<br />
 		<br />
-		<input type="text" class="txt lg w-lg" /><span class="note"> 160px</span>
+		<input type="text" class="txt lg w-lg" /><span class="note"> 170px</span>
 		<br />
 		<br />
-		<input type="text" class="txt xl w-xl" /><span class="note"> 390px</span>
+		<input type="text" class="txt lg w-lgl" /><span class="note"> 240px</span>
 		<br />
 		<br />
-		<input type="text" class="txt txt-radius sm w-sm" /><span class="note"> 80px</span>
+		<input type="text" class="txt xl w-xl" /><span class="note"> 420px</span>
+		<br />
+		<br />
+		<input type="text" class="txt txt-radius sm w-sm" /><span class="note"> 70px</span>
 		<br />
 		<br />
 		<input type="text" class="txt txt-radius" /><span class="note"> 116px</span>
 		<br />
 		<br />
-		<input type="text" class="txt txt-radius lg w-lg" /><span class="note"> 160px</span>
+		<input type="text" class="txt txt-radius lg w-lg" /><span class="note"> 170px</span>
 		<br />
 		<br />
-		<input type="text" class="txt txt-radius xl w-xl" /><span class="note"> 390px</span>
+		<input type="text" class="txt txt-radius xl w-xl" /><span class="note"> 420px</span>
 		<br />
 		<br />
 		<h3>固定电话</h3>
@@ -147,6 +162,11 @@
 			><input type="text" class="txt telNum" /><i>-</i
 			><input type="text" class="txt telExt" />
 		</div>
+		<h3>日期时间</h3>
+		<div class="txt-tel">
+			<input type="text" class="txt txt-date" /><br /><br />
+			<div class="txt-section"><input type="text" class="txt txt-date"><i>到</i><input type="text" class="txt txt-date"></div>
+		</div>
 		<br />
 		<br />
 		<h3>区间</h3>
@@ -154,7 +174,19 @@
 		<br />
 		<br />
 		<div class="txt-section"><input type="text" class="txt"><i>到</i><input type="text" class="txt"></div><span class="note">height:26px</span>
-
+		<h3>搜索框</h3>
+		<div class="searchGroup">
+			<input type="text" class="txt lg w-lg" />
+			<i class="icon i-zoom"></i>
+		</div><br /><br />
+		<div class="searchGroup">
+			<input type="text" class="txt lg w-lgl" />
+			<i class="icon i-zoom"></i>
+		</div><br /><br />
+		<div class="searchGroup">
+			<input type="text" class="txt lg w-xl" />
+			<i class="icon i-zoom"></i>
+		</div>
 	</div>
 	<h2>下拉框</h2>
 	<div class="content">

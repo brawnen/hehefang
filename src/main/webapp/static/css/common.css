@@ -33,6 +33,7 @@
 
 .icon {
 	background-image: url(../img/elements.png);
+	background-repeat: no-repeat;
 }
 
 /* Transition
@@ -140,7 +141,7 @@
 	float: left;
 	padding: 0 16px;
 	border-left: 1px solid #a7a7a7;
-	font: 700 20px/42px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+	font: 700 20px/42px 'Helvetica Neue', Helvetica, 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
 }
 
 /* site */
@@ -211,7 +212,7 @@
 	min-width: 162px;
 	color: #fff;
 	text-align: center;
-	font: 700 14px/40px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
+	font: 700 14px/40px 'Helvetica Neue', Helvetica, 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1','Hiragino Sans GB';
 }
 #mainNav li a {
 	display: block;

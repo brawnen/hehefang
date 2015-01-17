@@ -6,336 +6,263 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>卖家|在售商品</title>
-	<link rel="stylesheet" type="text/css" href="${ctx }/static/css/allstyle.css"/>
 	<link rel="stylesheet" href="${ctx }/static/css/product.css" />
 </head>
 <body>
 	<div class="wrapper product">
-		<!-- header -->
-		<div id="header">
-			<div class="wrap">
-				<!-- logo -->
-				<div id="logo">
-					<div class="logo"><a href="#" title="logo"><img src="${ctx }/static/img/logo.png" alt="logo" /></a></div>
-					<h1>商家中心</h1>
-				</div>
-				<!-- logo end -->
-				<!-- site -->
-				<div id="site">
-					<ul class="item">
-						<li>|</li>
-						<li class="msg">
-							<div class="hd"><i class="icon"></i><a href="#">消息</a><em>2</em></div>
-						</li>
-						<li>|</li>
-						<li>
-							<div class="hd"><a href="#">帮助中心</a></div>
-						</li>
-					</ul>
-				</div>
-				<!-- site end -->
-				<!-- signin -->
-				<div id="signin">
-					<p><span>您好,醉逍遥</span><span><a href="#" class="exit">退出</a><!--<a href="#">登录</a>/<a href="#">注册</a>--></span></p>
-				</div>
-				<!-- signin end -->
-			</div>
-		</div>
-		<!-- header end -->
-		<!-- mainNav -->
-		<div id="mainNav">
-			<div class="wrap">
-				<ul>
-					<li class="nav-01"><a href="#"><i class="icon"></i>商家助手</a></li>
-					<li class="nav-02 curr"><a href="#"><i class="icon"></i>商品管理</a></li>
-					<li class="nav-03"><a href="#"><i class="icon"></i>品牌特卖</a></li>
-					<li class="nav-04"><a href="#"><i class="icon"></i>交易管理</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- mainNav end -->
 		<!-- container -->
 		<div id="container">
-			<div class="wrap">
-				<!-- aside -->
-				<div id="aside">
-					<div id="asideNav">
-						<ul>
-							<li><a href="issueproduct.html"><i class="icon"></i>发布新商品</a></li>
-							<li class="curr"><a href="#"><i class="icon"></i>在售商品管理</a></li>
-							<li><a href="verifyproduct.html"><i class="icon"></i>审核中商品</a></li>
-							<li><a href="brandlist.html"><i class="icon"></i>品牌管理</a></li>
-						</ul>
-					</div>
+			<!-- main -->
+			<div id="main">
+				<!-- mainCaption -->
+				<div class="mainCaption">
+					<h2>我的商品</h2>
 				</div>
-				<!-- aside end -->
-				<!-- main -->
-				<div id="main">
-					<!-- mainCaption -->
-					<div class="mainCaption">
-						<h2>我的商品</h2>
-					</div>
-					<!-- mainCaption end -->
-					<!-- screening -->
-					<div class="screening">
-						<form class="form form-inline">
-							<legend></legend>
-							<div class="formGroup">
-								<div class="form-item">
-									<div class="item-label">
-										<label>品牌：</label>
-									</div>
-									<div class="item-cont">
-										<select name="" id="" class="select">
-											<option value="1">好孩子好孩子</option>
-											<option value="2">361</option>
-										</select>
-									</div>
+				<!-- mainCaption end -->
+				<!-- screening -->
+				<div class="screening">
+					<form class="form form-inline">
+						<legend></legend>
+						<div class="formGroup">
+							<div class="form-item">
+								<div class="item-label">
+									<label>品牌：</label>
 								</div>
-								<div class="form-item">
-									<div class="item-label">
-										<label>商品名称：</label>
-									</div>
-									<div class="item-cont">
-										<input type="text" class="txt w-lg" />
-										<input type="button" class="btn btn-def" value="查&nbsp;&nbsp;询">
-									</div>
+								<div class="item-cont">
+									<select name="" id="" class="select">
+										<option value="1">好孩子好孩子</option>
+										<option value="2">361</option>
+									</select>
 								</div>
 							</div>
-							<div class="searchBtn"><a href="#" class="btn btn-def">发布新商品</a></div>
-						</form>
-					</div>
-					<!-- screening end -->
-					<!-- table -->
-					<table class="table table-line table-left table-product">
-						<colgroup>
-							<col width="70">
-							<col width="80">
-							<col width="205">
-							<col width="90">
-							<col width="130">
-							<col width="100">
-							<col width="80">
-							<col width="80">
-							<col width="86">
-							<col width="100">
-						</colgroup>
-						<thead>
-							<tr>
-								<td>商品图片</td>
-								<td>商品ID</td>
-								<td>商品名称</td>
-								<td>品牌</td>
-								<td>货号</td>
-								<td>类目</td>
-								<td>原价</td>
-								<td>特卖价格</td>
-								<td>录入时间</td>
-								<td>操作</td>
-							</tr>
-						</thead>
-						<tbody class="interleave-even">
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="pro-img">
-										<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-									</div>
-								</td>
-								<td>GELKJ656</td>
-								<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-								<td>好孩子好孩子</td>
-								<td>GELKJ6564S5FAFSF</td>
-								<td>睡衣/睡裤/睡裙/睡衣套装</td>
-								<td>¥198.00~198.00</td>
-								<td>¥98.00~98.00</td>
-								<td>2013/11/02 12:09</td>
-								<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-							</tr>
-						</tbody>
-					</table>
-					<!-- table edn -->
-					<!-- paging -->
-					<div class="paging">
-						<div class="pagingWrap">
-							<div class="pagAll">共<span>4</span>条记录</div>
-							<div class="pageup disabled"><a href="javascript:;"><i class="icon"></i>&nbsp;上一页</a></div>
-							<ul>
-								<li><span class="on">1</span></li>
-								<li><a href="">2</a></li>
-								<li><a href="">3</a></li>
-								<li><a href="">4</a></li>
-								<li><b>...</b></li>
-								<li><a href="">100</a></li>
-							</ul>
-							<div class="pagedown"><a href="">下一页&nbsp;<i class="icon"></i></a></div>
-							<div class="goto"><span>到第</span><input type="text" value="1"><span>页</span><button class="btn btn-def">确定</button></div>
+							<div class="form-item">
+								<div class="item-label">
+									<label>商品名称：</label>
+								</div>
+								<div class="item-cont">
+									<input type="text" class="txt w-lg" />
+									<input type="button" class="btn btn-def" value="查&nbsp;&nbsp;询">
+								</div>
+							</div>
 						</div>
-					</div>
-					<!-- paging end -->
+						<div class="searchBtn"><a href="#" class="btn btn-def">发布新商品</a></div>
+					</form>
 				</div>
-				<!-- main end -->
+				<!-- screening end -->
+				<!-- table -->
+				<table class="table table-line table-left table-product">
+					<colgroup>
+						<col width="70">
+						<col width="80">
+						<col width="205">
+						<col width="90">
+						<col width="130">
+						<col width="100">
+						<col width="80">
+						<col width="80">
+						<col width="86">
+						<col width="100">
+					</colgroup>
+					<thead>
+						<tr>
+							<td>商品图片</td>
+							<td>商品ID</td>
+							<td>商品名称</td>
+							<td>品牌</td>
+							<td>货号</td>
+							<td>类目</td>
+							<td>原价</td>
+							<td>特卖价格</td>
+							<td>录入时间</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody class="interleave-even">
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="pro-img">
+									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+								</div>
+							</td>
+							<td>GELKJ656</td>
+							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
+							<td>好孩子好孩子</td>
+							<td>GELKJ6564S5FAFSF</td>
+							<td>睡衣/睡裤/睡裙/睡衣套装</td>
+							<td>¥198.00~198.00</td>
+							<td>¥98.00~98.00</td>
+							<td>2013/11/02 12:09</td>
+							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- table edn -->
+				<!-- paging -->
+				<div class="paging">
+					<div class="pagingWrap">
+						<div class="pagAll">共<span>4</span>条记录</div>
+						<div class="pageup disabled"><a href="javascript:;"><i class="icon"></i>&nbsp;上一页</a></div>
+						<ul>
+							<li><span class="on">1</span></li>
+							<li><a href="">2</a></li>
+							<li><a href="">3</a></li>
+							<li><a href="">4</a></li>
+							<li><b>...</b></li>
+							<li><a href="">100</a></li>
+						</ul>
+						<div class="pagedown"><a href="">下一页&nbsp;<i class="icon"></i></a></div>
+						<div class="goto"><span>到第</span><input type="text" value="1"><span>页</span><button class="btn btn-def">确定</button></div>
+					</div>
+				</div>
+				<!-- paging end -->
 			</div>
+			<!-- main end -->
 		</div>
 		<!-- container end -->
-		<!-- footer -->
-		<div id="footer">
-			<div class="links">
-				<a href="#" target="_blank">关于</a>|
-				<a href="#" target="_blank">联系我们</a>|
-				<a href="#" target="_blank">网站地图</a>|
-				<a href="#" target="_blank">网站合作</a>|
-				<a href="#" target="_blank">友情链接</a>|
-				<a href="#" target="_blank">帮助中心</a>|
-				<a href="#" target="_blank">版权声明</a>
-			</div>
-			<p class="copyright">Copyright &copy; 2013-2014 shop.com All Rights Reserved.</p>
-			<p><span>ICP经营许可证号：京AA-01334408</span></p>
-		</div>
-		<!-- footer end -->
 	</div>
 </body>
 </html>

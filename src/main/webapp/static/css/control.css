@@ -23,6 +23,11 @@
  * - textarea
  */
 
+.popup .close {
+	background-image: url(../img/control/control_elem.png);
+	background-repeat: no-repeat;
+}
+
 /* Control
  ---------------------------------------- */
 
@@ -64,11 +69,11 @@ select:hover {
 .txt:focus,
 textarea:focus,
 select:focus {
-	border-color: #0792ef !important;
+	border-color: #7a39b2 !important;
 }
 .focus {
 	/* IE7 patch */
-	border-color: #0792ef !important;
+	border-color: #7a39b2 !important;
 }
 .placeholder {
 	color: #999 !important;
@@ -79,13 +84,13 @@ select:focus {
 	background: #ffe8e8 !important;
 	border: 1px solid #ef7f7f !important;
 }
-.successIpt {} .errTxt {
-	color: #d70000 !important;
+.errTxt {
+	color: #f00 !important;
 }
 
 /* note */
 .note {
-	color: #666;
+	color: #999;
 	vertical-align: middle;
 }
 span.note {
@@ -93,6 +98,7 @@ span.note {
 }
 div.note {
 	clear: both !important;
+	padding: 5px 0 0;
 	line-height: 1.8;
 }
 .note strong {
@@ -101,6 +107,7 @@ div.note {
 }
 .note b {
 	padding: 0 5px;
+	color: #333;
 }
 
 /* checkbox & radio */
@@ -113,7 +120,7 @@ div.note {
 label .radio,
 label .chk {
 	position: relative;
-	top: -2px;
+	top: -1px;
 	*top: 0;
 	left: 0;
 }
@@ -165,13 +172,16 @@ span.btn:hover {
 a.btn-primary,
 span.btn-primary {
 	background: #7a39b2;
+	border-color: #7a39b2;
 	color: #fff;
 }
 .btn-primary:hover {
 	background: #a26cd0;
+	border-color: #a26cd0;
 }
 .btn-primary:active {
 	background: #a26cd0;
+	border-color: #a26cd0;
 }
 .btn-bezelFree,
 a.btn-bezelFree,
@@ -180,7 +190,7 @@ span.btn-bezelFree,
 .btn-bezelFree:focus,
 .btn-bezelFree:active {
 	background: transparent;
-	color: #ed5548;
+	color: #316cd6;
 }
 .btn-bezelFree.disabled,
 .btn-bezelFree.disabled:hover,
@@ -224,16 +234,16 @@ span.btn.lg {
 }
 .btn.xl {
 	/* extra large */
-	height: 46px;
+	height: 38px;
 	padding: 0 30px;
 	*padding: 0 15px;
-	font-size: 18px;
+	font-size: 16px;
 }
 a.btn.xl,
 span.btn.xl {
-	height: 44px;
+	height: 36px;
 	padding: 0 30px;
-	line-height: 44px;
+	line-height: 36px;
 }
 
 /* button padding */
@@ -241,11 +251,20 @@ span.btn.xl {
 .btn.p-lg {
 	/* large */
 	padding: 0 35px;
-	*padding: 0;
+	*padding: 0 14px;
 }
 a.btn.p-lg,
 span.btn.p-lg {
 	padding: 0 35px;
+}
+.btn.p-xl {
+	/* large */
+	padding: 0 80px;
+	*padding: 0 40px;
+}
+a.btn.p-xl,
+span.btn.p-xl {
+	padding: 0 80px;
 }
 
 /* text */
@@ -273,6 +292,7 @@ span.btn.p-lg {
 }
 .txt.lg {
 	/* long */
+	padding: 7px 4px;
 }
 .txt.xl {
 	/* extra large */
@@ -291,9 +311,20 @@ span.btn.p-lg {
 	/* long */
 	width: 160px;
 }
+.txt.w-lgl {
+	/* long */
+	width: 230px;
+}
 .txt.w-xl {
 	/* extra large */
-	width: 380px;
+	width: 410px;
+}
+
+/* date text */
+.txt-date {
+	width: 98px;
+	padding-right: 26px;
+	background: url(../img/control/control_date.png) no-repeat right center;
 }
 
 /* tel text */
@@ -345,10 +376,43 @@ span.btn.p-lg {
 	line-height: 22px;
 }
 
+/* searchGroup */
+.searchGroup {
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: inline-block;
+	*display: inline;
+}
+.searchGroup .txt {
+	padding-right: 26px;
+}
+.searchGroup .icon {
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	z-index: 2;
+	margin-top: -10px;
+	cursor: pointer;
+}
+.searchGroup .txt.w-lg {
+	/* long */
+	width: 138px;
+}
+.searchGroup .txt.w-lgl {
+	/* long */
+	width: 208px;
+}
+.searchGroup .txt.w-xl {
+	/* long */
+	width: 388px;
+}
+
 /* select */
 select,
 .select {
-	width: 106px;
+	width: 116px;
 	height: 22px;
 	border: 1px solid #c5c5c5;
 	outline: 0;
@@ -379,8 +443,18 @@ select,
 }
 
 /* select width */
-.select.w-lg {}
-.select.w-xl {}
+.select.w-xs {
+	width: 60px;
+}
+.select.w-sm {
+	width: 80px;
+}
+.select.w-lg {
+	width: 140px;
+}
+.select.w-xl {
+	width: 180px;
+}
 
 /* textarea */
 textarea {
