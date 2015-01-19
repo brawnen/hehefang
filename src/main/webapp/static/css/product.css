@@ -16,11 +16,13 @@
  * 
  * ProductGlobal
  * BrandGlobal
+ * OrderGlobal
  * 
  * IssueProduct
  * ProductGlobal
  * AddCategory
  * BrandForm
+ * DeliverInfoList
  * Layout
  * 
  */
@@ -41,6 +43,12 @@
 	border: 1px solid #e5e5e5;
 }
 
+/* Order Global
+ ---------------------------------------- */
+.wrap-order .mod-message,
+.wrap-order .mod-orderInfo {
+	margin: 10px 0 0;
+}
 
 /* AddCategory
  ---------------------------------------- */
@@ -246,6 +254,20 @@
 	background: #e5e5e5;
 }
 
+/* DeliverInfoList
+ ---------------------------------------- */
+
+.mod-orderInfo .deliverInfoList {
+	margin-bottom: 10px;
+}
+.mod-orderInfo .deliverInfoList li {
+	margin-bottom: 4px;
+	line-height: 18px;
+}
+.mod-orderInfo .deliverInfoList .now {
+	color: #339734;
+}
+
 /* Layout
  ---------------------------------------- */
 
@@ -253,4 +275,18 @@
 .mainCaption .applyBrand {
 	float: right;
 	margin: 4px 0 0;
+}
+
+.wrap-order .tips-order .icon {
+	position: relative;
+	top: -1px;
+	*top: 0;
+	left: 0;
+	margin-right: 4px;
+}
+.table .o-deliverStatus {
+	float: right;
+}
+.table .o-deliverStatus .tipsPop-deliver {
+	margin-left: 20px;
 }

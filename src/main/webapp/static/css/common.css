@@ -108,9 +108,12 @@
 .warnColor {
 	color: #f00 !important;
 }
+.successColor {
+	color: #339734 !important;
+}
 /* border */
 .borderL {
-	border-left: 1px solid #e5e5e5;
+	border-left: 1px solid #e5e5e5 !important;
 }
 
 /* Header

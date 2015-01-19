@@ -40,12 +40,12 @@
 .i-right {
 	width: 40px;
 	height: 40px;
-	background-position: -80px -103px;
+	background-position: -40px -43px;
 }
 .i-rightLG {/* large */
-	width: 74px;
-	height: 74px;
-	background-position: 0 -143px;
+	width: 50px;
+	height: 50px;
+	background-position: 0 -109px;
 }
 .i-rightXL {/* extra large */
 	
@@ -121,7 +121,7 @@
 
 .i-warn, .i-cartSM,
 .i-gold, .i-clock, .i-ok, .i-err,
-.i-zoom {
+.i-zoom, .i-horn {
 	width: 20px;
 	height: 20px;
 }
@@ -146,6 +146,9 @@
 }
 .i-zoom {
 	background-position: -120px 0;
+}
+.i-horn {
+	background-position: -140px 0;
 }
 
 /* 24*24

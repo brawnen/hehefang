@@ -210,13 +210,13 @@ span.btn-bezelFree,
 .btn.sm {
 	/* small */
 	height: 22px;
-	padding: 0 5px;
+	padding: 0 15px;
 	*padding: 0 1px;
 }
 a.btn.sm,
 span.btn.sm {
 	height: 20px;
-	padding: 0 5px;
+	padding: 0 15px;
 	line-height: 20px;
 }
 .btn.lg {
@@ -248,6 +248,15 @@ span.btn.xl {
 
 /* button padding */
 
+.btn.p-sm {
+	/* large */
+	padding: 0 5px;
+	*padding: 0;
+}
+a.btn.p-sm,
+span.btn.p-sm {
+	padding: 0 5px;
+}
 .btn.p-lg {
 	/* large */
 	padding: 0 35px;
@@ -325,6 +334,9 @@ span.btn.p-xl {
 	width: 98px;
 	padding-right: 26px;
 	background: url(../img/control/control_date.png) no-repeat right center;
+}
+.txt-date.w-sm {
+	width: 70px;
 }
 
 /* tel text */
@@ -447,7 +459,7 @@ select,
 	width: 60px;
 }
 .select.w-sm {
-	width: 80px;
+	width: 100px;
 }
 .select.w-lg {
 	width: 140px;

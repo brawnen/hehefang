@@ -15,6 +15,7 @@
  * - 
  * - 
  * Product
+ * Order
  * 
  */
 
@@ -59,6 +60,15 @@ table th,table td {
 /* noborder */
 .noborder {
 	border: 0 !important;
+}
+.table.noborder,
+.table.noborder th,
+.table.noborder td {
+	border: 0 !important;
+}
+.table-fixed {
+	table-layout: fixed;
+	*table-layout: auto;
 }
 
 /* interleave */
@@ -205,4 +215,40 @@ table.table-center>tfoot>tr>td,
 	color: #666;
 	vertical-align: top;
 	word-break: break-all;
+}
+
+/* Order
+ ---------------------------------------- */
+
+.table-order {
+	margin-top: 8px;
+	margin-bottom: 0;
+	width: 100%;
+}
+.table-order th,
+.table-order td {
+	padding: 10px 8px;
+}
+.table-order>thead th,
+.table-order>thead td {
+	height: 40px;
+	padding: 0 8px;
+	background: #f8f8f8;
+}
+.table-order>tbody th,
+.table-order>tbody td {
+	color: #666;
+	vertical-align: top;
+	word-break: break-all;
+}
+.table-order tfoot td {
+	background: #f8f8f8;
+}
+.table-order .o-total {
+	font-size: 14px;
+	text-align: right;
+}
+.table-order .o-total strong {
+	color: #f00;
+	font-size: 18px;
 }

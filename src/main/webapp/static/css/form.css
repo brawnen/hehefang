@@ -38,6 +38,9 @@
 	clear: both;
 	content: " ";
 }
+.itemGroup {
+	margin-bottom: 10px;
+}
 .form .form-item {
 	margin: 10px 0;
 }
@@ -64,20 +67,27 @@
 .form .item-cont>.txt,
 .form .item-cont>.btn,
 .form .item-cont>.txt-tel,
+.form .item-cont>.txt-section,
 .form .item-cont>.select,
-.form .item-cont>select {
+.form .item-cont>select,
+.form .itemGroup>.txt,
+.form .itemGroup>.btn,
+.form .itemGroup>.txt-tel,
+.form .itemGroup>.txt-section,
+.form .itemGroup>.select,
+.form .itemGroup>select {
 	margin-right: 10px;
 }
 .form .item-cont>.radio,
-.form .item-cont>.chk {
+.form .item-cont>.chk,
+.form .itemGroup>.radio,
+.form .itemGroup>.chk {
 	margin-right: 5px;
 }
-.form .item-cont>label {
+.form .item-cont>label,
+.form .itemGroup>label {
 	margin-right: 20px;
-}
-.form .item-cont .txt-tel,
-.form .item-cont .txt-section {
-	margin-right: 10px;
+	white-space: nowrap;
 }
 /* form-inline */
 .form.form-inline .form-item {
