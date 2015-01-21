@@ -13,6 +13,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
 <link rel="stylesheet" type="text/css" href="${ctx }/static/css/allstyle.min.css"/>
+<link rel="stylesheet" href="${ctx }/static/css/product.css" />
 <script type="text/javascript" src="${ctx}/js/jquery-1.10.2.min.js?t=201501171056"></script>
 <script type="text/javascript" src="${ctx}/js/check-util.js?t=201501171056"></script>
 <title><decorator:title default="卖家中心-一网全城"/></title>

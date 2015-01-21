@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.common.mybatis.Page;
+import com.afd.constants.product.ProductConstants;
 import com.afd.model.product.Product;
+import com.afd.model.product.vo.BaseCategoryInfoVO;
+import com.afd.model.product.vo.BaseCategoryInfoVO.Attr;
+import com.afd.model.product.vo.BaseCategoryInfoVO.Spec;
 import com.afd.param.product.ProductCondition;
 import com.afd.service.product.ICategoryService;
 import com.afd.service.product.IProductService;
@@ -33,10 +37,10 @@ import com.afd.service.product.IProductService;
 @RequestMapping("/product")
 public class ProductController {
 
-//	@Autowired
-//	IProductService productService;
-//	@Autowired
-//	ICategoryService categoryService;
+	@Autowired
+	IProductService productService;
+	@Autowired
+	ICategoryService categoryService;
 	
 	/**
 	 * 
@@ -44,6 +48,7 @@ public class ProductController {
 	 */
 	@RequestMapping(value = "/category")
 	public String toSelectCategoryPage(){
+		
 		
 		return "/product/category";
 	}
@@ -53,7 +58,33 @@ public class ProductController {
 	 * @return 发布商品页面
 	 */
 	@RequestMapping(value = "/publish")
-	public String toPublishPage(){
+	public String toPublishPage(
+			@RequestParam(value = "bcId", required = false) Integer bcId,
+			HttpServletRequest request,ModelMap modelMap) {
+		
+		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(64);
+		
+		String pathName = bc.getPathName();
+		if(StringUtils.isNotBlank(pathName)){ //商品品类
+			pathName = pathName.trim().replace("|", "<em>&gt;</em>");
+			modelMap.put("pathName", pathName +"<em>&gt;</em>" + bc.getBcName());
+		}
+//		List<Attr> attrList = bc.getAttrList(); // 属性
+//		if(null != attrList && !attrList.isEmpty()){
+//			for (Attr attr : attrList) {
+//				if(ProductConstants.DISPLAY_MODE_SELECT.equals(attr.getDisplayMode())){//下拉框
+//					
+//					
+//				}
+//			}
+//		}
+//		
+//		List<Spec> specList = bc.getSpecList(); // 规格
+//		if(null != specList && !specList.isEmpty()){
+//			
+//		}
+		
+		modelMap.put("bc", bc);
 		
 		return "/product/publish";
 	}
@@ -87,7 +118,7 @@ public class ProductController {
 	public Map<String, String> putawayProd(
 			@RequestParam(value = "prodId", required = true) Integer prodId,
 			HttpServletRequest request) {
-//		boolean b = productService.putawayProduct(prodId);
+		boolean b = productService.putawayProduct(prodId);
 
 		return null;
 	}
@@ -109,7 +140,7 @@ public class ProductController {
 				idList.add(Integer.parseInt(prodId));
 			}
 		}
-//		boolean b = productService.batchPutawayProduct(idList);
+		boolean b = productService.batchPutawayProduct(idList);
 		return null;
 	}
 	
@@ -123,7 +154,7 @@ public class ProductController {
 	public Map<String, String> cancelAuditProduct(
 			@RequestParam(value = "prodId", required = true) Integer prodId,
 			HttpServletRequest request) {
-//		boolean b = productService.cancelAuditProduct(prodId);
+		boolean b = productService.cancelAuditProduct(prodId);
 		return null;
 	}
 	
@@ -137,7 +168,7 @@ public class ProductController {
 	public Map<String, String> delProduct(
 			@RequestParam(value = "prodId", required = true) Integer prodId) {
 		Map<String, String> resultMap = new HashMap<String, String>();
-//		boolean b = productService.delProduct(prodId,null);
+		boolean b = productService.delProduct(prodId,null);
 		return resultMap;
 	}
 	
@@ -157,7 +188,7 @@ public class ProductController {
 				idList.add(Integer.parseInt(prodId));
 			}
 		}
-//		boolean b = productService.batchdelProduct(idList,null);
+		boolean b = productService.batchdelProduct(idList,null);
 		return null;
 	}
 	
@@ -174,7 +205,7 @@ public class ProductController {
 			) {
 		page.setPageSize(15);
 
-//		page = productService.searchStockProductPage(productCondition, sortField, sortDirection, page);
+		page = productService.searchStockProductPage(productCondition, sortField, sortDirection, page);
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("sortDirection", sortDirection);
 		modelMap.addAttribute("page", page);
@@ -195,7 +226,7 @@ public class ProductController {
 			) {
 		page.setPageSize(15);
 
-//		page = productService.searchAuditProductPage(productCondition, sortField, sortDirection, page);
+		page = productService.searchAuditProductPage(productCondition, sortField, sortDirection, page);
 		
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("sortDirection", sortDirection);
@@ -217,7 +248,7 @@ public class ProductController {
 			) {
 		page.setPageSize(15);
 
-//		page = productService.searchOnlineProduct(productCondition, sortField, sortDirection, page);
+		page = productService.searchOnlineProduct(productCondition, sortField, sortDirection, page);
 		
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("sortDirection", sortDirection);

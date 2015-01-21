@@ -6,7 +6,6 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>卖家|发布商品</title>
-	<link rel="stylesheet" href="${ctx }/static/css/product.css" />
 </head>
 <body>
 	<div class="wrapper product">
@@ -27,7 +26,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>商品类目：</label></div>
 								<div class="item-cont">
-									<span class="categoryTxt">靓丽女装<em>&gt;</em>应季女装<em>&gt;</em>羊绒衫</span><input type="button" class="btn btn-def" value="修改" />
+									<span class="categoryTxt">${pathName } <!-- 靓丽女装<em>&gt;</em>应季女装<em>&gt;</em>羊绒衫 --></span><input type="button" class="btn btn-def" value="修改" />
 								</div>
 							</div>
 							<div class="form-item">

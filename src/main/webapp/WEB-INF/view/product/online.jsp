@@ -6,7 +6,6 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>卖家|在售商品</title>
-	<link rel="stylesheet" href="${ctx }/static/css/product.css" />
 </head>
 <body>
 	<div class="wrapper product">
