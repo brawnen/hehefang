@@ -64,25 +64,31 @@ public class ProductController {
 		
 		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(64);
 		
+		//1. 已选商品品类
 		String pathName = bc.getPathName();
-		if(StringUtils.isNotBlank(pathName)){ //商品品类
+		if(StringUtils.isNotBlank(pathName)){ 
 			pathName = pathName.trim().replace("|", "<em>&gt;</em>");
 			modelMap.put("pathName", pathName +"<em>&gt;</em>" + bc.getBcName());
 		}
-//		List<Attr> attrList = bc.getAttrList(); // 属性
-//		if(null != attrList && !attrList.isEmpty()){
-//			for (Attr attr : attrList) {
-//				if(ProductConstants.DISPLAY_MODE_SELECT.equals(attr.getDisplayMode())){//下拉框
-//					
-//					
-//				}
-//			}
-//		}
-//		
-//		List<Spec> specList = bc.getSpecList(); // 规格
-//		if(null != specList && !specList.isEmpty()){
-//			
-//		}
+		
+		//2. 品牌
+		
+		//3. 属性
+		
+		List<Attr> attrList = bc.getAttrList(); 
+		if(null != attrList && !attrList.isEmpty()){
+			for (Attr attr : attrList) {
+				if(ProductConstants.DISPLAY_MODE_SELECT.equals(attr.getDisplayMode())){//下拉框
+					
+					
+				}
+			}
+		}
+		//4. 规格
+		List<Spec> specList = bc.getSpecList(); 
+		if(null != specList && !specList.isEmpty()){
+			
+		}
 		
 		modelMap.put("bc", bc);
 		

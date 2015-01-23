@@ -26,7 +26,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>商品类目：</label></div>
 								<div class="item-cont">
-									<span class="categoryTxt">${pathName } <!-- 靓丽女装<em>&gt;</em>应季女装<em>&gt;</em>羊绒衫 --></span><input type="button" class="btn btn-def" value="修改" />
+									<span class="categoryTxt">${pathName }</span><input type="button" class="btn btn-def" onclick="publish.modifyBc()" value="修改" />
 								</div>
 							</div>
 							<div class="form-item">
@@ -59,293 +59,83 @@
 								<div class="item-cont"><input type="text" class="txt lg w-lg" id="material" name="material" ></div>
 							</div>
 							<div class="form-item">
-								<div class="item-label"><label><em>*</em>款式：</label></div>
+							<c:if test="${!empty(bc.attrList)}">
+								<c:forEach items="${bc.attrList}" var="attr">
+								<div class="item-label">
+									<c:choose>
+										<c:when test="${attr.isRequire}">
+											<label><em>*</em>${attr.attrName}：</label>
+										</c:when>
+										<c:otherwise>
+											<label>${attr.attrName}：</label>
+										</c:otherwise>
+									</c:choose></div>
 								<div class="item-cont">
 									<div class="mod-attrChk">
-										<ul>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-											<li>
-												<label><input type="checkbox" class="chk">
-												露背</label>
-											</li>
-										</ul>
+										<c:choose>
+											<c:when test="${attr.displayMode == 1 }">
+												<select id="attrValue" name="attrValue" class="select">
+													<option value=""></option>
+													<c:forEach items="${attr.attrValueList }" var="attrV">
+														<option value="${attrV.attrValueId }|${attrV.attrValue }|${attrV.isSubAttr ? 'true' : 'false'}">${attrV.attrValue }</option>
+													</c:forEach>
+												</select>
+											</c:when>
+											<c:otherwise>
+												<ul>
+												<c:forEach items="${attr.attrValueList }" var="attrV">
+													<li><label><input type="checkbox" class="chk">${attrV.attrValue }</label></li>
+												</c:forEach>
+												</ul>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
+								</c:forEach>
+							</c:if>	
 							</div>
 							<div class="form-item item-color">
-								<div class="item-label"><label>颜色：</label></div>
-								<div class="item-cont">
+								<c:if test="${!empty(bc.specList)}">
+									<c:forEach items="${bc.specList}" var="spec">
+									<div class="item-label"><label>${spec.specName }：</label></div>
+									<div class="item-cont">
 									<div class="mod-attrChk">
-										<ul>
+										<ul specId="${spec.specId}">
+											<c:forEach items="${spec.specValueList }" var="specValue">
 											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="hide">军绿色</label>
-												<input type="text" class="txt show-iblock">
+												<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this)">
+												<c:if test="${!empty(specValue.imgUrl)}">
+													<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
+												</c:if>
+												<label name="specValueTxt" >${specValue.specValueName }</label>
+												<input type="text" class="txt" value="<c:out value='${specValue.specValueName}'/>">
 											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">天蓝色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">巧克力色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">桔色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">浅灰色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">浅绿色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">浅黄色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">深卡其布色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">深灰色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">深紫色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">深蓝色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">白色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">粉红色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">紫罗兰</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">紫色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">红色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">绿色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">花色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">蓝色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">褐色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">透明色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">酒红色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">黄色</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<img src="${ctx }/static/img/temp/color1.jpg" alt="" class="colorBlock">
-												<label class="">黑色</label>
-												<input type="text" class="txt">
-											</li>
+											</c:forEach>
 										</ul>
 									</div>
-								</div>
-							</div>
-							<div class="form-item">
-								<div class="item-label"><label>尺码：</label></div>
-								<div class="item-cont">
-									
-									<div class="mod-attrChk">
-										<ul>
-											<li>
-												<input type="checkbox" class="chk">
-												<label class="hide">XXL</label>
-												<input type="text" class="txt show-iblock">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<label class="">XL</label>
-												<input type="text" class="txt">
-											</li>
-											<li>
-												<input type="checkbox" class="chk">
-												<label class="">L</label>
-												<input type="text" class="txt">
-											</li>
-										</ul>
 									</div>
-								</div>
+									</c:forEach>
+								</c:if>
 							</div>
 							<div class="form-item sku-attr">
 								<div class="item-label"><label>SKU销售属性：</label></div>
-								<div class="item-cont">
-									<table class="table table-line">
-										<colgroup>
-											<col width="100" />
-											<col width="100" />
-											<col width="100" />
-											<col width="100" />
-											<col width="100" />
-											<col width="" />
-										</colgroup>
-										<thead>
-											<tr>
-												<th>颜色</th>
-												<th>尺码</th>
-												<th>单价</th>
-												<th>特卖价</th>
-												<th>数量</th>
-												<th>商家编码</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>红色</td>
-												<td>XXL码</td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg" /></td>
-											</tr>
-											<tr>
-												<td>红色</td>
-												<td>XXL码</td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg" /></td>
-											</tr>
-											<tr>
-												<td>红色</td>
-												<td>XXL码</td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg w-sm" /></td>
-												<td><input type="text" class="txt lg" /></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+ 								<div class="item-cont" id="genSpec">
+								</div> 
 							</div>
-							<div class="form-item">
+					 	 	<div class="form-item">
 								<div class="item-label"><label>SKU图片：</label></div>
 								<div class="item-cont">
 									<div class="uploadSKUImg">
 										<div class="wrap">
 											<span class="note warnColor">请使用白底图片，禁止出现拼接、水印、促销等信息；尺寸 800*800 px及以上，文件最大为500K</span>
-											<ul>
-												<li>
+											<ul id="skuImg">
+										<%-- 		<li>
 													<div class="mod-upload">
 														<img src="${ctx }/static/img/upload_img.jpg" alt="" />
 													</div>
 													<p>颜色：雪纺点红</p>
 													<div class="btnWrap"><input type="button" name="" id="" value="设为主图" class="btn btn-def" /></div>
-												</li>
+												</li> 
 												<li>
 													<div class="mod-upload">
 														<img src="${ctx }/static/img/upload_img.jpg" alt="" />
@@ -359,7 +149,7 @@
 													</div>
 													<p>颜色：雪纺点红</p>
 													<div class="btnWrap"><input type="button" name="" id="" value="设为主图" class="btn btn-def" /></div>
-												</li>
+												</li> --%>
 											</ul>
 										</div>
 									</div>
@@ -369,7 +159,7 @@
 								<div class="item-label"><label><em>*</em>商品描述：</label></div>
 								<div class="item-cont">
 									<div class="editer">
-										<img src="${ctx }/static/img/temp/editer1.jpg" alt="" width="750">
+										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"></textarea>
 									</div>
 								</div>
 							</div>
@@ -390,11 +180,12 @@
 		<!-- container end -->
 	</div>
 <script type="text/javascript" src="${ctx}/js/jquery-validate.min.js"></script>	
+<script type="text/javascript" src="${ctx}/js/kindeditor/kindeditor.js"></script>	
+<script type="text/javascript" src="${ctx}/js/kindeditor/lang/zh_CN.js"></script>
 <script type="text/javascript" src="${ctx}/js/publish.js"></script>	
 <script type="text/javascript">
 	$(function(){
 		publish = new publish();
-		
 	});
 </script>
 </body>
