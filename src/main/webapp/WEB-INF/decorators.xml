@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 默认目录 -->
-<decorators defaultdir="/WEB-INF/view/workstation/">
-	<!-- 自定义装饰页，下面目录只对这部分有用 -->
-	<decorator name="account" page="decoratorAccount.jsp">
-		<pattern>/account/*</pattern>
-	</decorator>	
-	<!-- 缺省装饰页  -->
-	<decorator name="main" page="decorator.jsp">
+<decorators defaultdir="/WEB-INF/view/sitemesh/">
+	<decorator name="default" page="decorator.jsp">
 		<pattern>/*</pattern>
 	</decorator>
 </decorators>
