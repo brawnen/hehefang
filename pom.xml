@@ -18,6 +18,11 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.afd.service</groupId>
+			<artifactId>afd_service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- sitemesh begin -->
 		<dependency>
 			<groupId>opensymphony</groupId>
