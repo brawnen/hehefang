@@ -16,7 +16,7 @@
 <title>商家注册-阿凡达</title>
 <style type="text/css">
 	.success-gou{
-		background: url(${ctx}/img/reg-wraning.png) no-repeat right 4px;
+		background: url(img/reg-wraning.png) no-repeat right 4px;
 	}
 </style>
 </head>
@@ -60,14 +60,14 @@
 							<dt class="item-label"><label><em>*</em>密码：</label></dt>
 							<dd class="item-cont">
 								<input type="password" class="txt lg" id="password" name="password" maxlength="20"/>
-								<div class="checkHint"><div class="hintBox"><span>6-20字符，请使用英文加数字或符号组合密码，不能单独使用英文，数字或符号</span></div></div>
+								<div class="checkHint" id="password_msg"><div class="hintBox"><span>6-20字符，请使用英文加数字或符号组合密码，不能单独使用英文，数字或符号</span></div></div>
 							</dd>
 						</dl>
 						<dl class="form-item item-pwd">
 							<dt class="item-label"><label><em>*</em>确认密码：</label></dt>
 							<dd class="item-cont">
 								<input type="password" class="txt lg" id="password2" name="password2" maxlength="20"/>
-								<div class="checkHint"><div class="hintBox"><span>请再次输入登录密码</span></div></div>
+								<div class="checkHint" id="password2_msg"><div class="hintBox"><span>请再次输入登录密码</span></div></div>
 							</dd>
 						</dl>
 						<dl class="form-item item-phone">
@@ -75,7 +75,7 @@
 							<dd class="item-cont">
 								<input type="text" class="txt lg" id="mobile"
 				name="mobile" maxlength="11" autocomplete="off" value="${fn:escapeXml(param.mobile)}"/>
-								<div class="checkHint"><div class="hintBox"><span>请输入11位手机号码（支持中国移动、联通、 电信的手机号码）</span></div></div>
+								<div class="checkHint" id="mobile_msg"><div class="hintBox"><span>请输入11位手机号码（支持中国移动、联通、 电信的手机号码）</span></div></div>
 							</dd>
 						</dl>
 						<dl class="form-item item-auth">
