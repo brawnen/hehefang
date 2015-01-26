@@ -21,7 +21,7 @@ import com.afd.seller.service.IValidatorService;
 import com.afd.seller.util.LoginUtils;
 import com.afd.seller.util.LoginUtils.LoginInfo;
 import com.afd.service.seller.ISellerLoginService;
-import com.afd.service.seller.SellerLoginValidate;
+import com.afd.service.seller.ISellerLoginService.SellerLoginValidate;
 import com.alibaba.dubbo.common.utils.StringUtils;
 
 /**
