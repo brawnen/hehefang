@@ -50,7 +50,7 @@ public class SessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) arg1;
 
 		if (!LoginUtils.isLogined(request)) {
-			response.sendRedirect(request.getContextPath() + "/login/login");
+			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
 

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class WsController {
-	@RequestMapping("/")
+	@RequestMapping("/ws/main")
 	public String ws(HttpServletRequest request, HttpServletResponse response) {
 		// LoginInfo login = LoginUtils.getLoginInfo(request);
 

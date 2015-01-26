@@ -1,5 +1,5 @@
 /**
- * Copyright (c)2013-2014 by www.yiwang.com. All rights reserved.
+ * Copyright (c)2013-2014 by www.afd.com. All rights reserved.
  * 
  */
 package com.afd.seller.controller;
@@ -21,7 +21,7 @@ import com.afd.seller.service.IValidatorService;
 import com.afd.seller.util.LoginUtils;
 import com.afd.seller.util.LoginUtils.LoginInfo;
 import com.afd.service.seller.ISellerLoginService;
-import com.afd.service.seller.ISellerLoginService.SellerLoginValidate;
+import com.afd.service.seller.SellerLoginValidate;
 import com.alibaba.dubbo.common.utils.StringUtils;
 
 /**
@@ -43,21 +43,22 @@ public class LoginController {
 	@Autowired
 	IValidatorService validatorService;
 
-	@RequestMapping("/login/login")
+	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
-		return LoginUtils.isLogined(request) ? "redirect:/" : "/login/login";
+		return LoginUtils.isLogined(request) ? "redirect:/ws/main"
+				: "/login/login";
 	}
 
-	@RequestMapping("/login/logout")
+	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		LoginUtils.removeLoginInfo(request, response);
 
-		return "redirect:/login/login";
+		return "redirect:/login";
 	}
 
-	@RequestMapping("/login/validate")
+	@RequestMapping("/loginValidate")
 	public String validate(
 			HttpServletRequest request,
 			HttpServletResponse response,
@@ -104,7 +105,7 @@ public class LoginController {
 				// 删除错误计数
 				resetErrCount(request, response);
 
-				return "redirect:/";
+				return "redirect:/ws/main";
 
 			}
 			// 登录失败
