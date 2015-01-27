@@ -30,8 +30,17 @@ $(function(){
 	
 	bigMenu.find('li > a').click(function(e){
 		e.preventDefault();
-
-		var item = smallMenu.find('li[b="' + $(this).parent().attr('b') + '"]');
+		
+		var b = $(this).parent().attr('b');
+		if(b == '30' || b == '40') {
+			if($.seller.isPaidDeposit != '1') {
+				showDeposit();
+				
+				return;
+			}
+		}
+		
+		var item = smallMenu.find('li[b="' + b + '"]');
 		var m = $(item[0]).attr('m');
 		var href = $(item[0]).find('a').attr('href');
 		
@@ -59,6 +68,14 @@ $(function() {
 	var bItem = $('#bigMenu').find('li[b="' + b + '"]');
 	bItem.addClass('curr');
 });
+
+function showDeposit() {
+	$('#depositPop, #depositMask').show();
+}
+
+function closeDeposit() {
+	$('#depositPop, #depositMask').hide();
+}
 </script>
 </head>
 <body>
@@ -150,5 +167,23 @@ $(function() {
 		<jsp:include page="/common/footer.jsp"/>
 		<!-- footer end -->
 	</div>
+	
+	<div class="popup popup-primary" style="width:650px; display: none" id="depositPop">
+		<div class="hd"><h2></h2><i class="close" onclick="javascript:closeDeposit();"></i></div>
+		<div class="bd">
+			<dl class="popup-doc">
+				<dt>
+					<i class="icon i-danger"></i>
+				</dt>
+				<dd>
+					<h3>公司保证金未缴纳 ！</h3>
+					<p>您公司保证金审核未通过，因此暂时不能申请或管理“品牌专场”功能，请尽快完成缴费。</p>
+					<div class="btnWrap"><a href="javascript:closeDeposit();" class="btn btn-primary">我知道了</a></div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="mask" id="depositMask" style="display: none"></div>
+	
 </body>
 </html>
