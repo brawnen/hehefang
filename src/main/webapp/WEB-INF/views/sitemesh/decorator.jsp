@@ -3,7 +3,6 @@
 
 <%@ include file="/common/common.jsp"%>
 <%@taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,21 +10,65 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-<link rel="stylesheet" type="text/css" href="${ctx }/static/css/allstyle.min.css"/>
-<link rel="stylesheet" href="${ctx }/static/css/product.css" />
-<script type="text/javascript" src="${ctx}/js/jquery-1.10.2.min.js?t=201501171056"></script>
-<script type="text/javascript" src="${ctx}/js/check-util.js?t=201501171056"></script>
-<title><decorator:title default="卖家中心-一网全城"/></title>
+<link rel="stylesheet" type="text/css" href="${cssUrl}/css/allstyle.min.css"/>
+<script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
+<title><decorator:title default="卖家中心-阿凡达"/></title>
+<script type="text/javascript">
+function appendParam(href, menuId) {
+	if(href.indexOf('?') == -1) {
+		href = href + '?m=' + menuId;
+		
+	} else {		
+		href = href + '&m=' + menuId; 
+	}
+	
+	return href;
+}
+
+$(function(){
+	var bigMenu = $('#bigMenu'), smallMenu = $('#smallMenu');
+	
+	bigMenu.find('li > a').click(function(e){
+		e.preventDefault();
+
+		var item = smallMenu.find('li[b="' + $(this).parent().attr('b') + '"]');
+		var m = $(item[0]).attr('m');
+		var href = $(item[0]).find('a').attr('href');
+		
+		self.location.href = appendParam(href, m);
+	});
+	
+	smallMenu.find('li > a').click(function(e){
+		e.preventDefault();
+		self.location.href = appendParam($(this).attr('href'), $(this).parent().attr('m'));
+	});
+});
+
+$(function() {
+	var m = '${param.m}';
+	if(!m) return;
+	
+	var smallMenu = $('#smallMenu');
+	var sItem = smallMenu.find('li[m="' + m + '"]');
+	var b = sItem.attr('b');
+	
+	sItem.addClass('curr');
+	
+	$('#smallMenu').find('li[b!="' + b + '"]').hide();
+	
+	var bItem = $('#bigMenu').find('li[b="' + b + '"]');
+	bItem.addClass('curr');
+});
+</script>
 </head>
 <body>
-	<div class="wrapper">
+<div class="wrapper wrap-helper">
 		<!-- header -->
 		<div id="header">
 			<div class="wrap">
 				<!-- logo -->
 				<div id="logo">
-					<div class="logo"><a href="#" title="logo"><img src="${ctx }/static/img/logo.png" alt="logo" /></a></div>
+					<div class="logo"><a href="#" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
 					<h1>商家中心</h1>
 				</div>
 				<!-- logo end -->
@@ -45,7 +88,7 @@
 				<!-- site end -->
 				<!-- signin -->
 				<div id="signin">
-					<p><span>您好,醉逍遥</span><span><a href="#" class="exit">退出</a><!--<a href="#">登录</a>/<a href="#">注册</a>--></span></p>
+					<p><span>您好,<c:out value="${loginInfo.nickName}"/></span><span><a href="${ctx}/logout" class="exit">退出</a></span></p>
 				</div>
 				<!-- signin end -->
 			</div>
@@ -54,11 +97,11 @@
 		<!-- mainNav -->
 		<div id="mainNav">
 			<div class="wrap">
-				<ul>
-					<li class="nav-01"><a href="#"><i class="icon"></i>商家助手</a></li>
-					<li class="nav-02 curr"><a href="#"><i class="icon"></i>商品管理</a></li>
-					<li class="nav-03"><a href="#"><i class="icon"></i>品牌特卖</a></li>
-					<li class="nav-04"><a href="#"><i class="icon"></i>交易管理</a></li>
+				<ul id="bigMenu">
+					<li class="nav-01" b="10"><a href="#"><i class="icon"></i>商家助手</a></li>
+					<li class="nav-02" b="20"><a href="#"><i class="icon"></i>商品管理</a></li>
+					<li class="nav-03" b="30"><a href="#"><i class="icon"></i>品牌特卖</a></li>
+					<li class="nav-04" b="40"><a href="#"><i class="icon"></i>交易管理</a></li>
 				</ul>
 			</div>
 		</div>
@@ -69,21 +112,40 @@
 				<!-- aside -->
 				<div id="aside">
 					<div id="asideNav">
-						<ul>
-							<li class="curr"><a href="${ctx }/product/category"><i class="icon"></i>发布新商品</a></li>
-							<li><a href="${ctx }/product/online"><i class="icon"></i>在售商品管理</a></li>
-							<li><a href="${ctx }/product/online"><i class="icon"></i>审核中商品</a></li>
-							<li><a href="${ctx }/product/online"><i class="icon"></i>品牌管理</a></li>
+						<ul id="smallMenu">
+							<li b="10" m="1001"><a href="${ctx}/ws/summary"><i class="icon"></i>概览</a></li>
+							<li b="10" m="1002"><a href="${ctx}/ws/summary"><i class="icon"></i>保证金</a></li>
+							<li b="10" m="1003"><a href="${ctx}/ws/summary"><i class="icon"></i>收款银行账户</a></li>
+							<li b="10" m="1004"><a href="${ctx}/ws/summary"><i class="icon"></i>开票信息</a></li>
+							<li b="10" m="1005"><a href="${ctx}/ws/summary"><i class="icon"></i>基本信息</a></li>
+							<li b="10" m="1006"><a href="${ctx}/ws/summary"><i class="icon"></i>退货地址</a></li>
+							<li b="10" m="1007"><a href="${ctx}/ws/summary"><i class="icon"></i>修改密码</a></li>
+							
+							<li b="20" m="2001"><a href="${ctx}/product/summary"><i class="icon"></i>发布新商品</a></li>
+							<li b="20" m="2002"><a href="${ctx}/product/summary"><i class="icon"></i>在售商品管理</a></li>
+							<li b="20" m="2003"><a href="${ctx}/product/summary"><i class="icon"></i>审核中商品</a></li>
+							<li b="20" m="2004"><a href="${ctx}/product/summary"><i class="icon"></i>品牌管理</a></li>
+							
+							<li b="30" m="3001"><a href="${ctx}/promotion/summary"><i class="icon"></i>特卖专场列表</a></li>
+							<li b="30" m="3002"><a href="${ctx}/promotion/summary"><i class="icon"></i>新建品牌特卖</a></li>
+							
+							<li b="40" m="4001"><a href="${ctx}/order/summary"><i class="icon"></i>全部订单</a></li>
+							<li b="40" m="4002"><a href="${ctx}/order/summary"><i class="icon"></i>订单发货</a></li>
+							<li b="40" m="4003"><a href="${ctx}/order/summary"><i class="icon"></i>退货管理</a></li>
+							
 						</ul>
 					</div>
 				</div>
 				<!-- aside end -->
-		<div id="content">
-			<decorator:body/>				
-		</div>			
-			<!-- content end -->
+				<!-- main -->
+				<div id="main">
+					<decorator:body/>
+				</div>
+				<!-- main end -->
+			</div>			
+			
 		</div>
-		<!-- main end -->
+		<!-- container end -->
 		<!-- footer -->
 		<jsp:include page="/common/footer.jsp"/>
 		<!-- footer end -->

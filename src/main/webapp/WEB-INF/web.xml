@@ -65,11 +65,33 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>sessionFilter</filter-name>
-		<url-pattern>/</url-pattern>
 		<url-pattern>/ws/*</url-pattern>
-		<url-pattern>/order/*</url-pattern>
+		<url-pattern>/apply/*</url-pattern>
+        <url-pattern>/product/*</url-pattern>
+        <url-pattern>/promotion/*</url-pattern>
+        <url-pattern>/order/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>depositFilter</filter-name>
+		<filter-class>com.afd.seller.filter.DepositFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>depositFilter</filter-name>
+        <url-pattern>/promotion/*</url-pattern>
+        <url-pattern>/order/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>sellerFilter</filter-name>
+		<filter-class>com.afd.seller.filter.SellerFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sellerFilter</filter-name>
+       	<url-pattern>/ws/*</url-pattern>
 		<url-pattern>/product/*</url-pattern>
-		<url-pattern>/account/*</url-pattern>
+        <url-pattern>/promotion/*</url-pattern>
+        <url-pattern>/order/*</url-pattern>
 	</filter-mapping>
 
 	<filter>
@@ -81,12 +103,12 @@
     
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
-        <url-pattern>/</url-pattern>
         <url-pattern>/ws/*</url-pattern>
+        <url-pattern>/apply/*</url-pattern>
+        <url-pattern>/helper/*</url-pattern>
         <url-pattern>/product/*</url-pattern>
+        <url-pattern>/promotion/*</url-pattern>
         <url-pattern>/order/*</url-pattern>
-        <url-pattern>/freight/*</url-pattern>
-        <url-pattern>/account/*</url-pattern>
     </filter-mapping> 
     
     <welcome-file-list>

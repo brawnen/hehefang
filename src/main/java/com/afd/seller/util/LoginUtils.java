@@ -99,7 +99,7 @@ public class LoginUtils {
 				return null;
 
 			String[] values = __s.getValue().split(SPLITTER_REGEXP);
-			if (values.length != 7)
+			if (values.length != 6)
 				return null;
 
 			loginInfo = new LoginInfo();
@@ -117,6 +117,7 @@ public class LoginUtils {
 				loginInfo.setNickName(values[2]);
 				loginInfo.setLoginName(values[3]);
 				loginInfo.setType(values[4]);
+				loginInfo.setIsPaidDeposit(values[5]);
 
 			} catch (Exception e) {
 				return null;
@@ -142,9 +143,14 @@ public class LoginUtils {
 				+ loginInfo.getSellerLoginId()
 				+ SPLITTER
 				+ (loginInfo.getNickName() == null ? "" : loginInfo
-						.getNickName()) + SPLITTER + loginInfo.getLoginName()
+						.getNickName())
 				+ SPLITTER
-				+ (loginInfo.getType() == null ? "" : loginInfo.getType());
+				+ loginInfo.getLoginName()
+				+ SPLITTER
+				+ (loginInfo.getType() == null ? "" : loginInfo.getType())
+				+ SPLITTER
+				+ (loginInfo.getIsPaidDeposit() == null ? "0" : loginInfo
+						.getIsPaidDeposit());
 
 		RequestUtils.setCookie(request, response, COOKIE_S_NAME, __s,
 				DEFAULT_MAX_AGE, false);
@@ -198,6 +204,7 @@ public class LoginUtils {
 		private String nickName;
 		private String loginName;
 		private String type;
+		private String isPaidDeposit; // 保证金缴纳标志
 
 		public int getSellerId() {
 			return sellerId;
@@ -237,6 +244,14 @@ public class LoginUtils {
 
 		public void setType(String type) {
 			this.type = type;
+		}
+
+		public String getIsPaidDeposit() {
+			return isPaidDeposit;
+		}
+
+		public void setIsPaidDeposit(String isPaidDeposit) {
+			this.isPaidDeposit = isPaidDeposit;
 		}
 	}
 }

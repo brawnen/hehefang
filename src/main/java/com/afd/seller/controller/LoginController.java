@@ -99,13 +99,17 @@ public class LoginController {
 				loginInfo
 						.setLoginName(validate.getSellerLogin().getLoginName());
 				loginInfo.setType(validate.getSellerLogin().getType());
+				if (validate.getSeller() != null) {
+					loginInfo.setIsPaidDeposit(validate.getSeller()
+							.getIsPaidDeposit());
+				}
 
 				LoginUtils.registerLoginInfo(request, response, loginInfo);
 
 				// 删除错误计数
 				resetErrCount(request, response);
 
-				return "redirect:/ws/main";
+				return "redirect:/ws/summary?m=1001";
 
 			}
 			// 登录失败
