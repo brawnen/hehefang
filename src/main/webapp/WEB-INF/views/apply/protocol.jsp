@@ -12,6 +12,6 @@
 <title>卖家申请-阿凡达</title>
 </head>
 <body>
-	<a href="apply">申请>>></a>
+	
 </body>
 </html>

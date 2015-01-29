@@ -62,4 +62,18 @@ public class ApplyController {
 		}
 
 	}
+
+	@RequestMapping("/apply/protocol")
+	public String applyProtocol(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return "/apply/protocol";
+	}
+
+	@RequestMapping("/apply/apply")
+	public String applyApply(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return "/apply/apply";
+	}
 }

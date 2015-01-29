@@ -8,7 +8,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="my" uri="http://my.function.com/tags"%>
+<%@taglib prefix="my" uri="/WEB-INF/tld/my.tld"%>
 
 <%	
 	LoginUtils.LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
