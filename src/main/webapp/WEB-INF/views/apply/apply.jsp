@@ -12,8 +12,15 @@
 <title>卖家申请-阿凡达</title>
 </head>
 <body>
-	<link rel="stylesheet" href="${cssUrl}/css/join.css" />
-	
+	<link rel="stylesheet" href="${cssUrl}/css/join.css?t=20150129" />
+	<link rel="stylesheet" href="${ctx}/uploadify/uploadify.css?t=20150129" />
+	<script type="text/javascript">
+		var ctx = '${ctx}';
+		var imgUploadUrl = '${imgUploadUrl}';
+		var imgGetUrl = '${my:random(imgGetUrl)}';
+	</script>	
+	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>
+	<script type="text/javascript" src="${jsUrl}/apply.js?t=20150129"></script>
 
 	<div class="wrap">
 				<!-- auditStep -->
@@ -97,19 +104,18 @@
 								<div class="item-label"><label><em>*</em>营业期限：</label></div>
 								<div class="item-cont">
 									<div class="txt-section">
-										<input type="text" class="txt txt-date" onfocus="WdatePicker()" name="btStartDate" id="btStartDate" data-describedby="btDate_msg" data-required="true" data-description="btStartDate"><i>到</i>
-										<input type="text" class="txt txt-date"  onfocus="WdatePicker()"  name="btEndDate" id="btEndDate" data-describedby="btDate_msg" data-description="btEndDate" data-conditional="confirmBtEndDate
-										"></div><span class="note">长期有效的可不填结束日期</span>
+										<input type="text" class="txt txt-date" onfocus="WdatePicker()" name="btStartDate" id="btStartDate"><i>到</i>
+										<input type="text" class="txt txt-date"  onfocus="WdatePicker()"  name="btEndDate" id="btEndDate"></div><span class="note">长期有效的可不填结束日期</span>
 									<div class="note errTxt" id="btDate_msg"></div>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>营业执照所在地：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lgl"></div>
+								<div class="item-cont"><input type="text" class="txt lg w-lgl" id="btGeo" name="btGeo" maxlength="10"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>旗下／代理品牌：</label></div>
-								<div class="item-cont"><textarea name="" id="" cols="60" rows="5" class="resize-none" placeholder="请填写品牌名称，多个可用,分隔" style="width: 420px;height: 60px"></textarea></div>
+								<div class="item-cont"><textarea name="coBrand" id="coBrand" cols="60" rows="5" class="resize-none" placeholder="请填写品牌名称，多个可用,分隔" style="width: 420px;height: 60px"></textarea></div>
 							</div>
 						</fieldset>
 						<fieldset class="papersUpload">
@@ -129,7 +135,10 @@
 										</td>
 										<td>
 											<div class="mod-upload">
-												<img src="${cssUrl}/img/upload_img.jpg" alt="">
+												<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBtImg">
+												<input type="hidden" id="btImg" name="btImg" value="${data.btImg}" data-required="true" data-describedby="btImg_msg" data-description="btImg">
+												<div class="note errTxt" id="btImg_msg"></div>
+												<a id="uploadBtImg">upload</a>
 											</div>
 										</td>
 										<td class="table-right">
