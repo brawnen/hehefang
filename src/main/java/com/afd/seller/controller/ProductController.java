@@ -1,5 +1,6 @@
 package com.afd.seller.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.common.mybatis.Page;
+import com.afd.common.util.DateUtils;
 import com.afd.constants.product.ProductConstants;
 import com.afd.model.product.Product;
+import com.afd.model.product.Sku;
 import com.afd.model.product.vo.BaseCategoryInfoVO;
-import com.afd.model.product.vo.BaseCategoryInfoVO.Attr;
-import com.afd.model.product.vo.BaseCategoryInfoVO.Spec;
+import com.afd.model.product.vo.ProductConvertUtil;
+import com.afd.model.product.vo.ProductVo;
 import com.afd.param.product.ProductCondition;
 import com.afd.service.product.ICategoryService;
 import com.afd.service.product.IProductService;
@@ -47,8 +50,7 @@ public class ProductController {
 	 * @return 选择类目页面
 	 */
 	@RequestMapping(value = "/category")
-	public String toSelectCategoryPage(){
-		
+	public String toSelectCategory(){
 		
 		return "/product/category";
 	}
@@ -58,11 +60,11 @@ public class ProductController {
 	 * @return 发布商品页面
 	 */
 	@RequestMapping(value = "/publish")
-	public String toPublishPage(
+	public String toPublish(
 			@RequestParam(value = "bcId", required = false) Integer bcId,
 			HttpServletRequest request,ModelMap modelMap) {
 		
-		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(64);
+		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(bcId);
 		
 		//1. 已选商品品类
 		String pathName = bc.getPathName();
@@ -72,26 +74,8 @@ public class ProductController {
 		}
 		
 		//2. 品牌
-		
-		//3. 属性
-		
-		List<Attr> attrList = bc.getAttrList(); 
-		if(null != attrList && !attrList.isEmpty()){
-			for (Attr attr : attrList) {
-				if(ProductConstants.DISPLAY_MODE_SELECT.equals(attr.getDisplayMode())){//下拉框
-					
-					
-				}
-			}
-		}
-		//4. 规格
-		List<Spec> specList = bc.getSpecList(); 
-		if(null != specList && !specList.isEmpty()){
-			
-		}
-		
+
 		modelMap.put("bc", bc);
-		
 		return "/product/publish";
 	}
 	
@@ -102,10 +86,67 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/save")
-	public String doSaveProduct(){
+	public String doSaveProduct(HttpServletRequest request,
+			ProductVo vo){
+		
+		Product product = ProductConvertUtil.voToProduct(vo,null);
+
+		product.setSellerId(765432);
+		product.setBcId(27);
+		product.setStatus(ProductConstants.PROD_AUDIT_NORMAL);
+//		product.setBcCode(bcCode);
+//		product.setProdCode("7654321");
+		product.setCreateDate(DateUtils.currentDate());
+		product.setLastUpdateDate(DateUtils.currentDate());
+		int prodId = productService.addProduct(product);
+		vo.setProdId(prodId);
+		saveSku(vo);
+		
+//		for (int i = 0; i < 2; i++) {
+//			Sku sku = new Sku();
+//			sku.setProdId(prodId);
+//			sku.setProdCode("7654321");
+//			sku.setSalePrice(new BigDecimal(108));
+//			sku.setMarketPrice(new BigDecimal(998));
+//			sku.setStockBalance(100);
+//			sku.setCreateDate(new Date());
+//			
+//			productService.addSku(sku);
+//		}
+		
+		// 1. 卖家
+		// 2. 品牌
+		// 3.
+		
 		return null;
 	}
 	
+	private void saveSku(ProductVo vo) {
+		BigDecimal[] skuSalePrice = vo.getSkuSalePrice();
+		BigDecimal[] skuMarketPrice = vo.getSkuMarketPrice();
+		
+		if(null != skuSalePrice && skuSalePrice.length > 0){
+			 ArrayList<Sku> skus = new ArrayList<Sku>();
+			for (int i = 0; i < skuSalePrice.length; i++) {
+				Sku sku = new Sku();
+				sku.setProdId(vo.getProdId());
+				sku.setProdCode(vo.getProdCode());
+				sku.setMarketPrice(skuMarketPrice[i]);
+				sku.setSalePrice(skuSalePrice[i]);
+//				sku.setSkuImgUrl(skuImgUrl);
+				sku.setSkuSpecId(vo.getSkuSpecId()[i]);
+				sku.setSkuSpecName(vo.getSkuSpecName()[i]);
+				sku.setSkuStatus(ProductConstants.SKU_STATUS_NORMAL); 
+				sku.setCreateDate(DateUtils.currentDate());
+//				sku.setCreateByName(loginName);
+				
+				skus.add(sku);
+				
+			}
+			productService.batchAddSkus(skus);
+		}
+	}
+
 	/**
 	 *  
 	 * @return 修改商品
@@ -124,7 +165,7 @@ public class ProductController {
 	public Map<String, String> putawayProd(
 			@RequestParam(value = "prodId", required = true) Integer prodId,
 			HttpServletRequest request) {
-		boolean b = productService.putawayProduct(prodId);
+		boolean b = productService.putawayProduct(prodId);		
 
 		return null;
 	}
@@ -175,6 +216,7 @@ public class ProductController {
 			@RequestParam(value = "prodId", required = true) Integer prodId) {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		boolean b = productService.delProduct(prodId,null);
+		
 		return resultMap;
 	}
 	
@@ -203,7 +245,7 @@ public class ProductController {
 	 * @return 库存商品列表
 	 */
 	@RequestMapping(value = "/stock")
-	public String toStockProductPage(
+	public String toStockProduct(
 			@ModelAttribute ProductCondition productCondition,
 			@RequestParam(value = "sortField", defaultValue = "") String sortField,
 			@RequestParam(value = "sortDirection", defaultValue = "") String sortDirection,
@@ -215,7 +257,6 @@ public class ProductController {
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("sortDirection", sortDirection);
 		modelMap.addAttribute("page", page);
-
 		return "/product/online";
 	}
 	
@@ -226,18 +267,13 @@ public class ProductController {
 	@RequestMapping(value = "/audit")
 	public String toWaitAuditProductPage(
 			@ModelAttribute ProductCondition productCondition,
-			@RequestParam(value = "sortField", defaultValue = "") String sortField,
-			@RequestParam(value = "sortDirection", defaultValue = "") String sortDirection,
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
 			) {
 		page.setPageSize(15);
 
-		page = productService.searchAuditProductPage(productCondition, sortField, sortDirection, page);
+		page = productService.searchAuditProductPage(productCondition, null, null, page);
 		
-		modelMap.addAttribute("sortField", sortField);
-		modelMap.addAttribute("sortDirection", sortDirection);
 		modelMap.addAttribute("page", page);
-
 		return "/product/audit";
 	}
 	
@@ -259,8 +295,9 @@ public class ProductController {
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("sortDirection", sortDirection);
 		modelMap.addAttribute("page", page);
-
+		List<Product> result = page.getResult();
+		System.out.println(result.size());
 		return "/product/online";
 	}
-
+	
 }

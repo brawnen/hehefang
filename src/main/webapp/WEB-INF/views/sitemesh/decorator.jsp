@@ -138,10 +138,10 @@ function closeDeposit() {
 							<li b="10" m="1006"><a href="${ctx}/ws/summary"><i class="icon"></i>退货地址</a></li>
 							<li b="10" m="1007"><a href="${ctx}/ws/summary"><i class="icon"></i>修改密码</a></li>
 							
-							<li b="20" m="2001"><a href="${ctx}/product/summary"><i class="icon"></i>发布新商品</a></li>
-							<li b="20" m="2002"><a href="${ctx}/product/summary"><i class="icon"></i>在售商品管理</a></li>
-							<li b="20" m="2003"><a href="${ctx}/product/summary"><i class="icon"></i>审核中商品</a></li>
-							<li b="20" m="2004"><a href="${ctx}/product/summary"><i class="icon"></i>品牌管理</a></li>
+							<li b="20" m="2001"><a href="${ctx}/product/category"><i class="icon"></i>发布新商品</a></li>
+							<li b="20" m="2002"><a href="${ctx}/product/online"><i class="icon"></i>在售商品管理</a></li>
+							<li b="20" m="2003"><a href="${ctx}/product/online"><i class="icon"></i>审核中商品</a></li>
+							<li b="20" m="2004"><a href="${ctx}/product/brand"><i class="icon"></i>品牌管理</a></li>
 							
 							<li b="30" m="3001"><a href="${ctx}/promotion/summary"><i class="icon"></i>特卖专场列表</a></li>
 							<li b="30" m="3002"><a href="${ctx}/promotion/summary"><i class="icon"></i>新建品牌特卖</a></li>
