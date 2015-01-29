@@ -8,6 +8,7 @@
 	<title>卖家|发布商品-添加类目</title>
 </head>
 <body>
+	<link rel="stylesheet" href="${cssUrl}/css/product.css" />
 	<div class="wrapper product">
 		<!-- container -->
 		<div id="container">
@@ -89,7 +90,7 @@
 	$(function() {
 
 		$(document).on("click", "#publishBtn", function() {
-			window.location.href = "${ctx}/product/publish";
+			window.location.href = "${ctx}/product/publish?bcId=175&m=2001";
 		});
 
 	});

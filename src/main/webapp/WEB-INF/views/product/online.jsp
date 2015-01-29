@@ -8,6 +8,7 @@
 	<title>卖家|在售商品</title>
 </head>
 <body>
+	<link rel="stylesheet" href="${cssUrl}/css/product.css" />
 	<div class="wrapper product">
 		<!-- container -->
 		<div id="container">
@@ -20,7 +21,7 @@
 				<!-- mainCaption end -->
 				<!-- screening -->
 				<div class="screening">
-					<form class="form form-inline">
+					<form class="form form-inline" method="post">
 						<legend></legend>
 						<div class="formGroup">
 							<div class="form-item">
@@ -39,211 +40,78 @@
 									<label>商品名称：</label>
 								</div>
 								<div class="item-cont">
-									<input type="text" class="txt w-lg" />
-									<input type="button" class="btn btn-def" value="查&nbsp;&nbsp;询">
+									<input type="text" name="title" class="txt w-lg" />
+									<input type="submit" class="btn btn-def" value="查&nbsp;&nbsp;询">
 								</div>
 							</div>
 						</div>
-						<div class="searchBtn"><a href="#" class="btn btn-def">发布新商品</a></div>
+						<div class="searchBtn"><a href="${ctx }/product/category" class="btn btn-def">发布新商品</a></div>
 					</form>
 				</div>
 				<!-- screening end -->
 				<!-- table -->
-				<table class="table table-line table-left table-product">
-					<colgroup>
-						<col width="70">
-						<col width="80">
-						<col width="205">
-						<col width="90">
-						<col width="130">
-						<col width="100">
-						<col width="80">
-						<col width="80">
-						<col width="86">
-						<col width="100">
-					</colgroup>
-					<thead>
-						<tr>
-							<td>商品图片</td>
-							<td>商品ID</td>
-							<td>商品名称</td>
-							<td>品牌</td>
-							<td>货号</td>
-							<td>类目</td>
-							<td>原价</td>
-							<td>特卖价格</td>
-							<td>录入时间</td>
-							<td>操作</td>
-						</tr>
-					</thead>
-					<tbody class="interleave-even">
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="pro-img">
-									<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
-								</div>
-							</td>
-							<td>GELKJ656</td>
-							<td><p>沃格贝斯 2013秋装新款棉毛夹背心款棉毛夹背心款棉毛夹</p></td>
-							<td>好孩子好孩子</td>
-							<td>GELKJ6564S5FAFSF</td>
-							<td>睡衣/睡裤/睡裙/睡衣套装</td>
-							<td>¥198.00~198.00</td>
-							<td>¥98.00~98.00</td>
-							<td>2013/11/02 12:09</td>
-							<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
-						</tr>
-					</tbody>
-				</table>
-				<!-- table edn -->
+				<c:choose>
+					<c:when test="${not empty requestScope.page.result}">		
+					<table class="table table-line table-left table-product">
+						<colgroup>
+							<col width="70">
+							<col width="80">
+							<col width="205">
+							<col width="90">
+							<col width="130">
+							<col width="100">
+							<col width="80">
+							<col width="80">
+							<col width="86">
+							<col width="100">
+						</colgroup>
+						<thead>
+							<tr>
+								<td>商品图片</td>
+								<td>商品ID</td>
+								<td>商品名称</td>
+								<td>品牌</td>
+								<td>货号</td>
+								<td>类目</td>
+								<td>原价</td>
+								<td>特卖价格</td>
+								<td>录入时间</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody class="interleave-even">
+							<c:forEach items="${requestScope.page.result}" var="p">
+								<tr>
+									<td>
+										<div class="pro-img">
+											<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+										</div>
+									</td>
+									<td>${p.prodCode }</td>
+									<td><p>${p.title }</p></td>
+									<td>${p.brandName }</td>
+									<td>${p.artNo }</td>
+									<td>睡衣/睡裤/睡裙/睡衣套装</td>
+									<td>${p.salePrice }</td>
+									<td>${p.marketPrice }</td>
+									<td>${p.createDate }</td>
+									<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<!-- table edn -->
+					</c:when>
+					<c:otherwise>
+						<div class="mod-tips fruitless">没有找到符合条件的商品！</div>
+						<div class="mod-tips fruitless">您还没有发布过商品？现在就 <a href="#">发布商品</a></div>
+					</c:otherwise>
+				</c:choose>
+				
 				<!-- paging -->
 				<div class="paging">
 					<div class="pagingWrap">
-						<div class="pagAll">共<span>4</span>条记录</div>
+						<div class="pagAll">共<span>${requestScope.page.totalRecord }</span>条记录</div>
 						<div class="pageup disabled"><a href="javascript:;"><i class="icon"></i>&nbsp;上一页</a></div>
 						<ul>
 							<li><span class="on">1</span></li>
