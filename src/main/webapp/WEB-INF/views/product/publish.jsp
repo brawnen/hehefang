@@ -40,13 +40,13 @@
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>货号：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lg" id="artNo" name="artNo" ><span class="note">12-16位数字/字母</span></div>
+								<div class="item-cont"><input type="text" class="txt lg w-lg" id="artNo" name="artNo" onkeyup="publish.validateArtNo(this);" ><span class="note">12-16位数字/字母</span></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>品牌：</label></div>
 								<div class="item-cont">
 									<select id="brand" name="brand" class="select">
-										<option value="0">请选择品牌</option>
+										<option value="-1">请选择品牌</option>
 										<option value="1">361</option>
 									</select>
 								</div>
@@ -79,14 +79,14 @@
 													<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select">
 														<option value=""></option>
 														<c:forEach items="${attr.attrValueList }" var="attrV" >
-															<option value="${attrV.attrValueId }|||${attrV.attrValue }|||${attrV.isSubAttr ? 'true' : 'false'}">${attrV.attrValue }</option>
+															<option value="${attrV.attrValueId }|||${attrV.attrValue }|||${attrV.isSubAttr ? 'true' : 'false'}"><c:out value='${attrV.attrValue }'/></option>
 														</c:forEach>
 													</select>
 												</c:when>
 												<c:otherwise>
 													<ul>
 													<c:forEach items="${attr.attrValueList }" var="attrV">
-														<li><label><input type="checkbox" class="chk" name="attrValue2" attrId="${attr.attrId}"  >${attrV.attrValue }</label></li>
+														<li><label><input type="checkbox" class="chk" name="attrValue2" attrId="${attr.attrId}"  ><c:out value='${attrV.attrValue }'/></label></li>
 													</c:forEach>
 													</ul>
 												</c:otherwise>
@@ -99,11 +99,11 @@
 							</div>
 							<div class="form-item item-color">
 								<c:if test="${!empty(bc.specList)}">
-									<c:forEach items="${bc.specList}" var="spec">
+									<c:forEach items="${bc.specList}" var="spec" varStatus="var">
 									<div class="item-label"><label><em>*</em>${spec.specName }：</label></div>
 									<div class="item-cont">
 									<div class="mod-attrChk">
-										<ul specId="${spec.specId}">
+										<ul var="${var.count }" specId="${spec.specId}">
 											<c:forEach items="${spec.specValueList }" var="specValue">
 											<li>
 												<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this)">
@@ -163,7 +163,7 @@
 		</div>
 		<!-- container end -->
 	</div>
-<script type="text/javascript" src="${ctx}/js/publish.js"></script>	
+<script type="text/javascript" src="${jsUrl}/publish.js"></script>	
 <script type="text/javascript">
 	$(function(){
 		publish = new publish();

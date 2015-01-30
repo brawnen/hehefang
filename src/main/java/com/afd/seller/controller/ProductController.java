@@ -87,7 +87,7 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value = "/save")
 	public String doSaveProduct(HttpServletRequest request,
-			ProductVo vo){
+			@ModelAttribute ProductVo vo){
 		
 		Product product = ProductConvertUtil.voToProduct(vo,null);
 
@@ -124,6 +124,7 @@ public class ProductController {
 	private void saveSku(ProductVo vo) {
 		BigDecimal[] skuSalePrice = vo.getSkuSalePrice();
 		BigDecimal[] skuMarketPrice = vo.getSkuMarketPrice();
+		Integer[] skuStockBalance = vo.getSkuStockBalance();
 		
 		if(null != skuSalePrice && skuSalePrice.length > 0){
 			 ArrayList<Sku> skus = new ArrayList<Sku>();
@@ -133,12 +134,27 @@ public class ProductController {
 				sku.setProdCode(vo.getProdCode());
 				sku.setMarketPrice(skuMarketPrice[i]);
 				sku.setSalePrice(skuSalePrice[i]);
-//				sku.setSkuImgUrl(skuImgUrl);
+				sku.setStockBalance(skuStockBalance[i]);
+//				sku.setSkuImgUrl(skuImgUrl[i]);
+				
+				if (null != vo.getSkuImgUrl() && vo.getSkuImgUrl().length > 0) {
+					String skuImgUrl = vo.getSkuImgUrl()[i];
+					if (null !=skuImgUrl && skuImgUrl.length() > 0) {
+						sku.setSkuImgUrl(skuImgUrl);
+					} else {
+						sku.setSkuImgUrl("www.yiwang.com");
+					}
+				} else {
+					sku.setSkuImgUrl("www.yiwang.com");
+				}
+				
 				sku.setSkuSpecId(vo.getSkuSpecId()[i]);
 				sku.setSkuSpecName(vo.getSkuSpecName()[i]);
 				sku.setSkuStatus(ProductConstants.SKU_STATUS_NORMAL); 
 				sku.setCreateDate(DateUtils.currentDate());
-//				sku.setCreateByName(loginName);
+				sku.setCreateByName("admin");
+				sku.setLastUpdateDate(DateUtils.currentDate());
+				sku.setUpdateByName("admin");
 				
 				skus.add(sku);
 				
