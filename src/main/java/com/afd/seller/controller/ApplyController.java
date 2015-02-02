@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.afd.model.seller.SellerApply;
 import com.afd.model.seller.SellerLogin;
 import com.afd.seller.util.LoginUtils;
 import com.afd.seller.util.LoginUtils.LoginInfo;
@@ -75,5 +76,14 @@ public class ApplyController {
 			HttpServletResponse response) {
 
 		return "/apply/apply";
+	}
+
+	public static final class ApplyForm extends SellerApply {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 7390036815400574899L;
+
 	}
 }
