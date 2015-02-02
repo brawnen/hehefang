@@ -58,20 +58,20 @@ public class ApplyController {
 			return "apply/waitAudit";
 
 		} else {
-			return "/apply/entry";
+			return "forward:/apply/apply";
 		}
 
 	}
 
-	@RequestMapping("/apply/protocol")
-	public String applyProtocol(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		return "/apply/protocol";
-	}
-
 	@RequestMapping("/apply/apply")
 	public String applyApply(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return "/apply/apply";
+	}
+
+	@RequestMapping("/apply/submit")
+	public String applySubmit(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		return "/apply/apply";

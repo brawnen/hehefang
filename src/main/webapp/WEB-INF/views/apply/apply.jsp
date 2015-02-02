@@ -12,6 +12,7 @@
 <title>卖家申请-阿凡达</title>
 </head>
 <body>
+	
 	<link rel="stylesheet" href="${cssUrl}/css/join.css?t=20150129" />
 	<link rel="stylesheet" href="${ctx}/uploadify/uploadify.css?t=20150129" />
 	<script type="text/javascript">
@@ -21,6 +22,30 @@
 	</script>	
 	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>
 	<script type="text/javascript" src="${jsUrl}/apply.js?t=20150129"></script>
+	<style>
+		.uploadBtn{
+		 	cursor:hand;
+			width: 54px;
+			height: 24px;
+			padding: 0;
+			margin-left:20px;
+			font-size: 12px;
+			background: url(${cssUrl}/img/control/btnbg.jpg) repeat-x 0 10%;
+			border-color: #c5c5c5;
+			color:#666;
+			text-shadow:none;
+			border:1px solid #708090;
+			font-weight:100;
+			border-radius: 4px;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+		}
+		
+		 .uploadify:hover .uploadify-button {
+			 padding: 0;
+		     background:#F0F0F0;
+		 }
+		</style>
 
 	<div class="wrap">
 				<!-- auditStep -->
@@ -47,7 +72,7 @@
 				<!-- auditStep end -->
 				<!-- joinAplly -->
 				<div class="joinAplly">
-					<form class="form form-join" method="post" action="applySubmit">
+					<form class="form form-join" method="post" action="submit" id="frm">
 						<c:if test="${!empty(audit.auditOpinion)}">
 						<div class="mod-tips">
 							<dl>
@@ -71,7 +96,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>营业执照注册号：</label></div>
 								<div class="item-cont">
-									<input type="text" class="txt lg w-lgl" autocomplete="off" maxlength="50"  id="coBln" name="coBln"
+									<input type="text" class="txt lg w-lgl" autocomplete="off" dblength="50"  id="coBln" name="coBln"
 								 			value="${fn:escapeXml(data.coBln)}" data-describedby="coBln_msg" data-required="true" data-description="coBln">
 									<div class="note errTxt" id="coBln_msg"></div>
 								</div>
@@ -79,7 +104,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>法人姓名：</label></div>
 								<div class="item-cont">
-									<input type="text" class="txt lg w-lg" autocomplete="off" maxlength="15"  id="lpName" name="lpName"
+									<input type="text" class="txt lg w-lg" autocomplete="off" dblength="20"  id="lpName" name="lpName"
 								 			value="${fn:escapeXml(data.lpName)}" data-describedby="lpName_msg" data-required="true" data-description="lpName">
 									<div class="note errTxt" id="lpName_msg"></div>
 								</div>
@@ -95,7 +120,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>经营范围：</label></div>
 								<div class="item-cont">
-									<textarea name="bizScope" id="bizScope" cols="60" rows="5" class="resize-none" placeholder="请填写营业执照上的经营范围" style="width: 420px;height: 80px"
+									<textarea name="bizScope" id="bizScope" cols="60" rows="5" dblength="1000" class="resize-none" placeholder="请填写营业执照上的经营范围" style="width: 420px;height: 80px"
 										data-describedby="bizScope_msg" data-required="true" data-description="bizScope"><c:out value="${data.bizScope}"/></textarea>
 									<div class="note errTxt" id="bizScope_msg"></div>
 								</div>
@@ -104,18 +129,18 @@
 								<div class="item-label"><label><em>*</em>营业期限：</label></div>
 								<div class="item-cont">
 									<div class="txt-section">
-										<input type="text" class="txt txt-date" onfocus="WdatePicker()" name="btStartDate" id="btStartDate"><i>到</i>
-										<input type="text" class="txt txt-date"  onfocus="WdatePicker()"  name="btEndDate" id="btEndDate"></div><span class="note">长期有效的可不填结束日期</span>
+										<input type="text" class="txt txt-date" onfocus="WdatePicker()" name="sBtStartDate" id="sBtStartDate" value="${data.sBtStartDate}"><i>到</i>
+										<input type="text" class="txt txt-date"  onfocus="WdatePicker()"  name="sBtEndDate" id="sBtEndDate" value="${data.sBtEndDate}"></div><span class="note">长期有效的可不填结束日期</span>
 									<div class="note errTxt" id="btDate_msg"></div>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>营业执照所在地：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lgl" id="btGeo" name="btGeo" maxlength="10"></div>
+								<div class="item-cont"><input type="text" class="txt lg w-lgl" id="btGeo" name="btGeo" dblength="30" value="${fn:escapeXml(data.btGeo)}"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>旗下／代理品牌：</label></div>
-								<div class="item-cont"><textarea name="coBrand" id="coBrand" cols="60" rows="5" class="resize-none" placeholder="请填写品牌名称，多个可用,分隔" style="width: 420px;height: 60px"></textarea></div>
+								<div class="item-cont"><textarea name="coBrand" id="coBrand" cols="60" rows="5" class="resize-none" placeholder="请填写品牌名称，多个可用,分隔" style="width: 420px;height: 60px" dblength="200"><c:out value="${data.coBrand}"/></textarea></div>
 							</div>
 						</fieldset>
 						<fieldset class="papersUpload">
@@ -135,11 +160,20 @@
 										</td>
 										<td>
 											<div class="mod-upload">
-												<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBtImg">
+												<c:choose>
+													<c:when test="${empty(data.btImg)}">
+														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBtImg">
+													</c:when>
+													<c:otherwise>
+														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.btImg)}" alt="" id="imgBtImg">
+													</c:otherwise>
+												</c:choose>													
 												<input type="hidden" id="btImg" name="btImg" value="${data.btImg}" data-required="true" data-describedby="btImg_msg" data-description="btImg">
-												<div class="note errTxt" id="btImg_msg"></div>
-												<a id="uploadBtImg">upload</a>
 											</div>
+											<p class="submit-btn">
+												<input type="button" class="btn btn-def" value="上 传" id="btnBtImg">
+											</p>
+											<div class="note errTxt" id="btImg_msg"></div>												
 										</td>
 										<td class="table-right">
 											<p>示例：</p>
@@ -157,8 +191,21 @@
 										</td>
 										<td>
 											<div class="mod-upload">
-												<img src="${cssUrl}/img/upload_img.jpg" alt="">
+												<c:choose>
+													<c:when test="${empty(data.orgCodeImg)}">
+														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgOrgCodeImg">
+													</c:when>
+													<c:otherwise>
+														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.orgCodeImg)}" alt="" id="imgOrgCodeImg">
+													</c:otherwise>
+												</c:choose>			
+												<input type="hidden" id="orgCodeImg" name="orgCodeImg" value="${data.orgCodeImg}" data-required="true" data-describedby="orgCodeImg_msg" data-description="orgCodeImg">											
 											</div>
+											
+											<p class="submit-btn">
+												<input type="button" class="btn btn-def" value="上 传" id="btnOrgCodeImg">
+											</p>
+											<div class="note errTxt" id="orgCodeImg_msg"></div>	
 										</td>
 										<td class="table-right">
 											<p>示例：</p>
@@ -176,8 +223,21 @@
 										</td>
 										<td>
 											<div class="mod-upload">
-												<img src="${cssUrl}/img/upload_img.jpg" alt="">
+												<c:choose>
+													<c:when test="${empty(data.taxImg)}">
+														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgTaxImg">
+													</c:when>
+													<c:otherwise>
+														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.taxImg)}" alt="" id="imgTaxImg">
+													</c:otherwise>
+												</c:choose>		
+												<input type="hidden" id="taxImg" name="taxImg" value="${data.taxImg}" data-required="true" data-describedby="taxImg_msg" data-description="taxImg">																							
 											</div>
+											
+											<p class="submit-btn">
+												<input type="button" class="btn btn-def" value="上 传" id="btnTaxImg">
+											</p>
+											<div class="note errTxt" id="taxImg_msg"></div>	
 										</td>
 										<td class="table-right">
 											<p>示例：</p>
@@ -195,8 +255,21 @@
 										</td>
 										<td>
 											<div class="mod-upload">
-												<img src="${cssUrl}/img/upload_img.jpg" alt="">
+												<c:choose>
+													<c:when test="${empty(data.bankLicenseImg)}">
+														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBankLicenseImg">
+													</c:when>
+													<c:otherwise>
+														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.bankLicenseImg)}" alt="" id="imgBankLicenseImg">
+													</c:otherwise>
+												</c:choose>		
+												<input type="hidden" id="bankLicenseImg" name="bankLicenseImg" value="${data.bankLicenseImg}" data-required="true" data-describedby="bankLicenseImg_msg" data-description="bankLicenseImg">																							
 											</div>
+											
+											<p class="submit-btn">
+												<input type="button" class="btn btn-def" value="上 传" id="btnBankLicenseImg">
+											</p>
+											<div class="note errTxt" id="bankLicenseImg_msg"></div>											
 										</td>
 										<td class="table-right">
 											<p>示例：</p>
@@ -214,17 +287,24 @@
 							<div class="legend"><h3>联系人信息<span>用于入驻过程中接收入驻通知，请务必正确填写。</span></h3></div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>联系人姓名：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lg"></div>
+								<div class="item-cont">
+									<input type="text" class="txt lg w-lg" id="bizManName" name="bizManName" value="${data.bizManName}" data-required="true" data-describedby="bizManName_msg" data-description="bizManName" dblength="20">
+									<div class="note errTxt" id="bizManName_msg"></div>	
+								</div>
+								
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>联系人手机号码：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lgl"></div>
+								<div class="item-cont">
+									<input type="text" class="txt lg w-lgl" id="bizManMobile" name="bizManMobile" value="${data.bizManMobile}" data-required="true" data-describedby="bizManMobile_msg" data-description="bizManMobile" data-pattern="^[1]\d{10}$" maxlength="11">
+									<div class="note errTxt" id="bizManMobile_msg"></div>		
+								</div>								
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>联系人固定电话：</label></div>
 								<div class="item-cont">
 									<div class="txt-tel">
-										<input type="text" class="txt lg telArea"><i>-</i><input type="text" class="txt lg telNum"><i>-</i><input type="text" class="txt lg telExt">
+										<input type="text" class="txt lg telArea"  id="telArea" name="telArea" value="${data.telArea}" maxlength="4"><i>-</i><input type="text" class="txt lg telNum" id="telNo" name="telNo" value="${data.telNo}" maxlength="8"><i>-</i><input type="text" class="txt lg telExt" id="telExt" name="telExt" value="${data.telExt}" maxlength="4">
 									</div>
 								</div>
 							</div>
@@ -232,21 +312,26 @@
 								<div class="item-label"><label>传真号码：</label></div>
 								<div class="item-cont">
 									<div class="txt-tel">
-										<input type="text" class="txt lg telArea"><i>-</i><input type="text" class="txt lg telNum"><i>-</i><input type="text" class="txt lg telExt">
+										<input type="text" class="txt lg telArea" id="faxArea" name="faxArea" value="${data.faxArea}" maxlength="4"><i>-</i><input type="text" class="txt lg telNum" id="faxNo" name="faxNo" value="${data.faxNo}" maxlength="8"><i>-</i><input type="text" class="txt lg telExt" id="faxExt" name="faxExt" value="${data.faxExt}" maxlength="4">
 									</div>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>电子邮箱：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lgl"></div>
+								<div class="item-cont">
+									<input type="text" class="txt lg w-lgl" id="bizManEmail" name="bizManEmail" value="${data.bizManEmail}" dblength="100" data-required="true" data-describedby="bizManEmail_msg" data-description="bizManEmail" data-conditional="confirmBizManEmail">
+									<div class="note errTxt" id="bizManEmail_msg"></div>	
+								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label class="hide">入驻协议：</label></div>
-								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" />我已阅读并同意<a href="#" target="_blank">《阿凡达商家入驻条款》</a></label></div>
+								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" id="chkProtocol"/>我已阅读并同意<a href="${ctx}/static/applyDeal.jsp" target="_blank">《阿凡达商家入驻条款》</a></label>
+									<div class="note errTxt" id="protocol_msg"></div>
+								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label class="hide">提交入驻申请：</label></div>
-								<div class="item-cont"><input type="button" class="btn btn-primary xl p-xl" value="提交入驻申请" /></div>
+								<div class="item-cont"><input type="submit" class="btn btn-primary xl p-xl" value="提交入驻申请" /></div>
 							</div>
 						</fieldset>
 					</form>
