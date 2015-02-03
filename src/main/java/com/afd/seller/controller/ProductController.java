@@ -1,14 +1,24 @@
 package com.afd.seller.controller;
 
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.common.mybatis.Page;
 import com.afd.common.util.DateUtils;
+import com.afd.common.util.PropertyUtils;
 import com.afd.constants.product.ProductConstants;
 import com.afd.model.product.Product;
 import com.afd.model.product.Sku;
@@ -27,8 +38,10 @@ import com.afd.model.product.vo.BaseCategoryInfoVO;
 import com.afd.model.product.vo.ProductConvertUtil;
 import com.afd.model.product.vo.ProductVo;
 import com.afd.param.product.ProductCondition;
+import com.afd.seller.util.YWHttpCilient;
 import com.afd.service.product.ICategoryService;
 import com.afd.service.product.IProductService;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 
@@ -37,9 +50,10 @@ import com.afd.service.product.IProductService;
  *
  */
 @Controller
-@RequestMapping("/product")
 public class ProductController {
-
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoginController.class);
+	
 	@Autowired
 	IProductService productService;
 	@Autowired
@@ -49,7 +63,7 @@ public class ProductController {
 	 * 
 	 * @return 选择类目页面
 	 */
-	@RequestMapping(value = "/category")
+	@RequestMapping(value = "/product/category")
 	public String toSelectCategory(){
 		
 		return "/product/category";
@@ -59,7 +73,7 @@ public class ProductController {
 	 *  
 	 * @return 发布商品页面
 	 */
-	@RequestMapping(value = "/publish")
+	@RequestMapping(value = "/product/publish")
 	public String toPublish(
 			@RequestParam(value = "bcId", required = false) Integer bcId,
 			HttpServletRequest request,ModelMap modelMap) {
@@ -85,7 +99,7 @@ public class ProductController {
 	 * @return 成功|失败 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/save")
+	@RequestMapping(value = "/product/save")
 	public String doSaveProduct(HttpServletRequest request,
 			@ModelAttribute ProductVo vo){
 		
@@ -135,7 +149,6 @@ public class ProductController {
 				sku.setMarketPrice(skuMarketPrice[i]);
 				sku.setSalePrice(skuSalePrice[i]);
 				sku.setStockBalance(skuStockBalance[i]);
-//				sku.setSkuImgUrl(skuImgUrl[i]);
 				
 				if (null != vo.getSkuImgUrl() && vo.getSkuImgUrl().length > 0) {
 					String skuImgUrl = vo.getSkuImgUrl()[i];
@@ -167,7 +180,7 @@ public class ProductController {
 	 *  
 	 * @return 修改商品
 	 */
-	@RequestMapping(value = "/modify")
+	@RequestMapping(value = "/product/modify")
 	public String toModifyProduct(HttpServletRequest request){
 		return "/product/modify";
 	}
@@ -176,7 +189,7 @@ public class ProductController {
 	 *  商品上架
 	 * @return 成功：失败
 	 */
-	@RequestMapping(value = "/putaway")
+	@RequestMapping(value = "/product/putaway")
 	@ResponseBody
 	public Map<String, String> putawayProd(
 			@RequestParam(value = "prodId", required = true) Integer prodId,
@@ -191,7 +204,7 @@ public class ProductController {
 	 * 
 	 * @return 成功：失败
 	 */
-	@RequestMapping(value = "/batchPutaway", method = RequestMethod.POST)
+	@RequestMapping(value = "/product/batchPutaway", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> batchPutawayProd(
 			@RequestParam(value = "ids", required = true) String ids,
@@ -212,7 +225,7 @@ public class ProductController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/cancelAudit")
+	@RequestMapping(value = "/product/cancelAudit")
 	@ResponseBody
 	public Map<String, String> cancelAuditProduct(
 			@RequestParam(value = "prodId", required = true) Integer prodId,
@@ -226,7 +239,7 @@ public class ProductController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/delProd")
+	@RequestMapping(value = "/product/delProd")
 	@ResponseBody
 	public Map<String, String> delProduct(
 			@RequestParam(value = "prodId", required = true) Integer prodId) {
@@ -241,7 +254,7 @@ public class ProductController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/batchdelProd", method = RequestMethod.POST)
+	@RequestMapping(value = "/product/batchdelProd", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> batchdelProduct(
 			@RequestParam(value = "ids", required = true) String ids) {
@@ -260,7 +273,7 @@ public class ProductController {
 	 * 
 	 * @return 库存商品列表
 	 */
-	@RequestMapping(value = "/stock")
+	@RequestMapping(value = "/product/stock")
 	public String toStockProduct(
 			@ModelAttribute ProductCondition productCondition,
 			@RequestParam(value = "sortField", defaultValue = "") String sortField,
@@ -280,7 +293,7 @@ public class ProductController {
 	 * 
 	 * @return 待审核商品列表
 	 */
-	@RequestMapping(value = "/audit")
+	@RequestMapping(value = "/product/audit")
 	public String toWaitAuditProductPage(
 			@ModelAttribute ProductCondition productCondition,
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
@@ -297,7 +310,7 @@ public class ProductController {
 	 * 
 	 * @return 在售商品列表
 	 */
-	@RequestMapping(value = "/online")
+	@RequestMapping(value = "/product/online")
 	public String toOnlineProductPage(
 			@ModelAttribute ProductCondition productCondition,
 			@RequestParam(value = "sortField", defaultValue = "") String sortField,
@@ -316,4 +329,91 @@ public class ProductController {
 		return "/product/online";
 	}
 	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST, value = "/image/saveImg")
+	public void uploadProductImg(HttpServletRequest request,
+			HttpServletResponse response) {
+		String opt = request.getParameter("opt");
+		// 定义允许上传的文件扩展名
+		HashMap<String, String> extMap = new HashMap<String, String>();
+		extMap.put("image", "gif,jpg,jpeg,png,bmp");
+		// extMap.put("flash", "swf,flv");
+		// extMap.put("media","swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
+		// extMap.put("file","doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2");
+
+		// 最大文件大小
+		long maxSize = 512000;
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter pw = null;
+		try {
+			pw = response.getWriter();
+
+			if (!ServletFileUpload.isMultipartContent(request)) {
+				pw.println(getError("请选择文件。"));
+			}
+
+			FileItemFactory factory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			upload.setHeaderEncoding("UTF-8");
+			List<FileItem> items = upload.parseRequest(request);
+			Iterator<FileItem> itr = items.iterator();
+
+			while (itr.hasNext()) {
+				FileItem item = itr.next();
+				String fileName = item.getName();
+				long fileSize = item.getSize();
+				List<String> urls = null;
+
+				if (fileName != null) {
+					if (fileSize > maxSize) {// 检查文件大小
+						pw.print(getError("上传文件大小超过限制。"));
+						return;
+					}
+
+					String fileExt = fileName.substring(
+							fileName.lastIndexOf(".") + 1).toLowerCase(); // 检查扩展名
+
+					if (!Arrays.<String> asList(extMap.get("image").split(","))
+							.contains(fileExt)) {
+						pw.print(getError("上传文件扩展名是不允许的扩展名。\n只允许"
+								+ extMap.get("image") + "格式。"));
+						return;
+					}
+
+					if (!item.isFormField() && fileName != null) {// 执行上传
+						urls = YWHttpCilient.uploadFileService(
+								item.getInputStream(), fileName, opt);
+						StringBuilder fullUrl = new StringBuilder();
+
+						for (String url : urls) {
+							fullUrl.append(((String[])PropertyUtils.getProperty("imgGetUrl"))[0]+"?rid=" + url + ",");
+						}
+
+						pw.print(getRight(fullUrl.substring(0,
+								fullUrl.length() - 1)));
+					}
+				}
+			}
+		} catch (Exception e) {
+			logger.info("上传文件失败！", e);
+			pw.println(getError("上传文件失败。"));
+			return;
+		} finally {
+			pw.close();
+		}
+	}
+	
+	private String getError(String message) {
+		JSONObject obj = new JSONObject();
+		obj.put("error", 1);
+		obj.put("message", message);
+		return obj.toJSONString();
+	}
+	
+	private String getRight(String message) {
+		JSONObject obj = new JSONObject();
+		obj.put("error", 0);
+		obj.put("url", message);
+		return obj.toJSONString();
+	}
 }

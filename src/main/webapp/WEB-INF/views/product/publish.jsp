@@ -163,11 +163,13 @@
 		</div>
 		<!-- container end -->
 	</div>
-<script type="text/javascript" src="${jsUrl}/publish.js"></script>	
-<script type="text/javascript">
-	$(function(){
-		publish = new publish();
-	});
-</script>
+	<script type="text/javascript">
+		var ctx = '${ctx}';
+		var imgUploadUrl = '${imgUploadUrl}';
+		var imgGetUrl = '${my:random(imgGetUrl)}';
+	</script>	
+	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>	
+<script type="text/javascript" src="${jsUrl}/publish.js"></script>
+
 </body>
 </html>
