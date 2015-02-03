@@ -29,5 +29,16 @@
 			<artifactId>sitemesh</artifactId>
 		</dependency>
 		<!-- sitemesh end -->
+		
+		<!-- httpclient begin -->
+		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpmime</artifactId>
+		</dependency>
+		<dependency>
+		  	<groupId>org.apache.httpcomponents</groupId>
+		  	<artifactId>httpcomponents-core</artifactId>
+		</dependency>
+		<!-- httpclient end -->
 	</dependencies>
 </project>
