@@ -11,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.afd.common.util.RequestUtils;
 import com.afd.model.seller.SellerApply;
+import com.afd.model.seller.SellerAudit;
 import com.afd.model.seller.SellerLogin;
 import com.afd.seller.util.LoginUtils;
 import com.afd.seller.util.LoginUtils.LoginInfo;
+import com.afd.service.seller.ISellerApplyService;
 import com.afd.service.seller.ISellerLoginService;
 import com.afd.service.seller.ISellerService;
 
@@ -31,6 +34,9 @@ public class ApplyController {
 
 	@Autowired
 	ISellerService sellerService;
+
+	@Autowired
+	ISellerApplyService applyService;
 
 	@RequestMapping("/apply/entry")
 	public String applyEntry(HttpServletRequest request,
@@ -56,7 +62,7 @@ public class ApplyController {
 		}
 
 		if (login.getSellerApplyId() != null && login.getSellerApplyId() != 0) {
-			return "apply/waitAudit";
+			return "forward:/apply/waitAudit";
 
 		} else {
 			return "forward:/apply/apply";
@@ -68,22 +74,48 @@ public class ApplyController {
 	public String applyApply(HttpServletRequest request,
 			HttpServletResponse response) {
 
+		SellerApply apply = applyService.getSellerApplyByLoginId(LoginUtils
+				.getLoginInfo(request).getSellerLoginId());
+
+		if (apply != null) {
+			request.setAttribute("data", apply);
+
+			SellerAudit audit = applyService.getRecentAudit(apply.getAppId());
+			if (audit != null)
+				request.setAttribute("audit", audit);
+		}
+
 		return "/apply/apply";
 	}
 
 	@RequestMapping("/apply/submit")
 	public String applySubmit(HttpServletRequest request,
+			HttpServletResponse response, SellerApply apply) {
+
+		apply.setSellerLoginId(LoginUtils.getLoginInfo(request)
+				.getSellerLoginId());
+		apply.setApplyIp(RequestUtils.getRemoteAddr(request));
+
+		if (apply.getAppId() == null || apply.getAppId() == 0) {
+			applyService.commitNewSellerApply(apply);
+
+		} else {
+			applyService.commitUpdatedSellerApply(apply);
+		}
+
+		return "redirect:/apply/entry?redy=1";
+	}
+
+	@RequestMapping("/apply/waitAudit")
+	public String waitAudit(HttpServletRequest request,
 			HttpServletResponse response) {
 
-		return "/apply/apply";
+		request.setAttribute(
+				"apply",
+				applyService.getSellerApplyByLoginId(LoginUtils.getLoginInfo(
+						request).getSellerLoginId()));
+
+		return "/apply/waitAudit";
 	}
 
-	public static final class ApplyForm extends SellerApply {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 7390036815400574899L;
-
-	}
 }

@@ -168,7 +168,7 @@ function closeDeposit() {
 		<!-- footer end -->
 	</div>
 	
-	<div class="popup popup-primary" style="width:650px; display: none" id="depositPop">
+	<div class="popup popup-primary" style="width:620px;margin-left:-310px; margin-top:-101px; display: none" id="depositPop">
 		<div class="hd"><h2></h2><i class="close" onclick="javascript:closeDeposit();"></i></div>
 		<div class="bd">
 			<dl class="popup-doc">

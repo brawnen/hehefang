@@ -11,8 +11,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
 <title>卖家申请-阿凡达</title>
 </head>
-<body>
-	
+<body>	
 	<link rel="stylesheet" href="${cssUrl}/css/join.css?t=20150129" />
 	<link rel="stylesheet" href="${ctx}/uploadify/uploadify.css?t=20150129" />
 	<script type="text/javascript">
@@ -331,7 +330,10 @@
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label class="hide">提交入驻申请：</label></div>
-								<div class="item-cont"><input type="submit" class="btn btn-primary xl p-xl" value="提交入驻申请" /></div>
+								<div class="item-cont">
+									<input type="submit" class="btn btn-primary xl p-xl" value="提交入驻申请" />
+									<input type="hidden" name="appId" id="appId" value="${data.appId}" />
+								</div>
 							</div>
 						</fieldset>
 					</form>
