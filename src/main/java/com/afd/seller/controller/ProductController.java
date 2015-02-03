@@ -116,22 +116,6 @@ public class ProductController {
 		vo.setProdId(prodId);
 		saveSku(vo);
 		
-//		for (int i = 0; i < 2; i++) {
-//			Sku sku = new Sku();
-//			sku.setProdId(prodId);
-//			sku.setProdCode("7654321");
-//			sku.setSalePrice(new BigDecimal(108));
-//			sku.setMarketPrice(new BigDecimal(998));
-//			sku.setStockBalance(100);
-//			sku.setCreateDate(new Date());
-//			
-//			productService.addSku(sku);
-//		}
-		
-		// 1. 卖家
-		// 2. 品牌
-		// 3.
-		
 		return null;
 	}
 	

@@ -33,23 +33,27 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>商品标题：</label></div>
 								<div class="item-cont"><input type="text" class="txt lg w-xl" id="title" name="title" onblur="publish.validateTitle()"><span class="note">还可输入<b>30</b>个字!</span></div>
+								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>商品卖点：</label></div>
 								<div class="item-cont"><input type="text" class="txt lg w-xl" id="subtitle" name="subtitle" ></div>
+								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>货号：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lg" id="artNo" name="artNo" onkeyup="publish.validateArtNo(this);" ><span class="note">12-16位数字/字母</span></div>
+								<div class="item-cont"><input type="text" class="txt lg w-lg" id="artNo" name="artNo" onblur="publish.validateArtNo();" ><span class="note">12-16位数字/字母</span></div>
+								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>品牌：</label></div>
 								<div class="item-cont">
-									<select id="brand" name="brand" class="select">
+									<select id="brand" name="brand" onchange="publish.validateBrand();" class="select">
 										<option value="-1">请选择品牌</option>
 										<option value="1">361</option>
 									</select>
 								</div>
+								<div class="note errTxt"></div>
 							</div>
 	<!-- 						<div class="form-item">
 								<div class="item-label"><label><em>*</em>产地：</label></div>
@@ -76,7 +80,7 @@
 										<div class="mod-attrChk">
 											<c:choose>
 												<c:when test="${attr.displayMode == 1 }">
-													<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select">
+													<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr();">
 														<option value=""></option>
 														<c:forEach items="${attr.attrValueList }" var="attrV" >
 															<option value="${attrV.attrValueId }|||${attrV.attrValue }|||${attrV.isSubAttr ? 'true' : 'false'}"><c:out value='${attrV.attrValue }'/></option>
@@ -97,29 +101,31 @@
 								</c:forEach>
 							</c:if>	
 							</div>
+							<div class="note errTxt"></div>
 							<div class="form-item item-color">
 								<c:if test="${!empty(bc.specList)}">
 									<c:forEach items="${bc.specList}" var="spec" varStatus="var">
 									<div class="item-label"><label><em>*</em>${spec.specName }：</label></div>
 									<div class="item-cont">
-									<div class="mod-attrChk">
-										<ul var="${var.count }" specId="${spec.specId}">
-											<c:forEach items="${spec.specValueList }" var="specValue">
-											<li>
-												<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this)">
-												<c:if test="${!empty(specValue.imgUrl)}">
-													<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
-												</c:if>
-												<label name="specValueTxt" >${specValue.specValueName }</label>
-												<input type="text" class="txt" value="<c:out value='${specValue.specValueName}'/>">
-											</li>
-											</c:forEach>
-										</ul>
-									</div>
+										<div class="mod-attrChk">
+											<ul var="${var.count }" specId="${spec.specId}">
+												<c:forEach items="${spec.specValueList }" var="specValue">
+												<li>
+													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this)">
+													<c:if test="${!empty(specValue.imgUrl)}">
+														<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
+													</c:if>
+													<label name="specValueTxt" >${specValue.specValueName }</label>
+													<input type="text" class="txt" value="<c:out value='${specValue.specValueName}'/>">
+												</li>
+												</c:forEach>
+											</ul>
+										</div>
 									</div>
 									</c:forEach>
 								</c:if>
 							</div>
+							<div class="note errTxt" id="spacErr"></div>
 							<div class="form-item sku-attr">
 								<div class="item-label" style="display: none;"><label><em>*</em>SKU销售属性：</label></div>
  								<div class="item-cont" id="genSpec">
@@ -134,6 +140,7 @@
 											<ul id="skuImg">
 											</ul>
 										</div>
+										<div class="note errTxt" id="errSkuImg"></div>
 									</div>
 								</div>
 							</div>
@@ -144,6 +151,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"></textarea>
 									</div>
 								</div>
+								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>
