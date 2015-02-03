@@ -131,7 +131,7 @@
 			</dl>
 		</div>
 	</div>
-	<div class="mask" id="applyMask"></div>
+	<div class="mask" id="applyMask" style="display: none"></div>
 		
 </body>
 </html>
