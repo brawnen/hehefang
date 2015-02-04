@@ -65,7 +65,6 @@ public class ProductController {
 	 */
 	@RequestMapping(value = "/product/category")
 	public String toSelectCategory(){
-		
 		return "/product/category";
 	}
 	
@@ -108,6 +107,7 @@ public class ProductController {
 		product.setBcId(27);
 		product.setStatus(ProductConstants.PROD_STATUS_ON);
 		product.setAuditStatus(ProductConstants.PROD_AUDIT_STATUS_WAIT);
+		product.setImgUrl(vo.getImgUrl());
 //		product.setBcCode(bcCode);
 //		product.setProdCode("7654321");
 		product.setCreateDate(DateUtils.currentDate());

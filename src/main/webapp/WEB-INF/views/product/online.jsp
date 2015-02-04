@@ -84,7 +84,7 @@
 								<tr>
 									<td>
 										<div class="pro-img">
-											<img src="${ctx }/static/img/temp/pro_img.jpg" alt="" />
+											<img src="${p.imgUrl}" alt="" />
 										</div>
 									</td>
 									<td>${p.prodCode }</td>
@@ -95,7 +95,7 @@
 									<td>${p.salePrice }</td>
 									<td>${p.marketPrice }</td>
 									<td>${p.createDate }</td>
-									<td class="td-operate"><p><a href="#">修改</a>|<a href="#">删除</a></p></td>
+									<td class="td-operate"><p><a href="${ctx }/">修改</a>|<a href="#">删除</a></p></td>
 								</tr>
 							</c:forEach>
 						</tbody>

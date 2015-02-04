@@ -161,6 +161,7 @@
 								</div>
 							</div>
 						</fieldset>
+						<input type="hidden" id="imgUrl" name="imgUrl" value="" />
 						<input type="hidden" id="attrValueId" name="attrValueId" value=""/>
 						<input type="hidden" id="attrValueName" name="attrValueName" value="" />
 					</form>
@@ -173,6 +174,7 @@
 	</div>
 	<script type="text/javascript">
 		var ctx = '${ctx}';
+		var cssUrl = '${cssUrl}';
 		var imgUploadUrl = '${imgUploadUrl}';
 		var imgGetUrl = '${my:random(imgGetUrl)}';
 	</script>	
