@@ -21,7 +21,7 @@
 				<!-- mainCaption end -->
 				<!-- issueProduct -->
 				<div class="issueProduct">
-					<form class="form" id="publishForm" action="${ctx}/product/save" method="post" >
+					<form class="form" id="publishForm">
 						<fieldset>
 							<div class="legend">填写商品信息</div>
 							<div class="form-item">
@@ -111,7 +111,7 @@
 											<ul var="${var.count }" specId="${spec.specId}">
 												<c:forEach items="${spec.specValueList }" var="specValue">
 												<li>
-													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this)">
+													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();publish.validateSkuImg();">
 													<c:if test="${!empty(specValue.imgUrl)}">
 														<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
 													</c:if>
@@ -177,7 +177,7 @@
 		var imgGetUrl = '${my:random(imgGetUrl)}';
 	</script>	
 	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>	
-<script type="text/javascript" src="${jsUrl}/publish.js"></script>
+	<script type="text/javascript" src="${jsUrl}/publish.js"></script>
 
 </body>
 </html>

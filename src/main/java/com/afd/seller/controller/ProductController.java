@@ -100,14 +100,14 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/product/save")
-	public String doSaveProduct(HttpServletRequest request,
+	public int doSaveProduct(HttpServletRequest request,
 			@ModelAttribute ProductVo vo){
 		
 		Product product = ProductConvertUtil.voToProduct(vo,null);
-
 		product.setSellerId(765432);
 		product.setBcId(27);
-		product.setStatus(ProductConstants.PROD_AUDIT_NORMAL);
+		product.setStatus(ProductConstants.PROD_STATUS_ON);
+		product.setAuditStatus(ProductConstants.PROD_AUDIT_STATUS_WAIT);
 //		product.setBcCode(bcCode);
 //		product.setProdCode("7654321");
 		product.setCreateDate(DateUtils.currentDate());
@@ -116,7 +116,7 @@ public class ProductController {
 		vo.setProdId(prodId);
 		saveSku(vo);
 		
-		return null;
+		return prodId;
 	}
 	
 	private void saveSku(ProductVo vo) {
@@ -138,13 +138,8 @@ public class ProductController {
 					String skuImgUrl = vo.getSkuImgUrl()[i];
 					if (null !=skuImgUrl && skuImgUrl.length() > 0) {
 						sku.setSkuImgUrl(skuImgUrl);
-					} else {
-						sku.setSkuImgUrl("www.yiwang.com");
-					}
-				} else {
-					sku.setSkuImgUrl("www.yiwang.com");
-				}
-				
+					} 
+				} 
 				sku.setSkuSpecId(vo.getSkuSpecId()[i]);
 				sku.setSkuSpecName(vo.getSkuSpecName()[i]);
 				sku.setSkuStatus(ProductConstants.SKU_STATUS_NORMAL); 
@@ -152,9 +147,7 @@ public class ProductController {
 				sku.setCreateByName("admin");
 				sku.setLastUpdateDate(DateUtils.currentDate());
 				sku.setUpdateByName("admin");
-				
 				skus.add(sku);
-				
 			}
 			productService.batchAddSkus(skus);
 		}
@@ -321,9 +314,6 @@ public class ProductController {
 		// 定义允许上传的文件扩展名
 		HashMap<String, String> extMap = new HashMap<String, String>();
 		extMap.put("image", "gif,jpg,jpeg,png,bmp");
-		// extMap.put("flash", "swf,flv");
-		// extMap.put("media","swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
-		// extMap.put("file","doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2");
 
 		// 最大文件大小
 		long maxSize = 512000;
