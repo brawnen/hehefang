@@ -32,12 +32,12 @@
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>商品标题：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-xl" id="title" name="title" onblur="publish.validateTitle()"><span class="note">还可输入<b>30</b>个字!</span></div>
+								<div class="item-cont"><input type="text" class="txt lg w-xl" id="title" name="title" onblur="publish.validateTitle();" ><span class="note" id='title_warn'>还可输入<b>30</b>个字!</span></div>
 								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>商品卖点：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-xl" id="subtitle" name="subtitle" ></div>
+								<div class="item-cont"><input type="text" class="txt lg w-xl" id="subtitle" onblur="publish.validateSubtitle();"  name="subtitle" maxlength="100"></div>
 								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
@@ -151,7 +151,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"></textarea>
 									</div>
 								</div>
-								<div class="note errTxt"></div>
+								<span class="note" id='detail_warn'>还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>
