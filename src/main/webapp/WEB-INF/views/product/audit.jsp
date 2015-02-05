@@ -112,28 +112,11 @@
 					<pg:page name="onlinePage" page="${page}" formId="queryForm"></pg:page>
 				</c:if>
 				
-				<!-- paging -->
-	<%-- 			<div class="paging">
-					<div class="pagingWrap">
-						<div class="pagAll">共<span>${requestScope.page.totalRecord }</span>条记录</div>
-						<div class="pageup disabled"><a href="javascript:;"><i class="icon"></i>&nbsp;上一页</a></div>
-						<ul>
-							<li><span class="on">1</span></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">4</a></li>
-							<li><b>...</b></li>
-							<li><a href="">100</a></li>
-						</ul>
-						<div class="pagedown"><a href="">下一页&nbsp;<i class="icon"></i></a></div>
-						<div class="goto"><span>到第</span><input type="text" value="1"><span>页</span><button class="btn btn-def">确定</button></div>
-					</div>
-				</div> --%>
-				<!-- paging end -->
 			</div>
 			<!-- main end -->
 		</div>
 		<!-- container end -->
 	</div>
+	<script type="text/javascript" src="${jsUrl}/product.js"></script>	
 </body>
 </html>

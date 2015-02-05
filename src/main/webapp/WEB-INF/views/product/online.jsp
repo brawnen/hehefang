@@ -40,7 +40,7 @@
 									<label>商品名称：</label>
 								</div>
 								<div class="item-cont">
-									<input type="text" name="title" class="txt w-lg" />
+									<input type="text" name="title" class="txt w-lg" value="<c:out value="${productCondition.title}"/>" />
 									<input type="submit" class="btn btn-def" value="查&nbsp;&nbsp;询">
 								</div>
 							</div>
@@ -84,18 +84,18 @@
 								<tr>
 									<td>
 										<div class="pro-img">
-											<img src="${p.imgUrl}" alt="" />
+											<img src="${my:random(imgGetUrl)}?rid=${p.imgUrl}" alt="" />
 										</div>
 									</td>
 									<td>${p.prodId }</td>
-									<td><p>${p.title }</p></td>
-									<td>${p.brandName }</td>
-									<td>${p.artNo }</td>
+									<td><p><c:out value="${p.title }"/></p></td>
+									<td><c:out value="${p.brandName }"/></td>
+									<td><c:out value="${p.artNo }"/></td>
 									<td>睡衣/睡裤/睡裙/睡衣套装</td>
 									<td>${p.salePrice }</td>
 									<td>${p.marketPrice }</td>
 									<td><fmt:formatDate value="${p.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-									<td class="td-operate"><p><a href="javascript:;">修改</a>|<a href="javascript:;">删除</a></p></td>
+									<td class="td-operate" prodId="${p.prodId }"><p><a href="${ctx}/product/modify?prodId=${p.prodId }&m=2001">修改</a>|<a href="${ctx}/product/delProd?prodId=${p.prodId }">删除</a></p></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -116,5 +116,6 @@
 		</div>
 		<!-- container end -->
 	</div>
+	<script type="text/javascript" src="${jsUrl}/product.js"></script>
 </body>
 </html>

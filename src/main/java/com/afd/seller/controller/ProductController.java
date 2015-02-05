@@ -162,7 +162,17 @@ public class ProductController {
 	public String toModifyProduct(@RequestParam(value = "prodId", required = true) Integer prodId,
 			HttpServletRequest request,ModelMap modelMap){
 		Product product = this.productService.getProductById(prodId);
-		modelMap.put("product",product);
+		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(product.getBcId());
+		
+		String pathName = bc.getPathName();
+		if (StringUtils.isNotBlank(pathName)) {
+			pathName = pathName.trim().replace("|", "<em>&gt;</em>");
+//			product.setBcName(pathName +"<em>&gt;</em>" + bc.getBcName());
+			modelMap.put("pathName", pathName +"<em>&gt;</em>" + bc.getBcName());
+		}
+		
+		modelMap.put("bc",bc);
+		modelMap.put("p",product);
 		return "/product/publish";
 	}
 	
@@ -214,12 +224,12 @@ public class ProductController {
 			@RequestParam(value = "sortDirection", defaultValue = "") String sortDirection,
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
 			) {
-		page.setPageSize(2);
+		page.setPageSize(15);
 		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
 		productCondition.setSellerId(loginInfo.getSellerId());
 		page = productService.searchOnlineProductPage(productCondition, sortField, sortDirection, page);
 		modelMap.addAttribute("sortField", sortField);
-		modelMap.addAttribute("sortDirection", sortDirection);
+		modelMap.addAttribute("productCondition", productCondition);
 		modelMap.addAttribute("page", page);
 		return "/product/online";
 	}
@@ -238,6 +248,7 @@ public class ProductController {
 		productCondition.setSellerId(loginInfo.getSellerId());
 		page = productService.searchAuditProductPage(productCondition, null, null, page);
 		modelMap.addAttribute("page", page);
+		modelMap.addAttribute("productCondition", productCondition);
 		return "/product/audit";
 	}
 	

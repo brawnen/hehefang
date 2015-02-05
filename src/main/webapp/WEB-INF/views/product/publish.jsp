@@ -16,7 +16,14 @@
 			<div id="main">
 				<!-- mainCaption -->
 				<div class="mainCaption">
-					<h2>发布新商品</h2>
+					<c:choose>
+						<c:when test="${!empty(p) }">
+							<h2>修改商品</h2>
+						</c:when>
+						<c:otherwise>
+							<h2>发布新商品</h2>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<!-- mainCaption end -->
 				<!-- issueProduct -->
@@ -32,17 +39,17 @@
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>商品标题：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-xl" id="title" name="title" onblur="publish.validateTitle();" ><span class="note" id='title_warn'>还可输入<b>30</b>个字!</span></div>
+								<div class="item-cont"><input type="text" class="txt lg w-xl" id="title" name="title" onblur="publish.validateTitle();" value="<c:out value="${p.title}"/>" ><span class="note" id='title_warn'>还可输入<b>30</b>个字!</span></div>
 								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>商品卖点：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-xl" id="subtitle" onblur="publish.validateSubtitle();"  name="subtitle" maxlength="100"></div>
+								<div class="item-cont"><input type="text" class="txt lg w-xl" id="subtitle" onblur="publish.validateSubtitle();"  name="subtitle"  value="<c:out value="${p.subtitle}"/>"  maxlength="100"></div>
 								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>货号：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lg" id="artNo" name="artNo" onblur="publish.validateArtNo();" ><span class="note">12-16位数字/字母</span></div>
+								<div class="item-cont"><input type="text" class="txt lg w-lg" id="artNo" name="artNo" value="<c:out value="${p.artNo}"/>"  onblur="publish.validateArtNo();" ><span class="note">12-16位数字/字母</span></div>
 								<div class="note errTxt"></div>
 							</div>
 							<div class="form-item">
@@ -148,7 +155,7 @@
 								<div class="item-label"><label><em>*</em>商品描述：</label></div>
 								<div class="item-cont">
 									<div class="editer">
-										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"></textarea>
+										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
 								</div>
 								<span class="note" id='detail_warn'>还可输入<b>30</b>个字!</span>
@@ -177,9 +184,8 @@
 		var cssUrl = '${cssUrl}';
 		var imgUploadUrl = '${imgUploadUrl}';
 		var imgGetUrl = '${my:random(imgGetUrl)}';
+		
 	</script>	
-	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>	
 	<script type="text/javascript" src="${jsUrl}/publish.js"></script>
-
 </body>
 </html>
