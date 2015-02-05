@@ -9,6 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="my" uri="/WEB-INF/tld/my.tld"%>
+<%@taglib uri="/WEB-INF/tld/page.tld" prefix="pg"%>
 
 <%	
 	LoginUtils.LoginInfo loginInfo = LoginUtils.getLoginInfo(request);

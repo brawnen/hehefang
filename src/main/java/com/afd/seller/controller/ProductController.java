@@ -38,6 +38,8 @@ import com.afd.model.product.vo.BaseCategoryInfoVO;
 import com.afd.model.product.vo.ProductConvertUtil;
 import com.afd.model.product.vo.ProductVo;
 import com.afd.param.product.ProductCondition;
+import com.afd.seller.util.LoginUtils;
+import com.afd.seller.util.LoginUtils.LoginInfo;
 import com.afd.seller.util.YWHttpCilient;
 import com.afd.service.product.ICategoryService;
 import com.afd.service.product.IProductService;
@@ -65,6 +67,7 @@ public class ProductController {
 	 */
 	@RequestMapping(value = "/product/category")
 	public String toSelectCategory(){
+		
 		return "/product/category";
 	}
 	
@@ -85,41 +88,12 @@ public class ProductController {
 			pathName = pathName.trim().replace("|", "<em>&gt;</em>");
 			modelMap.put("pathName", pathName +"<em>&gt;</em>" + bc.getBcName());
 		}
-		
 		//2. 品牌
-
 		modelMap.put("bc", bc);
 		return "/product/publish";
 	}
 	
-	/**
-	 * 
-	 *  Ajax调用：保存商品
-	 * @return 成功|失败 
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/product/save")
-	public int doSaveProduct(HttpServletRequest request,
-			@ModelAttribute ProductVo vo){
-		
-		Product product = ProductConvertUtil.voToProduct(vo,null);
-		product.setSellerId(765432);
-		product.setBcId(27);
-		product.setStatus(ProductConstants.PROD_STATUS_ON);
-		product.setAuditStatus(ProductConstants.PROD_AUDIT_STATUS_WAIT);
-		product.setImgUrl(vo.getImgUrl());
-//		product.setBcCode(bcCode);
-//		product.setProdCode("7654321");
-		product.setCreateDate(DateUtils.currentDate());
-		product.setLastUpdateDate(DateUtils.currentDate());
-		int prodId = productService.addProduct(product);
-		vo.setProdId(prodId);
-		saveSku(vo);
-		
-		return prodId;
-	}
-	
-	private void saveSku(ProductVo vo) {
+	private void saveSku(ProductVo vo,LoginInfo loginInfo) {
 		BigDecimal[] skuSalePrice = vo.getSkuSalePrice();
 		BigDecimal[] skuMarketPrice = vo.getSkuMarketPrice();
 		Integer[] skuStockBalance = vo.getSkuStockBalance();
@@ -144,13 +118,40 @@ public class ProductController {
 				sku.setSkuSpecName(vo.getSkuSpecName()[i]);
 				sku.setSkuStatus(ProductConstants.SKU_STATUS_NORMAL); 
 				sku.setCreateDate(DateUtils.currentDate());
-				sku.setCreateByName("admin");
+				sku.setCreateByName(loginInfo.getLoginName());
 				sku.setLastUpdateDate(DateUtils.currentDate());
-				sku.setUpdateByName("admin");
+				sku.setUpdateByName(loginInfo.getLoginName());
 				skus.add(sku);
 			}
 			productService.batchAddSkus(skus);
 		}
+	}
+	
+	/**
+	 * 
+	 *  Ajax调用：保存商品
+	 * @return 成功|失败 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/product/save")
+	public Map<String,String> doSaveProduct(HttpServletRequest request,
+			@ModelAttribute ProductVo vo){
+		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
+		Product product = ProductConvertUtil.voToProduct(vo,null);
+		product.setSellerId(loginInfo.getSellerId());
+		product.setBcId(27);
+		product.setStatus(ProductConstants.PROD_STATUS_ON);
+		product.setAuditStatus(ProductConstants.PROD_AUDIT_STATUS_WAIT);
+		product.setImgUrl(vo.getImgUrl());
+//		product.setBcCode(bcCode);
+//		product.setProdCode("7654321");
+		int prodId = productService.addProduct(product);
+		
+		vo.setProdId(prodId);
+		saveSku(vo,loginInfo);	// 保存SKU
+		
+		boolean b = prodId > 0 ? true :false;
+		return resultMsg(b,"");
 	}
 
 	/**
@@ -158,57 +159,11 @@ public class ProductController {
 	 * @return 修改商品
 	 */
 	@RequestMapping(value = "/product/modify")
-	public String toModifyProduct(HttpServletRequest request){
-		return "/product/modify";
-	}
-	
-	/**
-	 *  商品上架
-	 * @return 成功：失败
-	 */
-	@RequestMapping(value = "/product/putaway")
-	@ResponseBody
-	public Map<String, String> putawayProd(
-			@RequestParam(value = "prodId", required = true) Integer prodId,
-			HttpServletRequest request) {
-		boolean b = productService.putawayProduct(prodId);		
-
-		return null;
-	}
-	
-	/**
-	 * 批量上架商品
-	 * 
-	 * @return 成功：失败
-	 */
-	@RequestMapping(value = "/product/batchPutaway", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, String> batchPutawayProd(
-			@RequestParam(value = "ids", required = true) String ids,
-			HttpServletRequest request) {
-		List<Integer> idList = new ArrayList<Integer>();
-		if (StringUtils.isNotBlank(ids)) {
-			String[] prodIds = ids.split(",");
-			for (String prodId : prodIds) {
-				idList.add(Integer.parseInt(prodId));
-			}
-		}
-		boolean b = productService.batchPutawayProduct(idList);
-		return null;
-	}
-	
-	/**
-	 * Ajax调用：取消上架
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/product/cancelAudit")
-	@ResponseBody
-	public Map<String, String> cancelAuditProduct(
-			@RequestParam(value = "prodId", required = true) Integer prodId,
-			HttpServletRequest request) {
-		boolean b = productService.cancelAuditProduct(prodId);
-		return null;
+	public String toModifyProduct(@RequestParam(value = "prodId", required = true) Integer prodId,
+			HttpServletRequest request,ModelMap modelMap){
+		Product product = this.productService.getProductById(prodId);
+		modelMap.put("product",product);
+		return "/product/publish";
 	}
 	
 	/**
@@ -219,11 +174,11 @@ public class ProductController {
 	@RequestMapping(value = "/product/delProd")
 	@ResponseBody
 	public Map<String, String> delProduct(
-			@RequestParam(value = "prodId", required = true) Integer prodId) {
-		Map<String, String> resultMap = new HashMap<String, String>();
-		boolean b = productService.delProduct(prodId,null);
-		
-		return resultMap;
+			@RequestParam(value = "prodId", required = true) Integer prodId,
+			HttpServletRequest request) {
+		String loginName = LoginUtils.getLoginInfo(request).getLoginName();
+		boolean b = productService.delProduct(prodId,loginName);
+		return resultMsg(b,"");
 	}
 	
 	/**
@@ -234,7 +189,9 @@ public class ProductController {
 	@RequestMapping(value = "/product/batchdelProd", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> batchdelProduct(
-			@RequestParam(value = "ids", required = true) String ids) {
+			@RequestParam(value = "ids", required = true) String ids,
+			HttpServletRequest request) {
+		String loginName = LoginUtils.getLoginInfo(request).getLoginName();
 		List<Integer> idList = new ArrayList<Integer>();
 		if (StringUtils.isNotBlank(ids)) {
 			String[] prodIds = ids.split(",");
@@ -242,45 +199,8 @@ public class ProductController {
 				idList.add(Integer.parseInt(prodId));
 			}
 		}
-		boolean b = productService.batchdelProduct(idList,null);
-		return null;
-	}
-	
-	/**
-	 * 
-	 * @return 库存商品列表
-	 */
-	@RequestMapping(value = "/product/stock")
-	public String toStockProduct(
-			@ModelAttribute ProductCondition productCondition,
-			@RequestParam(value = "sortField", defaultValue = "") String sortField,
-			@RequestParam(value = "sortDirection", defaultValue = "") String sortDirection,
-			HttpServletRequest request, Page<Product> page, ModelMap modelMap
-			) {
-		page.setPageSize(15);
-
-		page = productService.searchStockProductPage(productCondition, sortField, sortDirection, page);
-		modelMap.addAttribute("sortField", sortField);
-		modelMap.addAttribute("sortDirection", sortDirection);
-		modelMap.addAttribute("page", page);
-		return "/product/online";
-	}
-	
-	/**
-	 * 
-	 * @return 待审核商品列表
-	 */
-	@RequestMapping(value = "/product/audit")
-	public String toWaitAuditProductPage(
-			@ModelAttribute ProductCondition productCondition,
-			HttpServletRequest request, Page<Product> page, ModelMap modelMap
-			) {
-		page.setPageSize(15);
-
-		page = productService.searchAuditProductPage(productCondition, null, null, page);
-		
-		modelMap.addAttribute("page", page);
-		return "/product/audit";
+		boolean b = productService.batchdelProduct(idList,loginName);
+		return resultMsg(b,"");
 	}
 	
 	/**
@@ -294,16 +214,31 @@ public class ProductController {
 			@RequestParam(value = "sortDirection", defaultValue = "") String sortDirection,
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
 			) {
-		page.setPageSize(15);
-
-		page = productService.searchOnlineProduct(productCondition, sortField, sortDirection, page);
-		
+		page.setPageSize(2);
+		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
+		productCondition.setSellerId(loginInfo.getSellerId());
+		page = productService.searchOnlineProductPage(productCondition, sortField, sortDirection, page);
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("sortDirection", sortDirection);
 		modelMap.addAttribute("page", page);
-		List<Product> result = page.getResult();
-		System.out.println(result.size());
 		return "/product/online";
+	}
+	
+	/**
+	 * 
+	 * @return 审核驳回商品列表
+	 */
+	@RequestMapping(value = "/product/audit")
+	public String toWaitAuditProductPage(
+			@ModelAttribute ProductCondition productCondition,
+			HttpServletRequest request, Page<Product> page, ModelMap modelMap
+			) {
+		page.setPageSize(15);
+		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
+		productCondition.setSellerId(loginInfo.getSellerId());
+		page = productService.searchAuditProductPage(productCondition, null, null, page);
+		modelMap.addAttribute("page", page);
+		return "/product/audit";
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -323,7 +258,7 @@ public class ProductController {
 			pw = response.getWriter();
 
 			if (!ServletFileUpload.isMultipartContent(request)) {
-				pw.println(getError("请选择文件。"));
+				pw.println(errorMsg("请选择文件。"));
 			}
 
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -340,7 +275,7 @@ public class ProductController {
 
 				if (fileName != null) {
 					if (fileSize > maxSize) {// 检查文件大小
-						pw.print(getError("上传文件大小超过限制。"));
+						pw.print(errorMsg("上传文件大小超过限制。"));
 						return;
 					}
 
@@ -349,7 +284,7 @@ public class ProductController {
 
 					if (!Arrays.<String> asList(extMap.get("image").split(","))
 							.contains(fileExt)) {
-						pw.print(getError("上传文件扩展名是不允许的扩展名。\n只允许"
+						pw.print(errorMsg("上传文件扩展名是不允许的扩展名。\n只允许"
 								+ extMap.get("image") + "格式。"));
 						return;
 					}
@@ -370,14 +305,14 @@ public class ProductController {
 			}
 		} catch (Exception e) {
 			logger.info("上传文件失败！", e);
-			pw.println(getError("上传文件失败。"));
+			pw.println(errorMsg("上传文件失败。"));
 			return;
 		} finally {
 			pw.close();
 		}
 	}
 	
-	private String getError(String message) {
+	private String errorMsg(String message) {
 		JSONObject obj = new JSONObject();
 		obj.put("error", 1);
 		obj.put("message", message);
@@ -389,5 +324,17 @@ public class ProductController {
 		obj.put("error", 0);
 		obj.put("url", message);
 		return obj.toJSONString();
+	}
+	
+	private Map<String,String> resultMsg(boolean b,String message) {
+		HashMap<String, String> resultMap = new HashMap<String,String>();
+		if (b) {// 成功
+			resultMap.put("success", "1");
+			resultMap.put("msg", message);
+		} else {// 失败
+			resultMap.put("error", "0");
+			resultMap.put("msg", message);
+		}
+		return resultMap;
 	}
 }
