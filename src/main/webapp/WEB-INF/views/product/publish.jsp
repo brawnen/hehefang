@@ -90,14 +90,14 @@
 													<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr();">
 														<option value=""></option>
 														<c:forEach items="${attr.attrValueList }" var="attrV" >
-															<option value="${attrV.attrValueId }|||${attrV.attrValue }|||${attrV.isSubAttr ? 'true' : 'false'}"><c:out value='${attrV.attrValue }'/></option>
+															<option value="${attrV.attrValueId }|||${attrV.attrValue }|||${attrV.isSubAttr ? 'true' : 'false'}" attrValueId="${attrV.attrValueId}"><c:out value='${attrV.attrValue }'/></option>
 														</c:forEach>
 													</select>
 												</c:when>
 												<c:otherwise>
 													<ul>
 													<c:forEach items="${attr.attrValueList }" var="attrV">
-														<li><label><input type="checkbox" class="chk" name="attrValue2" attrId="${attr.attrId}"  ><c:out value='${attrV.attrValue }'/></label></li>
+														<li><label><input type="checkbox" class="chk" name="attrValue2" attrId="${attr.attrId}" attrValue2Id="${attrV.attrValueId}" ><c:out value='${attrV.attrValue }'/></label></li>
 													</c:forEach>
 													</ul>
 												</c:otherwise>
@@ -184,7 +184,7 @@
 		var cssUrl = '${cssUrl}';
 		var imgUploadUrl = '${imgUploadUrl}';
 		var imgGetUrl = '${my:random(imgGetUrl)}';
-		
+		var attrValueId= '${p.attrValueId}';
 	</script>	
 	<script type="text/javascript" src="${jsUrl}/publish.js"></script>
 </body>
