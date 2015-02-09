@@ -64,7 +64,10 @@
 				<dl>
 					<dt class="imgIcon"><i class="icon i-dangerSM"></i></dt>
 					<dd>
-						<p>添加的新品牌，系统将在3-5个工作日内审核，审核通过后才允许使用；</p>
+						<c:choose>
+							<c:when test="${!empty(sellerBrand.auditContent)}"><p>驳回理由：<c:out value="${sellerBrand.auditContent}"/></p></c:when>
+							<c:otherwise><p>添加的新品牌，系统将在3-5个工作日内审核，审核通过后才允许使用；</p></c:otherwise>
+						</c:choose>						
 					</dd>
 				</dl>
 			</div>
