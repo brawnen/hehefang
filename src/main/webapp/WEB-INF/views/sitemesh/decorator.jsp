@@ -79,10 +79,10 @@ function closeDeposit() {
 </script>
 </head>
 <body>
-<div class="wrapper wrap-helper">
+<div class="wrapper wrap-helper wrap-brand">
 		<!-- header -->
 		<div id="header">
-			<div class="wrap">
+			<div class="wrap wrap-brand">
 				<!-- logo -->
 				<div id="logo">
 					<div class="logo"><a href="#" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>

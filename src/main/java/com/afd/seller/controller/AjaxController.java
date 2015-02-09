@@ -1,5 +1,6 @@
 package com.afd.seller.controller;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.common.util.CapthaUtils;
+import com.afd.model.product.Brand;
+import com.afd.service.product.IBrandService;
+import com.afd.service.product.ISellerBrandService;
 import com.afd.service.seller.ISellerLoginService;
 import com.afd.service.sms.ISmsService;
 
@@ -23,14 +27,18 @@ public class AjaxController {
 
 	private static final String SELLER_REGISTER_VALIDATOR_PREFIX = "afd_seller_register_validator_"; // 卖家注册验证码前缀
 	private static final String SELLER_FORGOT_PASSWORD_VALIDATOR_PREFIX = "afd_seller_forgot_password_validator_"; // 卖家忘记密码验证码前缀
-	// private static final String SELLER__MODIFY_PASSWORD_VALIDATOR_PREFIX =
-	// "afd_seller_modify_password_validator_"; // 卖家修改密码验证码前缀
 
 	@Autowired
 	private ISellerLoginService loginService;
 
 	@Autowired
 	private ISmsService smsService;
+
+	@Autowired
+	IBrandService brandService;
+
+	@Autowired
+	ISellerBrandService sellerBrandService;
 
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
@@ -170,5 +178,25 @@ public class AjaxController {
 				SELLER_FORGOT_PASSWORD_VALIDATOR_PREFIX + mobile);
 
 		return validator.equals(cachedValidator);
+	}
+
+	@RequestMapping("/queryBrand")
+	@ResponseBody
+	public List<Brand> queryBrand(@RequestParam("keyword") String keyword) {
+		return brandService.getBrandsByName(keyword);
+	}
+
+	@RequestMapping("/matchBrand")
+	@ResponseBody
+	public Brand matchBrand(@RequestParam("keyword") String keyword) {
+		return brandService.getBrandByName(keyword);
+	}
+
+	@RequestMapping("/existBrand")
+	@ResponseBody
+	public boolean existBrand(@RequestParam("sellerId") int sellerId,
+			@RequestParam("brandId") int brandId) {
+
+		return sellerBrandService.existSellerBrand(sellerId, brandId);
 	}
 }
