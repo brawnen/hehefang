@@ -32,6 +32,9 @@ import com.afd.common.mybatis.Page;
 import com.afd.common.util.DateUtils;
 import com.afd.common.util.PropertyUtils;
 import com.afd.constants.product.ProductConstants;
+import com.afd.constants.product.ProductConstants.SellerBrand$Status;
+import com.afd.model.product.BaseCategory;
+import com.afd.model.product.Brand;
 import com.afd.model.product.Product;
 import com.afd.model.product.Sku;
 import com.afd.model.product.vo.BaseCategoryInfoVO;
@@ -43,6 +46,7 @@ import com.afd.seller.util.LoginUtils.LoginInfo;
 import com.afd.seller.util.YWHttpCilient;
 import com.afd.service.product.ICategoryService;
 import com.afd.service.product.IProductService;
+import com.afd.service.product.ISellerBrandService;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -60,15 +64,32 @@ public class ProductController {
 	IProductService productService;
 	@Autowired
 	ICategoryService categoryService;
+	@Autowired
+	ISellerBrandService sellerBrandService;
 	
 	/**
 	 * 
 	 * @return 选择类目页面
 	 */
 	@RequestMapping(value = "/product/category")
-	public String toSelectCategory(){
-		
+	public String toSelectCategory(@RequestParam(value = "pathId", defaultValue = "") String pathId,
+			ModelMap modelMap) {
+		if(StringUtils.isNotBlank(pathId)){
+			modelMap.addAttribute("pathId", pathId);
+		}
 		return "/product/category";
+	}
+	
+	/**
+	 * Ajax调用 返回子BC列表
+	 * 
+	 * @param pId
+	 * @return 
+	 */
+	@RequestMapping(value = "/product/loadBc")
+	@ResponseBody
+	public List<BaseCategory> loadBcCategory(@RequestParam(value = "pId", defaultValue="0") Integer pId){
+		return categoryService.getBaseCategorysByPId(pId, SellerBrand$Status.VALID);
 	}
 	
 	/**
@@ -78,52 +99,111 @@ public class ProductController {
 	@RequestMapping(value = "/product/publish")
 	public String toPublish(
 			@RequestParam(value = "bcId", required = false) Integer bcId,
+			@RequestParam(value = "prodId", required = false) Integer prodId,
 			HttpServletRequest request,ModelMap modelMap) {
 		
+		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
+		
+		if(prodId != null){
+			Product product = this.productService.getProductById(prodId);
+			bcId = product.getBcId();
+			modelMap.put("p",product);
+		}
+
 		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(bcId);
 		
 		//1. 已选商品品类
 		String pathName = bc.getPathName();
 		if(StringUtils.isNotBlank(pathName)){ 
 			pathName = pathName.trim().replace("|", "<em>&gt;</em>");
-			modelMap.put("pathName", pathName +"<em>&gt;</em>" + bc.getBcName());
+			modelMap.put("pathName",pathName + "<em>&gt;</em>" + bc.getBcName());
+			modelMap.put("pathId", bc.getPathId() + "|" + bcId);
 		}
 		//2. 品牌
+		List<Brand> brandList = sellerBrandService.getValidBrandListOfSeller(sellerId);
+		if(null != brandList && brandList.size() >0){
+			modelMap.put("brand", brandList);
+		}
 		modelMap.put("bc", bc);
 		return "/product/publish";
 	}
 	
-	private void saveSku(ProductVo vo,LoginInfo loginInfo) {
-		BigDecimal[] skuSalePrice = vo.getSkuSalePrice();
-		BigDecimal[] skuMarketPrice = vo.getSkuMarketPrice();
-		Integer[] skuStockBalance = vo.getSkuStockBalance();
+	private void saveSku(ProductVo p,LoginInfo loginInfo) {
+		BigDecimal[] skuSalePrice = p.getSkuSalePrice();
+		BigDecimal[] skuMarketPrice = p.getSkuMarketPrice();
+		Integer[] skuStockBalance = p.getSkuStockBalance();
 		
-		if(null != skuSalePrice && skuSalePrice.length > 0){
-			 ArrayList<Sku> skus = new ArrayList<Sku>();
-			for (int i = 0; i < skuSalePrice.length; i++) {
-				Sku sku = new Sku();
-				sku.setProdId(vo.getProdId());
-				sku.setProdCode(vo.getProdCode());
-				sku.setMarketPrice(skuMarketPrice[i]);
-				sku.setSalePrice(skuSalePrice[i]);
-				sku.setStockBalance(skuStockBalance[i]);
-				
-				if (null != vo.getSkuImgUrl() && vo.getSkuImgUrl().length > 0) {
-					String skuImgUrl = vo.getSkuImgUrl()[i];
-					if (null !=skuImgUrl && skuImgUrl.length() > 0) {
-						sku.setSkuImgUrl(skuImgUrl);
-					} 
-				} 
-				sku.setSkuSpecId(vo.getSkuSpecId()[i]);
-				sku.setSkuSpecName(vo.getSkuSpecName()[i]);
-				sku.setSkuStatus(ProductConstants.SKU_STATUS_NORMAL); 
-				sku.setCreateDate(DateUtils.currentDate());
-				sku.setCreateByName(loginInfo.getLoginName());
-				sku.setLastUpdateDate(DateUtils.currentDate());
-				sku.setUpdateByName(loginInfo.getLoginName());
-				skus.add(sku);
+		// 1. 判断sku 是否存在 【通过skuspecId 判断】
+		List<Sku> skus = this.productService.getSkusByProdId(p.getProdId());
+		String[] skuSpecIds = p.getSkuSpecId();
+		if(null != skuSpecIds && skuSpecIds.length >0){
+			// 删除
+			for (Sku sku : skus) {
+				if (!this.isSkuExists(sku, skuSpecIds)) {
+					sku.setSkuStatus(ProductConstants.SKU_STATUS_DELETE);
+					this.productService.editSkuById(sku, sku.getStockBalance());
+				}
 			}
-			productService.batchAddSkus(skus);
+			
+			for (int i = 0; i < skuSpecIds.length; i++) {
+				String skuSpecId = skuSpecIds[i];
+				Sku sku = this.findExistsSku(skuSpecId, skus);
+				if(sku != null){//修改
+					sku.setSkuSpecId(skuSpecId);
+					sku.setSkuSpecName(p.getSkuSpecName()[i]);
+					if (null != p.getSkuImgUrl() && p.getSkuImgUrl().length > 0) {
+						String skuImgUrl = p.getSkuImgUrl()[i];
+						if (null !=skuImgUrl && skuImgUrl.length() > 0) {
+							sku.setSkuImgUrl(skuImgUrl);
+						} 
+					} 
+//					String skuImgUrl = null;
+//					if (p.getSkuImgUrl() != null && p.getSkuImgUrl().length > 0) {
+//						skuImgUrl = p.getSkuImgUrl()[i];
+//						if (skuImgUrl != null && skuImgUrl.length() > 0) {
+//							sku.setSkuImgUrl(skuImgUrl);
+//						} else { // sku没上传图片保存主图
+//							sku.setSkuImgUrl(p.getImgUrl());
+//						}
+//					} 
+//					for (int j = 0; j < skuSalePrice.length; j++) {
+//						if (skuSalePrice[j].compareTo(skuSalePrice[i]) == 0) {
+//							sku.setSortRank(j);
+//						}
+//					}
+//					Integer increaseNum = p.getSkuStockBalance()[i] ;
+//					sku.setStockBalance(increaseNum + sku.getStockBalance());
+					sku.setStockBalance(skuStockBalance[i]);
+					sku.setMarketPrice(skuMarketPrice[i]); // 市场价
+					sku.setSalePrice(skuSalePrice[i]);
+					sku.setLastUpdateDate(DateUtils.currentDate());
+					sku.setUpdateByName(loginInfo.getLoginName());
+
+					this.productService.editSkuById(sku, null);
+				}else{//新增
+					Sku sku1 = new Sku();
+					sku1.setProdId(p.getProdId());
+					sku1.setProdCode(p.getProdCode());
+					sku1.setMarketPrice(skuMarketPrice[i]);
+					sku1.setSalePrice(skuSalePrice[i]);
+					sku1.setStockBalance(skuStockBalance[i]);
+					
+					if (null != p.getSkuImgUrl() && p.getSkuImgUrl().length > 0) {
+						String skuImgUrl = p.getSkuImgUrl()[i];
+						if (null !=skuImgUrl && skuImgUrl.length() > 0) {
+							sku1.setSkuImgUrl(skuImgUrl);
+						} 
+					} 
+					sku1.setSkuSpecId(p.getSkuSpecId()[i]);
+					sku1.setSkuSpecName(p.getSkuSpecName()[i]);
+					sku1.setSkuStatus(ProductConstants.SKU_STATUS_NORMAL); 
+					sku1.setCreateDate(DateUtils.currentDate());
+					sku1.setCreateByName(loginInfo.getLoginName());
+					sku1.setLastUpdateDate(DateUtils.currentDate());
+					sku1.setUpdateByName(loginInfo.getLoginName());
+					this.productService.addSku(sku1);
+				}
+			}
 		}
 	}
 	
@@ -137,43 +217,21 @@ public class ProductController {
 	public Map<String,String> doSaveProduct(HttpServletRequest request,
 			@ModelAttribute ProductVo vo){
 		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
+		vo.setSellerId(loginInfo.getSellerId());
 		Product product = ProductConvertUtil.voToProduct(vo,null);
-		product.setSellerId(loginInfo.getSellerId());
-		product.setBcId(27);
-		product.setStatus(ProductConstants.PROD_STATUS_ON);
-		product.setAuditStatus(ProductConstants.PROD_AUDIT_STATUS_WAIT);
-		product.setImgUrl(vo.getImgUrl());
-//		product.setBcCode(bcCode);
-//		product.setProdCode("7654321");
-		int prodId = productService.addProduct(product);
+
+		Integer prodId = product.getProdId();
+		if(prodId != null && product.getProdId() > 0 ){
+			productService.editProductById(product);
+		}else{
+			prodId = productService.addProduct(product);
+			vo.setProdId(prodId);
+		}
 		
-		vo.setProdId(prodId);
 		saveSku(vo,loginInfo);	// 保存SKU
 		
 		boolean b = prodId > 0 ? true :false;
 		return resultMsg(b,"");
-	}
-
-	/**
-	 *  
-	 * @return 修改商品
-	 */
-	@RequestMapping(value = "/product/modify")
-	public String toModifyProduct(@RequestParam(value = "prodId", required = true) Integer prodId,
-			HttpServletRequest request,ModelMap modelMap){
-		Product product = this.productService.getProductById(prodId);
-		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(product.getBcId());
-		
-		String pathName = bc.getPathName();
-		if (StringUtils.isNotBlank(pathName)) {
-			pathName = pathName.trim().replace("|", "<em>&gt;</em>");
-//			product.setBcName(pathName +"<em>&gt;</em>" + bc.getBcName());
-			modelMap.put("pathName", pathName +"<em>&gt;</em>" + bc.getBcName());
-		}
-		
-		modelMap.put("bc",bc);
-		modelMap.put("p",product);
-		return "/product/publish";
 	}
 	
 	/**
@@ -321,6 +379,26 @@ public class ProductController {
 		} finally {
 			pw.close();
 		}
+	}
+	
+	// 判断是否存在sku
+	private boolean isSkuExists(Sku sku, String[] skuSpecIds) {
+		for (String skuSpecId : skuSpecIds) {
+			if (sku.getSkuSpecId().equals(skuSpecId))
+				return true;
+		}
+
+		return false;
+	}
+	
+	// 查询已经存在的sku
+	private Sku findExistsSku(String skuSpecId, List<Sku> skuList) {
+		for (Sku sku : skuList) {
+			if (skuSpecId.equals(sku.getSkuSpecId()))
+				return sku;
+		}
+
+		return null;
 	}
 	
 	private String errorMsg(String message) {

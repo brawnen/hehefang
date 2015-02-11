@@ -34,7 +34,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>商品类目：</label></div>
 								<div class="item-cont">
-									<span class="categoryTxt">${pathName }</span><input type="button" class="btn btn-def" onclick="publish.modifyBc()" value="修改" />
+									<span class="categoryTxt">${pathName }</span><input type="button" class="btn btn-def" onclick="publish.modifyBc('${pathId}')" value="修改" />
 								</div>
 							</div>
 							<div class="form-item">
@@ -56,8 +56,13 @@
 								<div class="item-label"><label><em>*</em>品牌：</label></div>
 								<div class="item-cont">
 									<select id="brand" name="brand" onchange="publish.validateBrand();" class="select">
+									
 										<option value="-1">请选择品牌</option>
-										<option value="1">361</option>
+										<c:if test="${!empty(brand)}">
+										<c:forEach items="${brand}" var="b">
+											<option value="<c:out value='${b.brandId}'/>" ><c:out value="${b.brandName }"></c:out> </option>
+										</c:forEach>
+										</c:if>
 									</select>
 								</div>
 								<div class="note errTxt"></div>
@@ -89,15 +94,26 @@
 												<c:when test="${attr.displayMode == 1 }">
 													<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr();">
 														<option value=""></option>
-														<c:forEach items="${attr.attrValueList }" var="attrV" >
-															<option value="${attrV.attrValueId }|||${attrV.attrValue }|||${attrV.isSubAttr ? 'true' : 'false'}" attrValueId="${attrV.attrValueId}"><c:out value='${attrV.attrValue }'/></option>
+														<c:forEach items="${attr.attrValueList }" var="attrValue" >
+															<option value="${attrValue.attrValueId }|||${attrValue.attrValue }|||${attrValue.isSubAttr ? 'true' : 'false'}" attrValueId="${attrValue.attrValueId}"><c:out value='${attrValue.attrValue }'/></option>
 														</c:forEach>
 													</select>
+													
+														<c:forEach items="${attr.attrValueList}" var="attrValue">
+														<c:if test="${attrValue.isSubAttr}">
+														<select id="attrValue" name="attrValue2" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}" style="display:none;">
+															<option value=""></option>
+															<c:forEach items="${attrValue.subAttrObj.attrValueList}" var="attrValue2">
+																<option value="${attrValue2.attrValueId}|||${attrValue2.attrValue}|||${attrValue2.isSubAttr ? 'true' : 'false'}" attrValue2Id="${attrValue2.attrValueId}">${attrValue2.attrValue}</option>
+															</c:forEach>
+														</select>
+														</c:if>		
+														</c:forEach>
 												</c:when>
 												<c:otherwise>
 													<ul>
-													<c:forEach items="${attr.attrValueList }" var="attrV">
-														<li><label><input type="checkbox" class="chk" name="attrValue2" attrId="${attr.attrId}" attrValue2Id="${attrV.attrValueId}" ><c:out value='${attrV.attrValue }'/></label></li>
+													<c:forEach items="${attr.attrValueList }" var="attrValue">
+														<li><label><input type="checkbox" class="chk" name="attrValue" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}"  attrValueName="${attrValue.attrValue}"><c:out value='${attrValue.attrValue }'/></label></li>
 													</c:forEach>
 													</ul>
 												</c:otherwise>
@@ -163,12 +179,24 @@
 							<div class="form-item">
 								<div class="item-label"></div>
 								<div class="item-cont">
-									<input type="button" value="发 布" onclick="publish.saveProduct();" class="btn btn-primary lg p-lg">
+									<c:choose>
+										<c:when test="${!empty(p) }">
+											<input type="button" value="修 改" onclick="publish.saveProduct();" class="btn btn-primary lg p-lg">
+										</c:when>
+										<c:otherwise>
+											<input type="button" value="发 布" onclick="publish.saveProduct();" class="btn btn-primary lg p-lg">
+										</c:otherwise>
+									</c:choose>
 									<input type="button" value="预 览" class="btn btn-bezelFree">
 								</div>
 							</div>
 						</fieldset>
-						<input type="hidden" id="imgUrl" name="imgUrl" value="" />
+						<input type="hidden" id="bcId" name="bcId" value="${bc.bcId }">
+						<input type="hidden" id="bcCode" name="bcCode" value="${bc.bcCode }">
+						<input type="hidden" id="brandId" name="brandId" value="">
+						<input type="hidden" id="brandName" name="brandName" value="">
+						<input type="hidden" id="prodId" name="prodId" value="${p.prodId }" />
+						<input type="hidden" id="imgUrl" name="imgUrl" value="${p.imgUrl }" />
 						<input type="hidden" id="attrValueId" name="attrValueId" value=""/>
 						<input type="hidden" id="attrValueName" name="attrValueName" value="" />
 					</form>
@@ -185,6 +213,17 @@
 		var imgUploadUrl = '${imgUploadUrl}';
 		var imgGetUrl = '${my:random(imgGetUrl)}';
 		var attrValueId= '${p.attrValueId}';
+		
+		var skuSpecIdArr = [], skuSpecNameArr = [], s_marketPrice = [],s_salePrice = [], s_stockBalance = [], s_imgUrl = [];
+		<c:forEach items="${p.skus}" var="sku" varStatus="status">
+			skuSpecIdArr['${status.index}'] = '${sku.skuSpecId}';
+			skuSpecNameArr['${status.index}'] = '${sku.skuSpecName}';
+			s_marketPrice['${status.index}'] = '${sku.marketPrice}';
+			s_salePrice['${status.index}'] = '${sku.salePrice}';
+			s_stockBalance['${status.index}'] = '${sku.stockBalance}';
+			s_imgUrl['${status.index}'] = '${sku.skuImgUrl}';
+		</c:forEach>
+		
 	</script>	
 	<script type="text/javascript" src="${jsUrl}/publish.js"></script>
 </body>

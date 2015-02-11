@@ -95,7 +95,7 @@
 									<td>${p.salePrice }</td>
 									<td>${p.marketPrice }</td>
 									<td><fmt:formatDate value="${p.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-									<td class="td-operate" prodId="${p.prodId }"><p><a href="${ctx}/product/modify?prodId=${p.prodId }&m=2001">修改</a>|<a href="${ctx}/product/delProd?prodId=${p.prodId }">删除</a></p></td>
+									<td class="td-operate" prodId="${p.prodId }"><p><a href="${ctx}/product/publish?prodId=${p.prodId }&m=2001">修改</a>|<a href="${ctx}/product/delProd?prodId=${p.prodId }">删除</a></p></td>
 								</tr>
 							</c:forEach>
 						</tbody>
