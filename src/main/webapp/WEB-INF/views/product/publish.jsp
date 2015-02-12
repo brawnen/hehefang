@@ -95,7 +95,7 @@
 													<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr();">
 														<option value=""></option>
 														<c:forEach items="${attr.attrValueList }" var="attrValue" >
-															<option value="${attrValue.attrValueId }|||${attrValue.attrValue }|||${attrValue.isSubAttr ? 'true' : 'false'}" attrValueId="${attrValue.attrValueId}"><c:out value='${attrValue.attrValue }'/></option>
+															<option value="${attrValue.attrValueId }|||${attrValue.attrValue }" attrValueId="${attrValue.attrValueId}"><c:out value='${attrValue.attrValue }'/></option>
 														</c:forEach>
 													</select>
 												</c:when>
