@@ -91,7 +91,7 @@
 									<td><p><c:out value="${p.title }"/></p></td>
 									<td><c:out value="${p.brandName }"/></td>
 									<td><c:out value="${p.artNo }"/></td>
-									<td>睡衣/睡裤/睡裙/睡衣套装</td>
+									<td>${p.bcName }</td>
 									<td>${p.salePrice }</td>
 									<td>${p.marketPrice }</td>
 									<td><fmt:formatDate value="${p.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>

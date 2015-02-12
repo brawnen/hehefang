@@ -60,7 +60,7 @@
 										<option value="-1">请选择品牌</option>
 										<c:if test="${!empty(brand)}">
 										<c:forEach items="${brand}" var="b">
-											<option value="<c:out value='${b.brandId}'/>" ><c:out value="${b.brandName }"></c:out> </option>
+											<option value="<c:out value='${b.brandId}'/>" id="brand${b.brandId}" ><c:out value="${b.brandName }"></c:out> </option>
 										</c:forEach>
 										</c:if>
 									</select>
@@ -98,17 +98,6 @@
 															<option value="${attrValue.attrValueId }|||${attrValue.attrValue }|||${attrValue.isSubAttr ? 'true' : 'false'}" attrValueId="${attrValue.attrValueId}"><c:out value='${attrValue.attrValue }'/></option>
 														</c:forEach>
 													</select>
-													
-														<c:forEach items="${attr.attrValueList}" var="attrValue">
-														<c:if test="${attrValue.isSubAttr}">
-														<select id="attrValue" name="attrValue2" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}" style="display:none;">
-															<option value=""></option>
-															<c:forEach items="${attrValue.subAttrObj.attrValueList}" var="attrValue2">
-																<option value="${attrValue2.attrValueId}|||${attrValue2.attrValue}|||${attrValue2.isSubAttr ? 'true' : 'false'}" attrValue2Id="${attrValue2.attrValueId}">${attrValue2.attrValue}</option>
-															</c:forEach>
-														</select>
-														</c:if>		
-														</c:forEach>
 												</c:when>
 												<c:otherwise>
 													<ul>
@@ -213,6 +202,7 @@
 		var imgUploadUrl = '${imgUploadUrl}';
 		var imgGetUrl = '${my:random(imgGetUrl)}';
 		var attrValueId= '${p.attrValueId}';
+		var brandId = '${p.brandId}';
 		
 		var skuSpecIdArr = [], skuSpecNameArr = [], s_marketPrice = [],s_salePrice = [], s_stockBalance = [], s_imgUrl = [];
 		<c:forEach items="${p.skus}" var="sku" varStatus="status">

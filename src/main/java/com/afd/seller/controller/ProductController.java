@@ -285,6 +285,7 @@ public class ProductController {
 		page.setPageSize(15);
 		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
 		productCondition.setSellerId(loginInfo.getSellerId());
+		// TODO bcName
 		page = productService.searchOnlineProductPage(productCondition, sortField, sortDirection, page);
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("productCondition", productCondition);
