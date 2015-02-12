@@ -196,6 +196,22 @@
 		</div>
 		<!-- container end -->
 	</div>
+	<div class="popup popup-primary" style="width:500px;margin-left:-250px;display:none" id="popProduct">
+		<div class="hd"><h2></h2><i class="close" onclick="javascript:$('#popProduct, #maskProduct').hide();"></i></div>
+		<div class="bd">
+			<dl class="popup-doc">
+				<dt>
+					<i class="icon i-right"></i>
+				</dt>
+				<dd>
+					<h3>商品已发布  ！</h3>
+					<p>您可在<b>“在售商品管理”</b>中查看、修改商品</p>
+					<div class="btnWrap"><a href="${ctx}/product/category?m=2002" class="btn btn-primary">继续发布商品</a><a href="${ctx}/product/online?m=2002" class="btn btn-def">查看在售商品</a></div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="mask"  id="maskProduct" style="display:none"></div>	
 	<script type="text/javascript">
 		var ctx = '${ctx}';
 		var cssUrl = '${cssUrl}';
