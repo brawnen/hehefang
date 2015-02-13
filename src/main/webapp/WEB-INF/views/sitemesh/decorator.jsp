@@ -146,9 +146,9 @@ function closeDeposit() {
 							<li b="30" m="3001"><a href="${ctx}/promotion/summary"><i class="icon"></i>特卖专场列表</a></li>
 							<li b="30" m="3002"><a href="${ctx}/promotion/summary"><i class="icon"></i>新建品牌特卖</a></li>
 							
-							<li b="40" m="4001"><a href="${ctx}/order/summary"><i class="icon"></i>全部订单</a></li>
-							<li b="40" m="4002"><a href="${ctx}/order/summary"><i class="icon"></i>订单发货</a></li>
-							<li b="40" m="4003"><a href="${ctx}/order/summary"><i class="icon"></i>退货管理</a></li>
+							<li b="40" m="4001"><a href="${ctx}/order/queryOrder"><i class="icon"></i>全部订单</a></li>
+							<li b="40" m="4002"><a href="${ctx}/order/sendOrder"><i class="icon"></i>订单发货</a></li>
+							<li b="40" m="4003"><a href="${ctx}/order/returnOrder"><i class="icon"></i>退货管理</a></li>
 							
 						</ul>
 					</div>
