@@ -278,10 +278,20 @@ public class ProductController {
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
 			) {
 		page.setPageSize(15);
-		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
-		productCondition.setSellerId(loginInfo.getSellerId());
-		// TODO bcName
+		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
+		productCondition.setSellerId(sellerId);
+		List<Brand> brandList = sellerBrandService.getValidBrandListOfSeller(sellerId);
+		if(null != brandList && brandList.size() >0){
+			modelMap.put("brand", brandList);
+		}
 		page = productService.searchOnlineProductPage(productCondition, sortField, sortDirection, page);
+		List<Product> list = page.getResult();
+		for (Product p : list) {
+			BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
+			String displayBcName = bc.getPathName().trim().replace("|", "/");
+			p.setBcName(displayBcName +"/"+ bc.getBcName());
+		}
+		
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("productCondition", productCondition);
 		modelMap.addAttribute("page", page);
@@ -298,9 +308,19 @@ public class ProductController {
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
 			) {
 		page.setPageSize(15);
-		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
-		productCondition.setSellerId(loginInfo.getSellerId());
+		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
+		productCondition.setSellerId(sellerId);
+		List<Brand> brandList = sellerBrandService.getValidBrandListOfSeller(sellerId);
+		if(null != brandList && brandList.size() >0){
+			modelMap.put("brand", brandList);
+		}
 		page = productService.searchAuditProductPage(productCondition, null, null, page);
+		List<Product> list = page.getResult();
+		for (Product p : list) {
+			BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
+			String displayBcName = bc.getPathName().trim().replace("|", "/");
+			p.setBcName(displayBcName +"/"+ bc.getBcName());
+		}
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("productCondition", productCondition);
 		return "/product/audit";
