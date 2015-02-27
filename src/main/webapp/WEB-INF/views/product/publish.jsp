@@ -220,17 +220,19 @@
 		var attrValueId= '${p.attrValueId}';
 		var brandId = '${p.brandId}';
 		
-		var skuSpecIdArr = [], skuSpecNameArr = [], s_marketPrice = [],s_salePrice = [], s_stockBalance = [], s_imgUrl = [];
+		var skuSpecIdArr = [], skuSpecNameArr = [], skuSortRankArr = [], s_marketPrice = [],s_salePrice = [], s_stockBalance = [], s_imgUrl = [];
 		<c:forEach items="${p.skus}" var="sku" varStatus="status">
 			skuSpecIdArr['${status.index}'] = '${sku.skuSpecId}';
 			skuSpecNameArr['${status.index}'] = '${sku.skuSpecName}';
+			skuSortRankArr['${status.index}'] = '${sku.sortRank}';
 			s_marketPrice['${status.index}'] = '${sku.marketPrice}';
 			s_salePrice['${status.index}'] = '${sku.salePrice}';
 			s_stockBalance['${status.index}'] = '${sku.stockBalance}';
 			s_imgUrl['${status.index}'] = '${sku.skuImgUrl}';
 		</c:forEach>
-		
-	</script>	
-	<script type="text/javascript" src="${jsUrl}/publish.js"></script>
+
+	</script>
+	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>	
+	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150210"></script>
 </body>
 </html>

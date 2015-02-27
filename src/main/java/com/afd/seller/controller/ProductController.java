@@ -153,26 +153,16 @@ public class ProductController {
 					sku.setSkuSpecName(p.getSkuSpecName()[i]);
 					if (null != p.getSkuImgUrl() && p.getSkuImgUrl().length > 0) {
 						String skuImgUrl = p.getSkuImgUrl()[i];
-						if (null !=skuImgUrl && skuImgUrl.length() > 0) {
+						if (null != skuImgUrl && skuImgUrl.length() > 0) {
 							sku.setSkuImgUrl(skuImgUrl);
+							if(skuImgUrl.equals(p.getImgUrl())){ //TODO 待优化记录默认sku
+								sku.setSortRank(0);
+							}else{
+								sku.setSortRank(99);
+							}
 						} 
 					} 
-//					String skuImgUrl = null;
-//					if (p.getSkuImgUrl() != null && p.getSkuImgUrl().length > 0) {
-//						skuImgUrl = p.getSkuImgUrl()[i];
-//						if (skuImgUrl != null && skuImgUrl.length() > 0) {
-//							sku.setSkuImgUrl(skuImgUrl);
-//						} else { // sku没上传图片保存主图
-//							sku.setSkuImgUrl(p.getImgUrl());
-//						}
-//					} 
-//					for (int j = 0; j < skuSalePrice.length; j++) {
-//						if (skuSalePrice[j].compareTo(skuSalePrice[i]) == 0) {
-//							sku.setSortRank(j);
-//						}
-//					}
-//					Integer increaseNum = p.getSkuStockBalance()[i] ;
-//					sku.setStockBalance(increaseNum + sku.getStockBalance());
+					
 					sku.setStockBalance(skuStockBalance[i]);
 					sku.setMarketPrice(skuMarketPrice[i]); // 市场价
 					sku.setSalePrice(skuSalePrice[i]);
@@ -192,6 +182,11 @@ public class ProductController {
 						String skuImgUrl = p.getSkuImgUrl()[i];
 						if (null !=skuImgUrl && skuImgUrl.length() > 0) {
 							sku1.setSkuImgUrl(skuImgUrl);
+							if(skuImgUrl.equals(p.getImgUrl())){ //TODO 待优化记录默认sku
+								sku1.setSortRank(0);
+							}else{
+								sku1.setSortRank(99);
+							}
 						} 
 					} 
 					sku1.setSkuSpecId(p.getSkuSpecId()[i]);

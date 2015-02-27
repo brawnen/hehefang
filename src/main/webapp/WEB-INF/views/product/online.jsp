@@ -45,7 +45,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="searchBtn"><a href="${ctx }/product/category" class="btn btn-def">发布新商品</a></div>
+						<div class="searchBtn"><a href="${ctx }/product/category?m=2002" class="btn btn-def">发布新商品</a></div>
 					</form>
 				</div>
 				<!-- screening end -->
@@ -95,7 +95,7 @@
 									<td>${p.salePrice }</td>
 									<td>${p.marketPrice }</td>
 									<td><fmt:formatDate value="${p.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-									<td class="td-operate" prodId="${p.prodId }"><p><a href="${ctx}/product/publish?prodId=${p.prodId }&m=2001">修改</a>|<a href="${ctx}/product/delProd?prodId=${p.prodId }">删除</a></p></td>
+									<td class="td-operate" prodId="${p.prodId }"><p><a href="${ctx}/product/publish?prodId=${p.prodId }&m=2001">修改</a>|<a href="javascript:;" onclick="product.delProduct(${p.prodId });">删除</a></p></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -116,6 +116,13 @@
 		</div>
 		<!-- container end -->
 	</div>
-	<script type="text/javascript" src="${jsUrl}/product.js"></script>
+	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>
+	<script type="text/javascript" src="${jsUrl}/product.js?t=20150210"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+		product = new product();
+	});
+	</script>
 </body>
 </html>

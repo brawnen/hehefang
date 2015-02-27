@@ -59,6 +59,7 @@
 		</div>
 		<!-- container end -->
 	</div>
+<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>	
 <script type="text/javascript" src="${jsUrl}/product.js?t=20150210"></script>	
 <script type="text/javascript">
 $(function(){
@@ -101,7 +102,8 @@ $(function(){
 		if(bcId > 0){
 			window.location.href = "${ctx}/product/publish?bcId="+bcId+"&m=2001";
 		}else{
-			alert("请选择类目");	
+			popWindown("商品类目必选 ！","issue:发布新商品，类目必须选到第三级 ！","","1");
+
 		}
 	});
 	
