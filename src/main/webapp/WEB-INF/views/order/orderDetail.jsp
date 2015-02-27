@@ -12,12 +12,29 @@
 		<!-- mainCaption end -->
 		<!-- message -->
 		<div class="mod-message">
-			<div class="hd">
-				<h3 class="title">当前订单状态：<span class="successColor"><c:out value="${order.strOrderStatus}" /></span></h3>
-			</div>
-			<div class="bd">
-				<div class="msg-text"><i class="icon i-horn"></i><b>系统提醒</b>：交易已成功后，如买家提出售后要求，请积极与买家协商，做好售后服务。</div>
-			</div>
+			<c:choose>
+				<c:when test="${order.orderStatus=='3'}">
+					<div class="hd">
+						<h3 class="title">当前订单状态：<span class="warnColor">等待发货</span><input id="send" id="${order.orderId}_${order.brandShowId}" type="button" class="btn btn-primary sm" value="发货" /></h3>
+					</div>
+					<div class="bd">
+						<div class="msg-text"><i class="icon i-horn"></i><b>系统提醒</b>：发货前请与买家确认发货信息及购买信息，确认无误后再执行发货处理。</div>
+					</div>
+				</c:when>
+				<c:when test="${order.orderStatus=='8'}">
+				<div class="hd">
+					<h3 class="title">当前订单状态：<span class="successColor"><c:out value="${order.strOrderStatus}" /></span></h3>
+				</div>
+				<div class="bd">
+					<div class="msg-text"><i class="icon i-horn"></i><b>系统提醒</b>：交易已成功后，如买家提出售后要求，请积极与买家协商，做好售后服务。</div>
+				</div>
+				</c:when>
+				<c:otherwise>
+				<div class="hd">
+					<h3 class="title">当前订单状态：<span><c:out value="${order.strOrderStatus}" /></span></h3>
+				</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<!-- message end -->
 		<!-- orderInfo -->
@@ -148,6 +165,121 @@
 			</div>item end
 		</div> -->
 		<!-- orderInfo end -->
+		
+		<c:if test="${order.orderStatus=='3'}">
+		<script>
+			$(function(){
+				$("#send").click(function(){
+					var idShowId = $(this).attr("id").split("_");  
+					var logiComHtml="";
+					
+					//获取物流公司列表
+					if(idShowId.length == 2){
+						$.ajax({
+							url  : "${ctx}/order/getLogiComs",
+							type : "POST",
+							sync : false,
+							data : {showId : idShowId[1]},
+							success : function(objList) {
+								$.each(objList, function( index, logisCom ) {
+									logiComHtml += '<label><input type="radio" name="logis" class="radio" value="'+logisCom.logisticsCompId+'"/>'+logisCom.logisticsCompName+'</label>';
+								});
+							}
+						});
+						
+						var dialoghtml = '<div id="dialog" class="popup popup-primary popup-deliver" style="width:600px;margin-left:-300px;">'+
+								'<div class="hd"><h2>订单发货</h2><i class="close"></i></div>'+
+								'<div class="bd">'+
+									'<form class="form">'+
+										'<fieldset>'+
+											'<div class="form-item">'+
+												'<div class="item-label"><label><em>*</em>快递公司：</label></div>'+
+												'<div class="item-cont">'+logiComHtml+'</div>'+
+											'</div>'+
+											'<div class="form-item">'+
+												'<div class="item-label"><label><em>*</em>运单号：</label></div>'+
+												'<div class="item-cont">'+
+													'<input id="awbNo" type="text" class="txt lg w-lgl" />'+
+												'</div>'+
+											'</div>'+
+											'<div class="form-item">'+
+												'<div class="item-cont">'+
+													'<input id="sendGoods" type="button" class="btn btn-primary" value="确认发货" />'+
+												'</div>'+
+											'</div>'+
+										'</fieldset>'+
+									'</form>'+
+								'</div>'+
+							'</div>';
+						var dialog$ = $(dialoghtml);	
+						$(document).append(dialog$);
+						$("#mask").addClass("mask");
+						
+						dialog$.find(".close").click(function(){
+							dialog$.remove();
+							$("#mask").removeClass("mask");
+						});
+						
+						dialog$.find("#sendGoods").click(function(){
+							var checkedRadio$ = dialog$.find("input[name='logis'][checked]");
+							var logisId = checkedRadio$.val();  
+							var logisName = checkedRadio$.text();  
+							var awbNo = dialog$.find("#awbNo").val();
+							
+							if(logisId>0 && awbNo.length>0){
+								$.ajax({
+									url  : "${ctx}/order/send",
+									type : "POST",
+									sync : false,
+									data : {
+											orId:idShowId[0], 
+											logiId:logisId,
+											logiName:logisName,
+											awbNo:awbNo
+										   },
+									success : function(re) {
+										//成功
+										if(re == 1){
+											var content$ = $('<dl class="popup-doc">'+
+																'<dt><i class="icon i-right"></i></dt>'+
+																'<dd><h3>订单已发货 ！</h3>p>请尽快联系快递公司，安排货物的正常发出，谢谢！</p><div class="btnWrap"><input id="cont" type="button" class="btn btn-primary" value="继续发货" /><input id="view" type="button" class="btn btn-def" value="查看订单" /></div></dd>'+
+															'</dl>');
+											content$.find("#cont").click(function(){
+												dialog$.remove();
+												$("#mask").removeClass("mask");
+											});
+											content$.find("#view").click(function(){
+												window.location.href = '${ctx}/order/orderDetail?m=4001&orderId='+idShowId[0];
+											});
+											
+											dialog$.removeClass("popup-deliver");
+											dialog$.find("h2").text("");
+											dialog$.find(".bd").empty().append(content$);
+										}else{
+											var content$ = $('<dl class="popup-doc">'+
+																'<dt><i class="icon i-danger"></i></dt>'+
+																'<dd><h3>发货操作异常！</h3>p>请重新尝试，多次尝试失败时请联系平台客服协助解决。</p><div class="btnWrap"><input id="know" type="button" class="btn btn-primary" value="我知道了" /></div></dd>'+
+															'</dl>');
+											content$.find("#know").click(function(){
+												dialog$.remove();
+												$("#mask").removeClass("mask");
+											});
+											
+											dialog$.removeClass("popup-deliver");
+											dialog$.find("h2").text("");
+											dialog$.find(".bd").empty().append(content$);
+										}
+									}
+								});
+							}else{
+								
+							}
+						});
+					}
+				});
+			});
+		</script>
+		</c:if>
 	</body>
 </html>
 

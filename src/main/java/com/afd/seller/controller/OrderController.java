@@ -26,10 +26,13 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.common.mybatis.Page;
 import com.afd.constants.order.OrderConstants;
+import com.afd.model.order.LogisticsCompany;
 import com.afd.model.order.Order;
 import com.afd.model.order.OrderItem;
 import com.afd.model.product.BrandShow;
@@ -54,8 +57,6 @@ public class OrderController {
 	private IOrderService orderService;
 	@Autowired
 	private IBrandShowService brandShowService;
-//	@Autowired
-//	private ILogisticsService logisticsService;
 
 	@RequestMapping(value="/queryOrder")
 	public String queryOrder(@ModelAttribute OrderCondition orderCondition, HttpServletRequest request, Page<Order> page, ModelMap modelMap){
@@ -75,7 +76,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/sendOrder")
-	public String sendOrder(@ModelAttribute OrderCondition orderCondition, HttpServletRequest request, Page<Order> page, ModelMap modelMap){
+	public String sendOrderList(@ModelAttribute OrderCondition orderCondition, HttpServletRequest request, Page<Order> page, ModelMap modelMap){
 		page.setPageSize(10);
 		//要发货的订单
 		orderCondition.setOrderStatus(OrderConstants.ORDER_STATUS_WAITDELIVERED);
@@ -87,7 +88,37 @@ public class OrderController {
 		page = this.orderService.getOrdersByOrderConditon(orderCondition, page);
 		modelMap.addAttribute("page", page);
 		
+		List<BrandShow> brandShows = this.brandShowService.getOnlinedBrandShowsOfSeller(sellerId);
+		modelMap.addAttribute("brandShows", brandShows);
+		
 		return "order/sendOrder";
+	}
+	
+	@RequestMapping(value="/getLogiComs", method=RequestMethod.POST)
+	@ResponseBody
+	public List<LogisticsCompany> getLogiCompanys(@RequestParam(value = "showId") int brandShowId){
+		return this.brandShowService.getLogisticsCompanyListOfBrandShow(brandShowId);
+	}
+	
+	@RequestMapping(value="/send", method=RequestMethod.POST)
+	@ResponseBody
+	public int sendOrder(@RequestParam(value = "orId") int orderId, 
+			@RequestParam(value = "logiId") int logiId, 
+			@RequestParam(value = "logiName") String logiName, 
+			@RequestParam(value = "awbNo") String awbNo, HttpServletRequest request){
+		
+		Order order = new Order();
+		order.setOrderStatus(OrderConstants.ORDER_STATUS_DELIVERED);
+		order.setLogisticsCompa(logiId+0L);
+		order.setLogisticsName(logiName);
+		order.setAwbNo(awbNo);
+		
+		Date date = new Date();
+		order.setSendTime(date);
+		order.setLastUpdateDate(date);
+		order.setLastUpdateByName(LoginUtils.getLoginInfo(request).getLoginName());
+		
+		return this.orderService.updateOrder2Sended(order);
 	}
 	
 	@RequestMapping(value="/orderDetail")
@@ -193,4 +224,5 @@ public class OrderController {
 			}
 		}
 	}
+	 
 }
