@@ -102,12 +102,13 @@ public class OrderController {
 	
 	@RequestMapping(value="/send", method=RequestMethod.POST)
 	@ResponseBody
-	public int sendOrder(@RequestParam(value = "orId") int orderId, 
+	public int sendOrder(@RequestParam(value = "orId") Long orderId, 
 			@RequestParam(value = "logiId") int logiId, 
 			@RequestParam(value = "logiName") String logiName, 
 			@RequestParam(value = "awbNo") String awbNo, HttpServletRequest request){
 		
 		Order order = new Order();
+		order.setOrderId(orderId);
 		order.setOrderStatus(OrderConstants.ORDER_STATUS_DELIVERED);
 		order.setLogisticsCompa(logiId+0L);
 		order.setLogisticsName(logiName);

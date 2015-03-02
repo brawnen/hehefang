@@ -126,13 +126,13 @@
 						<thead>
 							<tr>
 								<td colspan="8" class="o-select">
-									<span><input type="checkbox" class="chk" />订单编号：<a href="#" target="_blank">${order.orderCode}</a></span>
+									<span>订单编号：<a href="#" target="_blank">${order.orderCode}</a></span>
 									<span>订单提交时间：<fmt:formatDate value="${order.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 									<span>专场ID：<a href="#" target="_blank">${order.brandShowId}</a></span>
 								</td>
 							</tr>
 						</thead>
-						<c:if test="order.orderItems!=null && fn:length(order.orderItems)>0">
+						<c:if test="${order.orderItems!=null && fn:length(order.orderItems)>0}">
 						<tbody>
 							<c:forEach items="${order.orderItems}" var="orderItem" varStatus="status">
 							<tr>
@@ -162,7 +162,7 @@
 									</td>
 									<td rowspan="${fn:length(order.orderItems)}" class="borderL td-operate">
 										<p <c:choose><c:when test="${order.orderStatus=='3'}">class="warnColor"</c:when><c:when test="${order.orderStatus=='8'}">class="successColor"</c:when></c:choose>><c:out value="${order.strOrderStatus}" /></p>
-										<p><a href="${ctx}/order/orderDetail?orderId=${order.orderId}">订单详情</a></p>
+										<p><a href="${ctx}/order/orderDetail?m=4001&orderId=${order.orderId}">订单详情</a></p>
 									</td>
 								</c:if>
 							</tr>

@@ -96,13 +96,13 @@
 						<thead>
 							<tr>
 								<td colspan="8" class="o-select">
-									<span><input type="checkbox" class="chk" />订单编号：<a href="#" target="_blank">${order.orderCode}</a></span>
+									<span>订单编号：<a href="javascript:void(0);" target="_blank">${order.orderCode}</a></span>
 									<span>订单提交时间：<fmt:formatDate value="${order.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 									<span>专场ID：<a href="#" target="_blank">${order.brandShowId}</a></span>
 								</td>
 							</tr>
 						</thead>
-						<c:if test="order.orderItems!=null && fn:length(order.orderItems)>0">
+						<c:if test="${order.orderItems!=null && fn:length(order.orderItems)>0}">
 						<tbody>
 							<c:forEach items="${order.orderItems}" var="orderItem" varStatus="status">
 							<tr>
@@ -132,7 +132,7 @@
 									</td>
 									<td rowspan="${fn:length(order.orderItems)}" class="borderL td-operate">
 										<p class="warnColor">等待发货</p>
-										<p><a href="${ctx}/order/orderDetail?orderId=${order.orderId}">订单详情</a></p>
+										<p><a href="${ctx}/order/orderDetail?m=4002&orderId=${order.orderId}">订单详情</a></p>
 										<p><input name="send" id="${order.orderId}_${order.brandShowId}" type="button" class="btn btn-primary sm" value="发货" /></p>
 									</td>
 								</c:if>
@@ -192,11 +192,15 @@
 						$.ajax({
 							url  : "${ctx}/order/getLogiComs",
 							type : "POST",
-							sync : false,
+							async : false,
 							data : {showId : idShowId[1]},
 							success : function(objList) {
 								$.each(objList, function( index, logisCom ) {
-									logiComHtml += '<label><input type="radio" name="logis" class="radio" value="'+logisCom.logisticsCompId+'"/>'+logisCom.logisticsCompName+'</label>';
+									if(index == 0){
+										logiComHtml += '<label><input type="radio" name="logis" class="radio" checked="checked" value="'+logisCom.logisticsCompId+'"/>'+logisCom.logisticsCompName+'</label>';
+									}else{
+										logiComHtml += '<label><input type="radio" name="logis" class="radio" value="'+logisCom.logisticsCompId+'"/>'+logisCom.logisticsCompName+'</label>';
+									}
 								});
 							}
 						});
@@ -213,7 +217,7 @@
 											'<div class="form-item">'+
 												'<div class="item-label"><label><em>*</em>运单号：</label></div>'+
 												'<div class="item-cont">'+
-													'<input id="awbNo" type="text" class="txt lg w-lgl" />'+
+													'<input id="awbNo" type="text" class="txt lg w-lgl" /><span style="color:#f00;"></span>'+
 												'</div>'+
 											'</div>'+
 											'<div class="form-item">'+
@@ -226,7 +230,7 @@
 								'</div>'+
 							'</div>';
 						var dialog$ = $(dialoghtml);	
-						$(document).append(dialog$);
+						$(document.body).append(dialog$);
 						$("#mask").addClass("mask");
 						
 						dialog$.find(".close").click(function(){
@@ -234,13 +238,33 @@
 							$("#mask").removeClass("mask");
 						});
 						
+						var awbNoFlag = false;
+						
+						dialog$.find("#awbNo").blur(function(){
+							var awbNo$ = $(this);
+							var awbNo = awbNo$.val();
+							
+							if(awbNo.length > 0){
+								if(/^\d{12,15}$/.test(awbNo)){  
+									awbNoFlag = true;
+									awbNo$.next().text("");
+								}else{
+									awbNo$.next().text("运单号是12-15位数字");
+									awbNo$.focus();
+								}
+							}else{
+								awbNo$.next().text("请填写运单号码");
+								awbNo$.focus();
+							}
+						});
+						
 						dialog$.find("#sendGoods").click(function(){
-							var checkedRadio$ = dialog$.find("input[name='logis'][checked]");
+							var checkedRadio$ = dialog$.find("input[name='logis']:checked");
 							var logisId = checkedRadio$.val();  
-							var logisName = checkedRadio$.text();  
+							var logisName = checkedRadio$.parent().text();  
 							var awbNo = dialog$.find("#awbNo").val();
 							
-							if(logisId>0 && awbNo.length>0){
+							if(awbNoFlag){
 								$.ajax({
 									url  : "${ctx}/order/send",
 									type : "POST",
@@ -256,11 +280,10 @@
 										if(re == 1){
 											var content$ = $('<dl class="popup-doc">'+
 																'<dt><i class="icon i-right"></i></dt>'+
-																'<dd><h3>订单已发货 ！</h3>p>请尽快联系快递公司，安排货物的正常发出，谢谢！</p><div class="btnWrap"><input id="cont" type="button" class="btn btn-primary" value="继续发货" /><input id="view" type="button" class="btn btn-def" value="查看订单" /></div></dd>'+
+																'<dd><h3>订单已发货 ！</h3><p>请尽快联系快递公司，安排货物的正常发出，谢谢！</p><div class="btnWrap"><input id="cont" type="button" class="btn btn-primary" value="继续发货" /><input id="view" type="button" class="btn btn-def" value="查看订单" /></div></dd>'+
 															'</dl>');
 											content$.find("#cont").click(function(){
-												dialog$.remove();
-												$("#mask").removeClass("mask");
+												window.location.href = '${ctx}/order/sendOrder?m=4002';
 											});
 											content$.find("#view").click(function(){
 												window.location.href = '${ctx}/order/orderDetail?m=4001&orderId='+idShowId[0];
@@ -286,7 +309,7 @@
 									}
 								});
 							}else{
-								
+								dialog$.find("#awbNo").trigger("blur");
 							}
 						});
 					}
