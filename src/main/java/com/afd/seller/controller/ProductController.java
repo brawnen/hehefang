@@ -132,6 +132,7 @@ public class ProductController {
 		BigDecimal[] skuSalePrice = p.getSkuSalePrice();
 		BigDecimal[] skuMarketPrice = p.getSkuMarketPrice();
 		Integer[] skuStockBalance = p.getSkuStockBalance();
+		Integer[] sellerNo = p.getSellerNo();
 		
 		// 1. 判断sku 是否存在 【通过skuspecId 判断】
 		List<Sku> skus = this.productService.getSkusByProdId(p.getProdId());
@@ -163,6 +164,7 @@ public class ProductController {
 						} 
 					} 
 					
+					sku.setSellerNo(sellerNo[i]+"");
 					sku.setStockBalance(skuStockBalance[i]);
 					sku.setMarketPrice(skuMarketPrice[i]); // 市场价
 					sku.setSalePrice(skuSalePrice[i]);
@@ -177,6 +179,7 @@ public class ProductController {
 					sku1.setMarketPrice(skuMarketPrice[i]);
 					sku1.setSalePrice(skuSalePrice[i]);
 					sku1.setStockBalance(skuStockBalance[i]);
+					sku1.setSellerNo(sellerNo[i]+"");
 					
 					if (null != p.getSkuImgUrl() && p.getSkuImgUrl().length > 0) {
 						String skuImgUrl = p.getSkuImgUrl()[i];
