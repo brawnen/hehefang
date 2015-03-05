@@ -108,7 +108,7 @@
 							<tr>
 								<td>
 									<div class="order-img">
-										<img src="${my:random(imgGetUrl)}${orderItem.prodImg}&op=s1_w40_h40_e1-c3_w40_h40">
+										<img src="${my:random(imgGetUrl)}?rid=${orderItem.prodImg}&op=s1_w40_h40_e1-c3_w40_h40">
 									</div>
 								</td>
 								<td class="o-product">
@@ -205,7 +205,7 @@
 							}
 						});
 						
-						var dialoghtml = '<div id="dialog" class="popup popup-primary popup-deliver" style="width:600px;margin-left:-300px;">'+
+						var dialoghtml = '<div id="dialog" class="popup popup-primary popup-deliver" style="width:600px;">'+
 								'<div class="hd"><h2>订单发货</h2><i class="close"></i></div>'+
 								'<div class="bd">'+
 									'<form class="form">'+
@@ -232,6 +232,8 @@
 						var dialog$ = $(dialoghtml);	
 						$(document.body).append(dialog$);
 						$("#mask").addClass("mask");
+						
+						showPop();
 						
 						dialog$.find(".close").click(function(){
 							dialog$.remove();
@@ -314,7 +316,27 @@
 						});
 					}
 				});
+				
+				$(window).resize(function() {
+					if ($("#dialog").is(":visible")) {
+						showPop();
+					}
+				});
 			});
+			
+			function showPop() {
+				var objP = $("#dialog");
+				var windowWidth = document.documentElement.clientWidth;   
+				var windowHeight = document.documentElement.clientHeight;   
+				var popupHeight = objP.height();   
+				var popupWidth = objP.width();    
+				 
+				objP.css({   
+					"position": "absolute",   
+					"top": (windowHeight-popupHeight)/2+$(document).scrollTop(),   
+					"left": (windowWidth-popupWidth)/2   
+				});  
+			};
 		</script>
 	</body>
 </html>
