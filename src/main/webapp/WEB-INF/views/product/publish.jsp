@@ -186,6 +186,7 @@
 						<input type="hidden" id="brandName" name="brandName" value="">
 						<input type="hidden" id="prodId" name="prodId" value="${p.prodId }" />
 						<input type="hidden" id="imgUrl" name="imgUrl" value="${p.imgUrl }" />
+						<input type="hidden" id="auditStatus" name="auditStatus" value="${p.auditStatus }">
 						<input type="hidden" id="attrValueId" name="attrValueId" value=""/>
 						<input type="hidden" id="attrValueName" name="attrValueName" value="" />
 					</form>

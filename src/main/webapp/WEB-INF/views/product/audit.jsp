@@ -102,7 +102,7 @@
 									<td>${p.marketPrice }</td>
 									<td><fmt:formatDate value="${p.lastAuditDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 									<c:choose>
-										<c:when test="${p.auditStatus == '0' }">
+										<c:when test="${p.auditStatus == '1' }">
 											<td>待审核</td>
 										</c:when>
 										<c:when test="${p.auditStatus == '2' }">

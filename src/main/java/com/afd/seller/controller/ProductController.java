@@ -214,22 +214,25 @@ public class ProductController {
 	@RequestMapping(value = "/product/save")
 	public Map<String,String> doSaveProduct(HttpServletRequest request,
 			@ModelAttribute ProductVo vo){
+		HashMap<String, String> resultMap = new HashMap<String,String>();
 		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
 		vo.setSellerId(loginInfo.getSellerId());
+		
 		Product product = ProductConvertUtil.voToProduct(vo,null);
-
+		
 		Integer prodId = product.getProdId();
-		if(prodId != null && product.getProdId() > 0 ){
+		if(null != prodId && prodId > 0 ){
 			productService.editProductById(product);
+			resultMap.put("success", "1");
 		}else{
 			prodId = productService.addProduct(product);
 			vo.setProdId(prodId);
+			resultMap.put("success", "0");
 		}
 		
-		saveSku(vo,loginInfo);	// 保存SKU
+		saveSku(vo,loginInfo);
 		
-		boolean b = prodId > 0 ? true :false;
-		return resultMsg(b,"");
+		return resultMap;
 	}
 	
 	/**
