@@ -123,7 +123,7 @@
 											<ul var="${var.count }" specId="${spec.specId}">
 												<c:forEach items="${spec.specValueList }" var="specValue">
 												<li>
-													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();publish.validateSkuImg();">
+													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();">
 													<c:if test="${!empty(specValue.imgUrl)}">
 														<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
 													</c:if>
