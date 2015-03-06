@@ -43,12 +43,27 @@
 						<tr>
 							<td>退货单号：${returnOrder.retOrderCode}</td>
 							<td>退货原因：<c:out value="${returnOrder.returnReason}" /></td>
-							<td></td>
+							<td>申请时间：<fmt:formatDate value="${returnOrder.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						</tr>
 						<tr>
-							<td>申请时间：<fmt:formatDate value="${returnOrder.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td>退货说明：<c:out value="${returnOrder.remarks}" /></td>
-							<td></td>
+						</tr>
+						<tr>
+							<td colspan="2"><div class="form-item">
+									<div class="item-label"><label>退货凭证：</label></div>
+									<div class="item-cont">
+										<div class="uploadImg">
+											<ul>
+												<c:forEach items="${returnOrder.evidencePics}" var="pic">
+													<li>
+														<a href="${my:random(imgGetUrl)}?rid=${pic}" target="_blank"><img src="${my:random(imgGetUrl)}?rid=${pic}&op=s1_w40_h40_e1-c3_w40_h40" alt=""></a>
+													</li>
+												</c:forEach>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
