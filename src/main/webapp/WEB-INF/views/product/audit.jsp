@@ -106,7 +106,14 @@
 											<td>待审核</td>
 										</c:when>
 										<c:when test="${p.auditStatus == '2' }">
-											<td class="warnColor">驳回待修改</td>
+											<td class="warnColor">驳回待修改
+											<c:if test="${!empty p.auditContent  }">
+												<div class="mod-tipsPop tip-lb">
+													<i class="icon"></i>
+													<div class="tip" style="width:200px"><c:out value="${p.auditContent }" /></div>
+												</div>
+											</c:if>
+											</td>
 										</c:when>
 									</c:choose>
 									<td class="td-operate" prodId="${p.prodId }"><p><a href="${ctx}/product/publish?prodId=${p.prodId }&m=2001">修改</a>|<a href="javascript:;" onclick="product.delProduct(${p.prodId });">删除</a></p></td>
