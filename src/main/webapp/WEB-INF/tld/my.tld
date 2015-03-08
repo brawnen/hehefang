@@ -16,6 +16,14 @@
 		<function-signature>java.lang.String random(java.lang.String[])</function-signature>
 		<example/>
   	</function>
+  	
+  	<function>
+		<description/>
+		<name>inArray</name>
+		<function-class>com.afd.taglib.MyFunctionTag</function-class>
+		<function-signature>java.lang.Boolean inArray(java.lang.Object[], java.lang.Object)</function-signature>
+		<example/>
+  	</function>
 
 </taglib>
 	
