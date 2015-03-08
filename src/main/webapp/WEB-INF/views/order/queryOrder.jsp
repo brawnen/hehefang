@@ -18,7 +18,7 @@
 						}
 					}
 					$("#queryForm").submit();
-				});
+				}); 
 				
 			});
 		</script>
@@ -29,7 +29,7 @@
 		<!-- mainCaption end -->
 		<!-- screening -->
 		<div class="screening">
-			<form id="queryForm" method="post" action="${ctx}/order/queryOrder" class="form form-inline">
+			<form id="queryForm" method="post" action="${ctx}/order/queryOrder?m=4001" class="form form-inline">
 				<legend></legend>
 				<div class="formGroup">
 					<div class="form-item">
@@ -126,19 +126,19 @@
 						<thead>
 							<tr>
 								<td colspan="8" class="o-select">
-									<span><input type="checkbox" class="chk" />订单编号：<a href="#" target="_blank">${order.orderCode}</a></span>
+									<span>订单编号：<a href="#" target="_blank">${order.orderCode}</a></span>
 									<span>订单提交时间：<fmt:formatDate value="${order.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 									<span>专场ID：<a href="#" target="_blank">${order.brandShowId}</a></span>
 								</td>
 							</tr>
 						</thead>
-						<c:if test="order.orderItems!=null && fn:length(order.orderItems)>0">
+						<c:if test="${order.orderItems!=null && fn:length(order.orderItems)>0}">
 						<tbody>
 							<c:forEach items="${order.orderItems}" var="orderItem" varStatus="status">
 							<tr>
 								<td>
 									<div class="order-img">
-										<img src="${my:random(imgGetUrl)}${orderItem.prodImg}&op=s1_w40_h40_e1-c3_w40_h40">
+										<img src="${my:random(imgGetUrl)}?rid=${orderItem.prodImg}&op=s1_w40_h40_e1-c3_w40_h40">
 									</div>
 								</td>
 								<td class="o-product">
@@ -161,8 +161,8 @@
 										<p class="lightColor">（免运费）</p>
 									</td>
 									<td rowspan="${fn:length(order.orderItems)}" class="borderL td-operate">
-										<p class="successColor"><c:out value="${order.strOrderStatus}" /></p>
-										<p><a href="${ctx}/order/orderDetail?orderId=${order.orderId}">订单详情</a></p>
+										<p <c:choose><c:when test="${order.orderStatus=='3'}">class="warnColor"</c:when><c:when test="${order.orderStatus=='8'}">class="successColor"</c:when></c:choose>><c:out value="${order.strOrderStatus}" /></p>
+										<p><a href="${ctx}/order/orderDetail?m=4001&orderId=${order.orderId}">订单详情</a></p>
 									</td>
 								</c:if>
 							</tr>
@@ -187,7 +187,7 @@
 						</colgroup>
 						<tbody>
 							<tr class="emptyGoods">
-									<td colspan="6" rowspan="3">暂无符合条件的查询结果</td>
+								<td colspan="6" rowspan="3">暂无符合条件的查询结果</td>
 							</tr>
 						</tbody>
 					</table>

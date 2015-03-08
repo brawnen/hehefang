@@ -5,175 +5,186 @@
 		<title>订单管理-afd</title>
 	</head>
 	<body>
+		<script type="text/javascript" src="${jsDomain}/datePicker/WdatePicker.js?dt=2015021"></script>
 		<!-- mainCaption -->
 		<div class="mainCaption mc-mb">
 			<h2>我的订单</h2>
 		</div>
 		<!-- mainCaption end -->
-		<!-- message -->
-		<div class="mod-message">
-			<c:choose>
-				<c:when test="${order.orderStatus=='3'}">
-					<div class="hd">
-						<h3 class="title">当前订单状态：<span class="warnColor">等待发货</span><input id="send" name="${order.orderId}_${order.brandShowId}" type="button" class="btn btn-primary sm" value="发货" /></h3>
+		<!-- screening -->
+		<div class="screening">
+			<form id="queryForm" method="post" action="${ctx}/order/sendOrder?m=4002" class="form form-inline">
+				<legend></legend>
+				<div class="formGroup">
+					<div class="form-item">
+						<div class="item-label">
+							<label>特卖专场：</label>
+						</div>
+						<div class="item-cont">
+							<select name="brandShowId" id="brandShowId" class="select w-sm">
+								<option value="">全部专场</option>
+								<c:forEach items="${brandShows}" var="brandShow" varStatus="status">
+								<option value="${brandShow.brandShowId}" <c:if test="${brandShow.brandShowId==orderCondition.brandShowId}">selected="selected"</c:if>  ><c:out value="${brandShow.title}"/></option>
+								</c:forEach>
+							</select>
+						</div>
 					</div>
-					<div class="bd">
-						<div class="msg-text"><i class="icon i-horn"></i><b>系统提醒</b>：发货前请与买家确认发货信息及购买信息，确认无误后再执行发货处理。</div>
+					<div class="form-item">
+						<div class="item-label">
+							<label>下单时间：</label>
+						</div>
+						<div class="item-cont">
+							<div class="txt-section">
+								<input type="text" readonly="readonly" name="startDate" value="<fmt:formatDate value="${orderCondition.startDate}" pattern="yyyy-MM-dd" />" onClick="WdatePicker()" class="txt txt-date w-sm">
+									<i>至</i>
+								<input type="text" readonly="readonly" name="endDate" value="<fmt:formatDate value="${orderCondition.endDate}" pattern="yyyy-MM-dd" />" onClick="WdatePicker()" class="txt txt-date w-sm">
+							</div>
+						</div>
 					</div>
-				</c:when>
-				<c:when test="${order.orderStatus=='8'}">
-				<div class="hd">
-					<h3 class="title">当前订单状态：<span class="successColor"><c:out value="${order.strOrderStatus}" /></span></h3>
+					<div class="form-item">
+						<div class="item-label">
+							<label>订单编号：</label>
+						</div>
+						<div class="item-cont">
+							<input type="text" id="orderCode" name="orderCode" value="${orderCondition.orderCode}" class="txt w-lg">
+						</div>
+					</div>
 				</div>
-				<div class="bd">
-					<div class="msg-text"><i class="icon i-horn"></i><b>系统提醒</b>：交易已成功后，如买家提出售后要求，请积极与买家协商，做好售后服务。</div>
-				</div>
-				</c:when>
-				<c:otherwise>
-				<div class="hd">
-					<h3 class="title">当前订单状态：<span><c:out value="${order.strOrderStatus}" /></span></h3>
-				</div>
-				</c:otherwise>
-			</c:choose>
+				<div class="searchBtn"><input name="query" id="query" type="button" class="btn btn-def" value="查&nbsp;&nbsp;询"></div>
+			</form>
 		</div>
-		<!-- message end -->
-		<!-- orderInfo -->
-		<div class="mod-orderInfo">
-			<div class="item">
-				<table class="table table-left noborder">
-					<caption>订单信息</caption>
-					<colgroup>
-						<col width="300">
-						<col width="300">
-						<col>
-					</colgroup>
-					<tbody>
-						<tr>
-							<td>订单编号：${orderCondition.orderCode}</td>
-							<td>付款方式：<c:out value="${order.strPayMode}" /></td>
-							<td>订单来源：<c:out value="${order.strOrderSource}" /></td>
-						</tr>
-						<tr>
-							<td>下单时间：<fmt:formatDate value="${order.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<td>付款时间：<fmt:formatDate value="${order.payDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<td>发货时间：<fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						</tr>
-					</tbody>
-				</table>
-			</div><!-- item end -->
-			<div class="item">
-				<table class="table table-left noborder">
-					<caption>买家信息</caption>
-					<colgroup>
-						<col>
-					</colgroup>
-					<tbody>
-						<tr>
-							<td>收货地址：<c:out value="${order.rProvince}"/> <c:out value="${order.rCity}"/> <c:out value="${order.rCounty}"/> <c:out value="${order.rTown}"/> <c:out value="${order.rAddr}"/>，    收件人：<c:out value="${order.rName}" />，     手机：${order.rMobile}</td> 
-						</tr>
-					</tbody>
-				</table>
-			</div><!-- item end -->
-		</div>
-		<!-- orderInfo end -->
+		<!-- screening end -->
+		<div class="mod-tips tips-order"><i class="icon i-horn"></i><b>系统提醒：</b>发货前请与买家确认发货信息及购买信息，确认无误后再执行发货处理。</div>
 		<!-- table -->
 		<table class="table table-line table-order">
 			<colgroup>
-				<col width="86">
-				<col width="300">
-				<col width="150">
-				<col width="127">
-				<col width="113">
-				<col width="130">
+				<col width="366">
+				<col width="140">
+				<col width="107">
+				<col width="93">
+				<!-- <col width="104"> -->
+				<col width="96">
 				<col width="119">
 			</colgroup>
 			<thead>
 				<tr>
-					<td colspan="2">商品</td>
+					<td>商品</td>
 					<td>商品编码</td>
 					<td>单价</td>
 					<td>数量</td>
-					<td>优惠</td>
+					<!-- <td>维权 <i class="textMark">/</i> 售后</td> -->
+					<td>实付款</td>
 					<td>状态</td>
 				</tr>
 			</thead>
-			<tbody>
-				<c:if test="${not empty order.orderItems}">
-					<c:forEach items="${order.orderItems}" var="orderItem">
-						<tr>
-							<td>
-								<div class="order-img">
-									<img src="${my:random(imgGetUrl)}?rid=${orderItem.prodImg}&op=s1_w40_h40_e1-c3_w40_h40" alt="" />
-								</div>
-							</td>
-							<td class="o-product">
-								<p><a href="#" target="_blank"><c:out value="${orderItem.prodTitle}" /></a></p>
-								<p class="lightColor">
-									<c:forEach items="${orderItem.specNames}" var="spec">
-										<span><c:out value="${spec.key}" /> : <c:out value="${spec.value}" /></span>
-									</c:forEach>
-								</p>
-							</td>
-							<td><c:out value="${orderItem.prodCode}" /></td>
-							<td>
-								<p>&yen;<fmt:formatNumber value="${orderItem.salePrice}" pattern="0.00" /></p>
-							</td>
-							<td>${orderItem.number}</td>
-							<td><p>&yen;<fmt:formatNumber value="${orderItem.transPrice}" pattern="0.00" /></p></td>
-							<td>
-								<p><c:out value="${order.strOrderStatus}" /></p>
-							</td>
-						</tr>
-					</c:forEach>
-				</c:if>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="7" class="o-total">订单总额：<strong>&yen;<fmt:formatNumber value="${order.orderFee}" pattern="0.00" /></strong></td>
-				</tr>
-			</tfoot>
 		</table>
-		<!-- table edn -->
-		<!-- orderInfo -->
-		<!-- <div class="mod-orderInfo">
-			<div class="item">
-				<table class="table table-left noborder">
-					<caption>物流信息</caption>
-					<colgroup>
-						<col width="300">
-						<col width="300">
-						<col>
-					</colgroup>
-					<tbody>
-						<tr>
-							<td>配送方式 ：EMS速递</td>
-							<td>运单号码：1500102087387</td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>item end
-			<div class="item">
-				<ul class="deliverInfoList">
-					<li>2014-12-03 21:10 上海市|到件|到上海市【浦东分拨中心】</li>
-					<li>2014-12-03 21:13 上海市|发件|上海市【浦东分拨中心】，正发往【上海分拨中心】</li>
-					<li>2014-12-04 01:15 上海市|到件|到上海市【上海分拨中心】</li>
-					<li>2014-12-04 01:18 上海市|发件|上海市【上海分拨中心】，正发往【太原分拨中心】</li>
-					<li>2014-12-05 11:15 太原市|到件|到太原市【太原分拨中心】</li>
-					<li class="now">2014-12-06 17:06 大同市|签收|大同市【大同云冈路分部】，林子 已签收</li>
-				</ul>
-			</div>item end
-		</div> -->
-		<!-- orderInfo end -->
 		
-		<c:if test="${order.orderStatus=='3'}">
+		<c:choose>
+			<c:when test="${page.result!=null && fn:length(page.result)>0}">
+				 <c:forEach items="${page.result}" var="order">
+					<table class="table table-line table-order">
+						<colgroup>
+							<!-- <col width="86"> -->
+							<col width="280">
+							<col width="140">
+							<col width="107">
+							<col width="93">
+							<!-- <col width="104"> -->
+							<col width="95">
+							<col width="118">
+						</colgroup>
+						<thead>
+							<tr>
+								<td colspan="8" class="o-select">
+									<span>订单编号：<a href="javascript:void(0);" target="_blank">${order.orderCode}</a></span>
+									<span>订单提交时间：<fmt:formatDate value="${order.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+									<span>专场ID：<a href="#" target="_blank">${order.brandShowId}</a></span>
+								</td>
+							</tr>
+						</thead>
+						<c:if test="${order.orderItems!=null && fn:length(order.orderItems)>0}">
+						<tbody>
+							<c:forEach items="${order.orderItems}" var="orderItem" varStatus="status">
+							<tr>
+								<td>
+									<div class="order-img">
+										<img src="${my:random(imgGetUrl)}?rid=${orderItem.prodImg}&op=s1_w40_h40_e1-c3_w40_h40">
+									</div>
+								</td>
+								<td class="o-product">
+									<p><a href="#"><c:out value="${orderItem.prodTitle}" /></a></p>
+									<p class="lightColor">
+										<c:forEach items="${orderItem.specNames}" var="spec">
+											<c:out value="${spec.key}" /> : <c:out value="${spec.value}" />
+										</c:forEach>
+									</p>
+								</td>
+								<td>${orderItem.prodCode}</td>
+								<td>
+									<p><b>&yen;<fmt:formatNumber value="${orderItem.transPrice}" pattern="0.00" /></b></p>
+								</td>
+								<td>${orderItem.number}</td>
+								<!-- <td class="borderL"><p class="warnColor">已退款</p></td> -->
+								<c:if test="${status.first}">
+									<td rowspan="${fn:length(order.orderItems)}" class="borderL">
+										<p><b>&yen;<fmt:formatNumber value="${order.orderFee}" pattern="0.00" /></b></p>
+										<p class="lightColor">（免运费）</p>
+									</td>
+									<td rowspan="${fn:length(order.orderItems)}" class="borderL td-operate">
+										<p class="warnColor">等待发货</p>
+										<p><a href="${ctx}/order/orderDetail?m=4002&orderId=${order.orderId}">订单详情</a></p>
+										<p><input name="send" id="${order.orderId}_${order.brandShowId}" type="button" class="btn btn-primary sm" value="发货" /></p>
+									</td>
+								</c:if>
+							</tr>
+							</c:forEach>
+						</tbody>
+						</c:if>
+					</table>
+				</c:forEach>
+				<pg:page name="orderPage" page="${page}" formId="queryForm"></pg:page>
+			</c:when>
+			<c:otherwise>
+				<table class="table table-line table-order">
+						<colgroup>
+							<!-- <col width="86"> -->
+							<col width="280">
+							<col width="140">
+							<col width="107">
+							<col width="93">
+							<!-- <col width="104"> -->
+							<col width="95">
+							<col width="118">
+						</colgroup>
+						<tbody>
+							<tr class="emptyGoods">
+									<td colspan="6" rowspan="3">暂无符合条件的查询结果</td>
+							</tr>
+						</tbody>
+					</table>
+			</c:otherwise>
+		</c:choose>
+		
 		<!-- popup -->
 		<div id="mask"></div>
 		<!-- popup end -->
+		
 		<script>
 			$(function(){
-				$("#send").click(function(){
-					var idShowId = $(this).attr("name").split("_");  
+				$("#query").click(function(){
+					var orderId = $("#orderCode").val();
+					if(!!orderId){
+						if(!/^\d+$/.exec(orderId)){
+							tipsWindown("提示信息","issue:订单编号必须是数字型！","","1");
+							$("#orderCode").select();
+							return;
+						}
+					}
+					$("#queryForm").submit();
+				}); 
+				
+				$("input[name='send']").click(function(){
+					var idShowId = $(this).attr("id").split("_");  
 					var logiComHtml="";
 					
 					//获取物流公司列表
@@ -222,7 +233,7 @@
 						$(document.body).append(dialog$);
 						$("#mask").addClass("mask");
 						
-						showPop()
+						showPop();
 						
 						dialog$.find(".close").click(function(){
 							dialog$.remove();
@@ -234,6 +245,7 @@
 						dialog$.find("#awbNo").blur(function(){
 							var awbNo$ = $(this);
 							var awbNo = awbNo$.val();
+							
 							if(awbNo.length > 0){
 								if(/^\d{12,15}$/.test(awbNo)){  
 									awbNoFlag = true;
@@ -326,9 +338,6 @@
 				});  
 			};
 		</script>
-		</c:if>
 	</body>
 </html>
-
-
-
+				

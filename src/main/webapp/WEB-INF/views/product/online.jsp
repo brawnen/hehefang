@@ -29,9 +29,13 @@
 									<label>品牌：</label>
 								</div>
 								<div class="item-cont">
-									<select name="" id="" class="select">
-										<option value="1">好孩子好孩子</option>
-										<option value="2">361</option>
+									<select id="brandId" name="brandId" class="select">
+										<option value="">全选</option>
+										<c:if test="${!empty(brand)}">
+										<c:forEach items="${brand}" var="b">
+											<option value="<c:out value='${b.brandId}'/>" id="brand${b.brandId}" ><c:out value="${b.brandName }"></c:out> </option>
+										</c:forEach>
+										</c:if>
 									</select>
 								</div>
 							</div>
@@ -45,7 +49,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="searchBtn"><a href="${ctx }/product/category?m=2002" class="btn btn-def">发布新商品</a></div>
+						<div class="searchBtn"><a href="${ctx }/product/category?m=2001" class="btn btn-def">发布新商品</a></div>
 					</form>
 				</div>
 				<!-- screening end -->

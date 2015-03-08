@@ -132,6 +132,7 @@ public class ProductController {
 		BigDecimal[] skuSalePrice = p.getSkuSalePrice();
 		BigDecimal[] skuMarketPrice = p.getSkuMarketPrice();
 		Integer[] skuStockBalance = p.getSkuStockBalance();
+		Integer[] sellerNo = p.getSellerNo();
 		
 		// 1. 判断sku 是否存在 【通过skuspecId 判断】
 		List<Sku> skus = this.productService.getSkusByProdId(p.getProdId());
@@ -163,6 +164,7 @@ public class ProductController {
 						} 
 					} 
 					
+					sku.setSellerNo(sellerNo[i]+"");
 					sku.setStockBalance(skuStockBalance[i]);
 					sku.setMarketPrice(skuMarketPrice[i]); // 市场价
 					sku.setSalePrice(skuSalePrice[i]);
@@ -177,6 +179,7 @@ public class ProductController {
 					sku1.setMarketPrice(skuMarketPrice[i]);
 					sku1.setSalePrice(skuSalePrice[i]);
 					sku1.setStockBalance(skuStockBalance[i]);
+					sku1.setSellerNo(sellerNo[i]+"");
 					
 					if (null != p.getSkuImgUrl() && p.getSkuImgUrl().length > 0) {
 						String skuImgUrl = p.getSkuImgUrl()[i];
@@ -211,22 +214,25 @@ public class ProductController {
 	@RequestMapping(value = "/product/save")
 	public Map<String,String> doSaveProduct(HttpServletRequest request,
 			@ModelAttribute ProductVo vo){
+		HashMap<String, String> resultMap = new HashMap<String,String>();
 		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
 		vo.setSellerId(loginInfo.getSellerId());
+		
 		Product product = ProductConvertUtil.voToProduct(vo,null);
-
+		
 		Integer prodId = product.getProdId();
-		if(prodId != null && product.getProdId() > 0 ){
+		if(null != prodId && prodId > 0 ){
 			productService.editProductById(product);
+			resultMap.put("success", "1");
 		}else{
 			prodId = productService.addProduct(product);
 			vo.setProdId(prodId);
+			resultMap.put("success", "0");
 		}
 		
-		saveSku(vo,loginInfo);	// 保存SKU
+		saveSku(vo,loginInfo);
 		
-		boolean b = prodId > 0 ? true :false;
-		return resultMsg(b,"");
+		return resultMap;
 	}
 	
 	/**
@@ -278,10 +284,20 @@ public class ProductController {
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
 			) {
 		page.setPageSize(15);
-		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
-		productCondition.setSellerId(loginInfo.getSellerId());
-		// TODO bcName
+		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
+		productCondition.setSellerId(sellerId);
+		List<Brand> brandList = sellerBrandService.getValidBrandListOfSeller(sellerId);
+		if(null != brandList && brandList.size() >0){
+			modelMap.put("brand", brandList);
+		}
 		page = productService.searchOnlineProductPage(productCondition, sortField, sortDirection, page);
+		List<Product> list = page.getResult();
+		for (Product p : list) {
+			BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
+			String displayBcName = bc.getPathName().trim().replace("|", "/");
+			p.setBcName(displayBcName +"/"+ bc.getBcName());
+		}
+		
 		modelMap.addAttribute("sortField", sortField);
 		modelMap.addAttribute("productCondition", productCondition);
 		modelMap.addAttribute("page", page);
@@ -298,9 +314,19 @@ public class ProductController {
 			HttpServletRequest request, Page<Product> page, ModelMap modelMap
 			) {
 		page.setPageSize(15);
-		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
-		productCondition.setSellerId(loginInfo.getSellerId());
+		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
+		productCondition.setSellerId(sellerId);
+		List<Brand> brandList = sellerBrandService.getValidBrandListOfSeller(sellerId);
+		if(null != brandList && brandList.size() >0){
+			modelMap.put("brand", brandList);
+		}
 		page = productService.searchAuditProductPage(productCondition, null, null, page);
+		List<Product> list = page.getResult();
+		for (Product p : list) {
+			BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
+			String displayBcName = bc.getPathName().trim().replace("|", "/");
+			p.setBcName(displayBcName +"/"+ bc.getBcName());
+		}
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("productCondition", productCondition);
 		return "/product/audit";

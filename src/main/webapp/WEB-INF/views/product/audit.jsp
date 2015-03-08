@@ -29,9 +29,13 @@
 									<label>品牌：</label>
 								</div>
 								<div class="item-cont">
-									<select name="" id="" class="select">
-										<option value="1">好孩子好孩子</option>
-										<option value="2">361</option>
+									<select id="brandId" name="brandId" class="select">
+										<option value="">全选</option>
+										<c:if test="${!empty(brand)}">
+										<c:forEach items="${brand}" var="b">
+											<option value="<c:out value='${b.brandId}'/>" id="brand${b.brandId}" ><c:out value="${b.brandName }"></c:out> </option>
+										</c:forEach>
+										</c:if>
 									</select>
 								</div>
 							</div>
@@ -40,12 +44,12 @@
 									<label>商品名称：</label>
 								</div>
 								<div class="item-cont">
-									<input type="text" name="title" class="txt w-lg" />
+									<input type="text" name="title" class="txt w-lg" value="<c:out value="${productCondition.title}"/>" />
 									<input type="submit" class="btn btn-def" value="查&nbsp;&nbsp;询">
 								</div>
 							</div>
 						</div>
-						<div class="searchBtn"><a href="${ctx }/product/category" class="btn btn-def">发布新商品</a></div>
+						<div class="searchBtn"><a href="${ctx }/product/category?m=2001" class="btn btn-def">发布新商品</a></div>
 					</form>
 				</div>
 				<!-- screening end -->
@@ -55,15 +59,16 @@
 					<table class="table table-line table-left table-product">
 						<colgroup>
 							<col width="70">
+							<col width="60">
+							<col width="160">
 							<col width="80">
-							<col width="205">
-							<col width="90">
 							<col width="130">
 							<col width="100">
 							<col width="80">
 							<col width="80">
 							<col width="86">
-							<col width="100">
+							<col width="80">
+							<col width="95">
 						</colgroup>
 						<thead>
 							<tr>
@@ -75,7 +80,8 @@
 								<td>类目</td>
 								<td>原价</td>
 								<td>特卖价格</td>
-								<td>录入时间</td>
+								<td>审核时间</td>
+								<td>状态</td>
 								<td>操作</td>
 							</tr>
 						</thead>
@@ -84,18 +90,33 @@
 								<tr>
 									<td>
 										<div class="pro-img">
-											<img src="${p.imgUrl}" alt="" />
+											<img src="${my:random(imgGetUrl)}?rid=${p.imgUrl}" alt="" />
 										</div>
 									</td>
-									<td>${p.prodCode }</td>
-									<td><p>${p.title }</p></td>
-									<td>${p.brandName }</td>
-									<td>${p.artNo }</td>
-									<td>睡衣/睡裤/睡裙/睡衣套装</td>
+									<td>${p.prodId }</td>
+									<td><p><c:out value="${p.title }"/></p></td>
+									<td><c:out value="${p.brandName }"/></td>
+									<td><c:out value="${p.artNo }"/></td>
+									<td>${p.bcName }</td>
 									<td>${p.salePrice }</td>
 									<td>${p.marketPrice }</td>
-									<td>${p.createDate }</td>
-									<td class="td-operate"><p><a href="javascript:;">修改</a>|<a href="javascript:;">删除</a></p></td>
+									<td><fmt:formatDate value="${p.lastAuditDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<c:choose>
+										<c:when test="${p.auditStatus == '1' }">
+											<td>待审核</td>
+										</c:when>
+										<c:when test="${p.auditStatus == '2' }">
+											<td class="warnColor">驳回待修改
+											<c:if test="${!empty p.auditContent  }">
+												<div class="mod-tipsPop tip-lb">
+													<i class="icon"></i>
+													<div class="tip" style="width:200px"><c:out value="${p.auditContent }" /></div>
+												</div>
+											</c:if>
+											</td>
+										</c:when>
+									</c:choose>
+									<td class="td-operate" prodId="${p.prodId }"><p><a href="${ctx}/product/publish?prodId=${p.prodId }&m=2001">修改</a>|<a href="javascript:;" onclick="product.delProduct(${p.prodId });">删除</a></p></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -111,12 +132,18 @@
 				<c:if test="${fn:length(page.result) > 0}">
 					<pg:page name="onlinePage" page="${page}" formId="queryForm"></pg:page>
 				</c:if>
-				
 			</div>
 			<!-- main end -->
 		</div>
 		<!-- container end -->
 	</div>
-	<script type="text/javascript" src="${jsUrl}/product.js"></script>	
+	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>
+	<script type="text/javascript" src="${jsUrl}/product.js?t=20150210"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+		product = new product();
+	});
+	</script>
 </body>
 </html>

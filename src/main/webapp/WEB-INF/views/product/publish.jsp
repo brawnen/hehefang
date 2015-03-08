@@ -123,7 +123,7 @@
 											<ul var="${var.count }" specId="${spec.specId}">
 												<c:forEach items="${spec.specValueList }" var="specValue">
 												<li>
-													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();publish.validateSkuImg();">
+													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();">
 													<c:if test="${!empty(specValue.imgUrl)}">
 														<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
 													</c:if>
@@ -186,6 +186,7 @@
 						<input type="hidden" id="brandName" name="brandName" value="">
 						<input type="hidden" id="prodId" name="prodId" value="${p.prodId }" />
 						<input type="hidden" id="imgUrl" name="imgUrl" value="${p.imgUrl }" />
+						<input type="hidden" id="auditStatus" name="auditStatus" value="${p.auditStatus }">
 						<input type="hidden" id="attrValueId" name="attrValueId" value=""/>
 						<input type="hidden" id="attrValueName" name="attrValueName" value="" />
 					</form>
@@ -220,7 +221,7 @@
 		var attrValueId= '${p.attrValueId}';
 		var brandId = '${p.brandId}';
 		
-		var skuSpecIdArr = [], skuSpecNameArr = [], skuSortRankArr = [], s_marketPrice = [],s_salePrice = [], s_stockBalance = [], s_imgUrl = [];
+		var skuSpecIdArr = [], skuSpecNameArr = [], skuSortRankArr = [], s_marketPrice = [],s_salePrice = [], s_stockBalance = [],s_sellerNo = [], s_imgUrl = [];
 		<c:forEach items="${p.skus}" var="sku" varStatus="status">
 			skuSpecIdArr['${status.index}'] = '${sku.skuSpecId}';
 			skuSpecNameArr['${status.index}'] = '${sku.skuSpecName}';
@@ -228,6 +229,7 @@
 			s_marketPrice['${status.index}'] = '${sku.marketPrice}';
 			s_salePrice['${status.index}'] = '${sku.salePrice}';
 			s_stockBalance['${status.index}'] = '${sku.stockBalance}';
+			s_sellerNo['${status.index}'] = '${sku.sellerNo}';
 			s_imgUrl['${status.index}'] = '${sku.skuImgUrl}';
 		</c:forEach>
 
