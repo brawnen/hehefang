@@ -79,7 +79,7 @@ function closeDeposit() {
 </script>
 </head>
 <body>
-<div class="wrapper wrap-helper wrap-brand">
+<div class="wrapper wrap-helper wrap-brand wrap-special product">
 		<!-- header -->
 		<div id="header">
 			<div class="wrap wrap-brand">
@@ -143,8 +143,8 @@ function closeDeposit() {
 							<li b="20" m="2003"><a href="${ctx}/product/audit"><i class="icon"></i>审核中商品</a></li>
 							<li b="20" m="2004"><a href="${ctx}/product/brand"><i class="icon"></i>品牌管理</a></li>
 							
-							<li b="30" m="3001"><a href="${ctx}/promotion/summary"><i class="icon"></i>特卖专场列表</a></li>
-							<li b="30" m="3002"><a href="${ctx}/promotion/summary"><i class="icon"></i>新建品牌特卖</a></li>
+							<li b="30" m="3001"><a href="${ctx}/brandShow/list"><i class="icon"></i>特卖专场列表</a></li>
+							<li b="30" m="3002"><a href="${ctx}/brandShow/show"><i class="icon"></i>新建品牌特卖</a></li>
 							
 							<li b="40" m="4001"><a href="${ctx}/order/queryOrder"><i class="icon"></i>全部订单</a></li>
 							<li b="40" m="4002"><a href="${ctx}/order/sendOrder"><i class="icon"></i>订单发货</a></li>
@@ -155,7 +155,7 @@ function closeDeposit() {
 				</div>
 				<!-- aside end -->
 				<!-- main -->
-				<div id="main">
+				<div id="main" class="specialmaintain">
 					<decorator:body/>
 				</div>
 				<!-- main end -->

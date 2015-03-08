@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.common.util.CapthaUtils;
 import com.afd.model.product.Brand;
+import com.afd.model.product.Product;
+import com.afd.model.user.Geo;
 import com.afd.service.product.IBrandService;
+import com.afd.service.product.ICategoryService;
+import com.afd.service.product.IProductService;
 import com.afd.service.product.ISellerBrandService;
 import com.afd.service.seller.ISellerLoginService;
 import com.afd.service.sms.ISmsService;
+import com.afd.service.user.IGeoService;
 
 @Controller
 @RequestMapping("/ajax")
@@ -41,7 +46,16 @@ public class AjaxController {
 	ISellerBrandService sellerBrandService;
 
 	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	RedisTemplate<String, String> redisTemplate;
+
+	@Autowired
+	IGeoService geoService;
+
+	@Autowired
+	IProductService productService;
+
+	@Autowired
+	ICategoryService categoryService;
 
 	/**
 	 * 验证卖家账号是否已被使用
@@ -198,5 +212,29 @@ public class AjaxController {
 			@RequestParam("brandId") int brandId) {
 
 		return sellerBrandService.existSellerBrand(sellerId, brandId);
+	}
+
+	@RequestMapping("/geoList")
+	@ResponseBody
+	public List<Geo> getGeoListByFid(@RequestParam("fId") long fid) {
+		return geoService.getGeoByFId(fid);
+	}
+
+	@RequestMapping("/getOnlineProduct")
+	@ResponseBody
+	public List<Product> getOnlineProductBySellerIdAndBrandId(
+			@RequestParam("sellerId") int sellerId,
+			@RequestParam("brandId") int brandId) {
+
+		List<Product> productList = productService
+				.getOnlineProductBySellerIdAndBrandId(sellerId, brandId);
+
+		for (Product product : productList) {
+			product.setSkus(productService.getSkusByProdId(product.getProdId()));
+			product.setBcName(categoryService.getByBcId(product.getBcId())
+					.getBcName());
+		}
+
+		return productList;
 	}
 }
