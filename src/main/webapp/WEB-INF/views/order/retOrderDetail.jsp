@@ -76,23 +76,26 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<td>退货地址：天津 滨海新区 城区 西环路恒圆魏都小区52号商铺，    收件人：林子，     手机：18690689979</td> 
-							<%-- <c:out value="${order.rProvince}"></c:out>
-							<c:out value="${order.rCity}"></c:out>
-							<c:out value="${order.rCounty}"></c:out>
-							<c:out value="${order.rTown}"></c:out>
-							<c:out value="${order.rAddr}"></c:out>
-							<c:choose>
-								<c:when test="${not empty order.rMobile and not empty order.rPhone}">
-									<span>${order.rMobile}</span>/<span>${order.rPhone}</span>
-								</c:when>
-								<c:when test="${order.rMobile != ''}">
-									<span>${order.rMobile}</span>
-								</c:when>
-								<c:otherwise>
-									<span>${order.rPhone}</span>
-								</c:otherwise>
-							</c:choose> --%>
+							<td>
+							<c:if test="${not empty retAddr}">
+								<c:out value="${retAddr.provinceName}"></c:out>
+								<c:out value="${retAddr.cityName}"></c:out>
+								<c:out value="${retAddr.districtName}"></c:out>
+								<c:out value="${retAddr.townName}"></c:out>
+								<c:out value="${retAddr.addr}"></c:out>，     收件人：<c:out value="${retAddr.receiver}" />，     手机：
+								<c:choose>
+									<c:when test="${not empty retAddr.mobile and not empty retAddr.tel}">
+										<span>${retAddr.mobile}</span>/<span>${order.tel}</span>
+									</c:when>
+									<c:when test="${not empty retAddr.mobile}">
+										<span>${retAddr.mobile}</span>
+									</c:when>
+									<c:otherwise>
+										<span>${retAddr.tel}</span>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+							</td> 
 						</tr>
 					</tbody>
 				</table>
@@ -142,7 +145,7 @@
 							</td>
 							<td>${returnOrderItem.orderItem.prodCode}</td>
 							<td><b>&yen;<fmt:formatNumber value="${returnOrderItem.orderItem.salePrice}" pattern="0.00" /></b></td>
-							<td>${returnOrderItem.orderItem.number}</td>
+							<td>${returnOrderItem.orderItem.returnNumber}</td>
 							<td><b>&yen;<fmt:formatNumber value="${returnOrderItem.orderItem.transPrice}" pattern="0.00" /></b></td>
 							<td><p class="warnColor"><b>&yen;<fmt:formatNumber value="${returnOrderItem.retFee}" pattern="0.00" /></b></p></td>
 							<td>

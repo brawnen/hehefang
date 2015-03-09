@@ -31,11 +31,13 @@ import com.afd.model.order.Order;
 import com.afd.model.order.OrderItem;
 import com.afd.model.order.ReturnOrder;
 import com.afd.model.product.BrandShow;
+import com.afd.model.seller.SellerRetAddress;
 import com.afd.param.order.OrderCondition;
 import com.afd.seller.util.LoginUtils;
 import com.afd.service.order.IOrderService;
 import com.afd.service.order.IRetOrderService;
 import com.afd.service.product.IBrandShowService;
+import com.afd.service.seller.ISellerRetAddrService;
 
 @Controller
 @RequestMapping("/order")
@@ -55,7 +57,9 @@ public class OrderController {
 	private IRetOrderService retOrderService;
 	@Autowired
 	private IBrandShowService brandShowService;
-
+	@Autowired
+	private ISellerRetAddrService sellerRetAddressService;
+	
 	@RequestMapping(value="/queryOrder")
 	public String queryOrder(@ModelAttribute OrderCondition orderCondition, HttpServletRequest request, Page<Order> page, ModelMap modelMap){
 		page.setPageSize(10);
@@ -144,7 +148,14 @@ public class OrderController {
 			ReturnOrder retOrder = this.retOrderService.getRetOrderInfoByRetOrderId(retOrderId);
 			modelMap.addAttribute("returnOrder", retOrder);
 			
-			//退货地址
+			if(retOrder != null){
+				//退货地址
+				BrandShow brandShow = this.brandShowService.getBrandShowById(retOrderId.intValue());
+				if(brandShow!=null && brandShow.getsRAId()>0){
+					SellerRetAddress retAddr = this.sellerRetAddressService.getAddrById(brandShow.getsRAId());
+					modelMap.addAttribute("retAddr", retAddr);
+				}
+			}
 		}
 		
 		return "order/retOrderDetail";
