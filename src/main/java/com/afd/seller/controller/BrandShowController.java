@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.afd.common.mybatis.Page;
 import com.afd.common.util.DateUtils;
 import com.afd.common.util.RequestUtils;
-import com.afd.model.product.Brand;
 import com.afd.model.product.BrandShow;
 import com.afd.model.product.BrandShowDetail;
 import com.afd.seller.util.LoginUtils;
@@ -33,6 +32,7 @@ import com.afd.service.product.IBrandService;
 import com.afd.service.product.IBrandShowService;
 import com.afd.service.product.ISellerBrandService;
 import com.afd.service.seller.ISellerRetAddrService;
+import com.afd.service.seller.ISellerService;
 import com.google.common.collect.Maps;
 
 /**
@@ -43,6 +43,9 @@ import com.google.common.collect.Maps;
  */
 @Controller
 public class BrandShowController {
+	@Autowired
+	ISellerService sellerService;
+
 	@Autowired
 	IBrandShowService brandShowService;
 
@@ -96,10 +99,14 @@ public class BrandShowController {
 	public String saveBrandShow(HttpServletRequest request, BrandShow brandShow) {
 		LoginInfo loginInfo = LoginUtils.getLoginInfo(request);
 		brandShow.setSellerId(loginInfo.getSellerId());
+		brandShow.setBrandName(brandService.getByBrandId(
+				brandShow.getBrandId().longValue()).getBrandName());
 
 		if (brandShow.getBrandShowId() == null
 				|| brandShow.getBrandShowId() == 0) {
 			brandShow.setCreateByDate(DateUtils.currentDate());
+			brandShow.setCoName(sellerService.getSellerById(
+					loginInfo.getSellerId()).getCoName());
 			int brandShowId = brandShowService.newBrandShow(brandShow);
 			brandShow.setBrandShowId(brandShowId);
 
@@ -208,17 +215,6 @@ public class BrandShowController {
 		Page<BrandShow> brandShowPage = brandShowService
 				.queryMyBrandShowByPage(LoginUtils.getLoginInfo(request)
 						.getSellerId(), map, pageNo);
-
-		for (BrandShow brandShow : brandShowPage.getResult()) {
-			if (brandShow.getBrandId() != null) {
-				Brand brand = brandService.getByBrandId(brandShow.getBrandId()
-						.longValue());
-
-				if (brand != null)
-					brandShow.setBrandName(brand.getBrandName());
-
-			}
-		}
 
 		request.setAttribute("brandShowPage", brandShowPage);
 		request.setAttribute("cond", form);
