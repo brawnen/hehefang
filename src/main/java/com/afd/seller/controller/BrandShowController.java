@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.afd.common.mybatis.Page;
 import com.afd.common.util.DateUtils;
 import com.afd.common.util.RequestUtils;
+import com.afd.model.product.Brand;
 import com.afd.model.product.BrandShow;
 import com.afd.model.product.BrandShowDetail;
 import com.afd.seller.util.LoginUtils;
@@ -207,6 +208,17 @@ public class BrandShowController {
 		Page<BrandShow> brandShowPage = brandShowService
 				.queryMyBrandShowByPage(LoginUtils.getLoginInfo(request)
 						.getSellerId(), map, pageNo);
+
+		for (BrandShow brandShow : brandShowPage.getResult()) {
+			if (brandShow.getBrandId() != null) {
+				Brand brand = brandService.getByBrandId(brandShow.getBrandId()
+						.longValue());
+
+				if (brand != null)
+					brandShow.setBrandName(brand.getBrandName());
+
+			}
+		}
 
 		request.setAttribute("brandShowPage", brandShowPage);
 		request.setAttribute("cond", form);

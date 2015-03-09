@@ -73,7 +73,7 @@
 		<c:forEach items="${brandShowPage.result}" var="brandShow">
 			<tr>
 			<td><c:out value="${brandShow.brandShowId}" /></td>
-			<td><p>香奈儿</p></td>
+			<td><p><c:out value="${brandShow.brandName}" /></p></td>
 			<td><c:out value="${brandShow.title}" /></td>
 			<td><fmt:formatDate value="${brandShow.createByDate}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
 			<td><fmt:formatDate value="${brandShow.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
