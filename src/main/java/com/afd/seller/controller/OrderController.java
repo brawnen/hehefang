@@ -108,6 +108,7 @@ public class OrderController {
 		
 		if(brandShowId!=null && brandShowId>0){
 			cond.put("brandShowId", brandShowId);
+			modelMap.put("brandShowId", brandShowId.longValue());
 		}
 		
 		if(startDate != null){

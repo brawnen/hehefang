@@ -25,7 +25,7 @@
 							<select name="brandShowId" id="brandShowId" class="select w-sm">
 								<option value="">全部专场</option>
 								<c:forEach items="${brandShows}" var="brandShow" varStatus="status">
-								<option value="${brandShow.brandShowId}" <c:if test="${brandShow.brandShowId==param.brandShowId}">selected="selected"</c:if>  ><c:out value="${brandShow.title}"/></option>
+								<option value="${brandShow.brandShowId}" <c:if test="${brandShow.brandShowId==brandShowId}">selected="selected"</c:if>  ><c:out value="${brandShow.title}"/></option>
 								</c:forEach>
 							</select>
 						</div>
