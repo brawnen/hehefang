@@ -158,7 +158,7 @@
 </form>
 
 <!-- popup -->
-<div class="popup popup-primary" style="width:600px;margin-left:-300px; display: none" id="popupTip">
+<div class="popup popup-primary" style="width:600px;margin-left:-300px; margin-top:-65px; display: none" id="popupTip">
 	<div class="hd"><h2></h2><i class="close"></i></div>
 	<div class="bd">
 		<dl class="popup-doc">
@@ -172,7 +172,7 @@
 	</div>
 </div>
 
-<div class="popup popup-primary popup-specialProduct" style="width:900px;margin-left:-450px; display: none" id="popupProduct">
+<div class="popup popup-primary popup-specialProduct" style="width:900px;margin-left:-450px; margin-top:-193px; display: none" id="popupProduct">
 	<div class="hd"><h2>选择专场商品</h2><i class="close"></i></div>
 	<div class="bd">
 		<table class="table table-line">
