@@ -31,7 +31,7 @@ public class AjaxController {
 			.getLogger(AjaxController.class);
 
 	private static final String SELLER_REGISTER_VALIDATOR_PREFIX = "afd_seller_register_validator_"; // 卖家注册验证码前缀
-	private static final String SELLER_FORGOT_PASSWORD_VALIDATOR_PREFIX = "afd_seller_forgot_password_validator_"; // 卖家忘记密码验证码前缀
+	public static final String SELLER_FORGOT_PASSWORD_VALIDATOR_PREFIX = "afd_seller_forgot_password_validator_"; // 卖家忘记密码验证码前缀
 
 	@Autowired
 	private ISellerLoginService loginService;
