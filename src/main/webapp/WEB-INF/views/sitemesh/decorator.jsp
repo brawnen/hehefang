@@ -131,12 +131,12 @@ function closeDeposit() {
 					<div id="asideNav">
 						<ul id="smallMenu">
 							<li b="10" m="1001"><a href="${ctx}/ws/summary"><i class="icon"></i>概览</a></li>
-							<li b="10" m="1002"><a href="${ctx}/ws/summary"><i class="icon"></i>保证金</a></li>
+							<li b="10" m="1002"><a href="${ctx}/helper/deposit"><i class="icon"></i>保证金</a></li>
 							<li b="10" m="1003"><a href="${ctx}/helper/payee"><i class="icon"></i>收款银行账户</a></li>
-							<li b="10" m="1004"><a href="${ctx}/ws/summary"><i class="icon"></i>开票信息</a></li>
-							<li b="10" m="1005"><a href="${ctx}/ws/summary"><i class="icon"></i>基本信息</a></li>
+							<li b="10" m="1004"><a href="${ctx}/helper/ticket"><i class="icon"></i>开票信息</a></li>
+							<li b="10" m="1005"><a href="${ctx}/helper/sellerInfo"><i class="icon"></i>基本信息</a></li>
 							<li b="10" m="1006"><a href="${ctx}/ws/summary"><i class="icon"></i>退货地址</a></li>
-							<li b="10" m="1007"><a href="${ctx}/ws/summary"><i class="icon"></i>修改密码</a></li>
+							<li b="10" m="1007"><a href="${ctx}/helper/setPasswd"><i class="icon"></i>修改密码</a></li>
 							
 							<li b="20" m="2001"><a href="${ctx}/product/category"><i class="icon"></i>发布新商品</a></li>
 							<li b="20" m="2002"><a href="${ctx}/product/online"><i class="icon"></i>在售商品管理</a></li>
