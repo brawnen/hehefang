@@ -222,7 +222,7 @@
 						$(document.body).append(dialog$);
 						$("#mask").addClass("mask");
 						
-						showPop()
+						showPop();
 						
 						dialog$.find(".close").click(function(){
 							dialog$.remove();

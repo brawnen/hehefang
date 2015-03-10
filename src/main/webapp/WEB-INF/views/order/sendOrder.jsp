@@ -50,7 +50,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="searchBtn"><input name="query" id="query" type="button" class="btn btn-def" value="查&nbsp;&nbsp;询"></div>
+				<div class="searchBtn"><input name="query" id="query" type="submit" class="btn btn-def" value="查&nbsp;&nbsp;询"></div>
 			</form>
 		</div>
 		<!-- screening end -->
@@ -171,18 +171,6 @@
 		
 		<script>
 			$(function(){
-				$("#query").click(function(){
-					var orderId = $("#orderCode").val();
-					if(!!orderId){
-						if(!/^\d+$/.exec(orderId)){
-							tipsWindown("提示信息","issue:订单编号必须是数字型！","","1");
-							$("#orderCode").select();
-							return;
-						}
-					}
-					$("#queryForm").submit();
-				}); 
-				
 				$("input[name='send']").click(function(){
 					var idShowId = $(this).attr("id").split("_");  
 					var logiComHtml="";
