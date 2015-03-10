@@ -112,7 +112,7 @@
 			</c:if>
 					<tr>
 						<td><img style="width:50px;height:50px;" src="${my:random(imgGetUrl)}?rid=${brandShowDetail.prodImg}" alt=""></td>
-						<td><c:out value="${brandShowDetail.skuSpecName}"/></td>
+						<td><p><c:out value="${fn:replace(fn:replace(brandShowDetail.skuSpecName, ':::', ' : '), '|||', '</p><p>')}" escapeXml="false"/></p></td>
 						<td>￥<c:out value="${brandShowDetail.orgPrice}"/></td>
 						<td>
 							<input type="text" class="txt sm w-sm" placeholder="10" maxlength="3" name="discount" value="${brandShowDetail.discount}">

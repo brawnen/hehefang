@@ -88,7 +88,7 @@
 		</c:if>	
 			<tr>
 				<td><img style="width:50px;height:50px;" src="${my:random(imgGetUrl)}?rid=${brandShowDetail.prodImg}" alt=""></td>
-				<td><c:out value="${brandShowDetail.skuSpecName}"/></td>
+				<td><p><c:out value="${fn:replace(fn:replace(brandShowDetail.skuSpecName, ':::', ' : '), '|||', '</p><p>')}" escapeXml="false"/></p></td>
 				<td>￥<c:out value="${brandShowDetail.orgPrice}"/></td>
 				<td><p><span><c:out value="${brandShowDetail.discount}"/></span> 折</p></td>
 				<td><p class="errTxt">￥<c:out value="${brandShowDetail.showPrice}"/></p></td>
