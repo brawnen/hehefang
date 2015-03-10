@@ -132,7 +132,7 @@ function closeDeposit() {
 						<ul id="smallMenu">
 							<li b="10" m="1001"><a href="${ctx}/ws/summary"><i class="icon"></i>概览</a></li>
 							<li b="10" m="1002"><a href="${ctx}/ws/summary"><i class="icon"></i>保证金</a></li>
-							<li b="10" m="1003"><a href="${ctx}/ws/summary"><i class="icon"></i>收款银行账户</a></li>
+							<li b="10" m="1003"><a href="${ctx}/helper/payee"><i class="icon"></i>收款银行账户</a></li>
 							<li b="10" m="1004"><a href="${ctx}/ws/summary"><i class="icon"></i>开票信息</a></li>
 							<li b="10" m="1005"><a href="${ctx}/ws/summary"><i class="icon"></i>基本信息</a></li>
 							<li b="10" m="1006"><a href="${ctx}/ws/summary"><i class="icon"></i>退货地址</a></li>
