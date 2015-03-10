@@ -123,7 +123,7 @@
 											<ul var="${var.count }" specId="${spec.specId}">
 												<c:forEach items="${spec.specValueList }" var="specValue">
 												<li>
-													<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();">
+													<input type="checkbox" class="chk" id="specValue" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();">
 													<c:if test="${!empty(specValue.imgUrl)}">
 														<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
 													</c:if>
@@ -163,7 +163,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
 								</div>
-								<span class="note" id='detail_warn'>还可输入<b>30</b>个字!</span>
+								<span class="note errTxt" id='detail_warn'>还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>
@@ -176,8 +176,8 @@
 											<input type="button" value="发 布" onclick="publish.saveProduct();" class="btn btn-primary lg p-lg">
 										</c:otherwise>
 									</c:choose>
-									<input type="button" value="预 览" class="btn btn-bezelFree">
-								</div>
+<!-- 									<input type="button" value="预 览" class="btn btn-bezelFree">
+ -->								</div>
 							</div>
 						</fieldset>
 						<input type="hidden" id="bcId" name="bcId" value="${bc.bcId }">
