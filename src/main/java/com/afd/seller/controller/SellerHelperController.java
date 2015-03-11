@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.model.seller.Seller;
 import com.afd.seller.util.LoginUtils;
+import com.afd.service.seller.ISellerLoginService;
 import com.afd.service.seller.ISellerService;
 
 @Controller
@@ -18,6 +19,8 @@ public class SellerHelperController {
 	
 	@Autowired
 	ISellerService sellerService;
+	@Autowired
+	ISellerLoginService sellerLoginService;
 
 	
 	/**
@@ -54,15 +57,15 @@ public class SellerHelperController {
 	 *  开票信息
 	 * @return
 	 */
-	@RequestMapping(value="helper/ticket")
-	public String toTicket(HttpServletRequest request,ModelMap modelMap){
+	@RequestMapping(value="helper/receipt")
+	public String toReceipt(HttpServletRequest request,ModelMap modelMap){
 		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
 		
 		Seller seller = sellerService.getSellerById(sellerId);
 		if(null != seller){
 			modelMap.put("s",seller);
 		}
-		return "sellerHelper/ticket";
+		return "sellerHelper/receipt";
 	}
 	
 	/**
@@ -104,7 +107,7 @@ public class SellerHelperController {
 		if(null != seller){
 			modelMap.put("s",seller);
 		}
-		return "sellerHelper/payeeAccount";
+		return "sellerHelper/passwd";
 	}
 
 	/**
@@ -114,8 +117,9 @@ public class SellerHelperController {
 	@RequestMapping(value="helper/savePasswd")
 	@ResponseBody
 	public int savePasswd(HttpServletRequest request,@ModelAttribute Seller seller){
-		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
-		seller.setSellerId(sellerId);
+		int loginId = LoginUtils.getLoginInfo(request).getSellerLoginId();
+		String newPassword = request.getParameter("");
+		sellerLoginService.changePassword(loginId, newPassword);
 		return sellerService.updateSeller(seller);
 	}
 	
