@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.model.seller.Seller;
+import com.afd.model.seller.SellerReceipt;
 import com.afd.seller.util.LoginUtils;
 import com.afd.service.seller.ISellerLoginService;
+import com.afd.service.seller.ISellerReceiptService;
 import com.afd.service.seller.ISellerService;
 
 @Controller
@@ -21,8 +23,9 @@ public class SellerHelperController {
 	ISellerService sellerService;
 	@Autowired
 	ISellerLoginService sellerLoginService;
+	@Autowired
+	ISellerReceiptService sellerReceiptService;
 
-	
 	/**
 	 *  基本信息
 	 * @return
@@ -61,12 +64,24 @@ public class SellerHelperController {
 	public String toReceipt(HttpServletRequest request,ModelMap modelMap){
 		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
 		
-		Seller seller = sellerService.getSellerById(sellerId);
-		if(null != seller){
-			modelMap.put("s",seller);
+		SellerReceipt sellerReceipt = sellerReceiptService.getSellerReceiptBySellerId(sellerId);
+		if(null != sellerReceipt){
+			modelMap.put("receipt",sellerReceipt);
 		}
 		return "sellerHelper/receipt";
 	}
+	
+	/**
+	 *  保存开票信息
+	 * @return
+	 */
+	@RequestMapping(value="helper/saveReceipt")
+	@ResponseBody
+	public int toSaveReceipt(HttpServletRequest request,@ModelAttribute SellerReceipt sellerReceipt){
+		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
+		sellerReceipt.setSellerId(sellerId);
+		return sellerReceiptService.updateSellerReceipt(sellerReceipt);
+	}	
 	
 	/**
 	 * 收款银行账户
