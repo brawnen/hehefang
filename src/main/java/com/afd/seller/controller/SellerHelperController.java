@@ -2,15 +2,19 @@ package com.afd.seller.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afd.model.seller.Seller;
 import com.afd.seller.util.LoginUtils;
+import com.afd.service.seller.ISellerLoginService;
 import com.afd.service.seller.ISellerService;
 
 @Controller
@@ -18,6 +22,8 @@ public class SellerHelperController {
 	
 	@Autowired
 	ISellerService sellerService;
+	@Autowired
+	ISellerLoginService sellerLoginService;
 
 	
 	/**
@@ -54,15 +60,15 @@ public class SellerHelperController {
 	 *  开票信息
 	 * @return
 	 */
-	@RequestMapping(value="helper/ticket")
-	public String toTicket(HttpServletRequest request,ModelMap modelMap){
+	@RequestMapping(value="helper/receipt")
+	public String toReceipt(HttpServletRequest request,ModelMap modelMap){
 		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
 		
 		Seller seller = sellerService.getSellerById(sellerId);
 		if(null != seller){
 			modelMap.put("s",seller);
 		}
-		return "sellerHelper/ticket";
+		return "sellerHelper/receipt";
 	}
 	
 	/**
@@ -98,25 +104,34 @@ public class SellerHelperController {
 	 */
 	@RequestMapping(value="helper/setPasswd")
 	public String toSetPwd(HttpServletRequest request,ModelMap modelMap){
-		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
-		
-		Seller seller = sellerService.getSellerById(sellerId);
-		if(null != seller){
-			modelMap.put("s",seller);
-		}
-		return "sellerHelper/payeeAccount";
+		return "sellerHelper/passwd";
 	}
 
 	/**
 	 *  ajax调用：修改密码
-	 * @return
+	 * @return 0:失败,1:成功,-1:原密码不正确,-2:新密码不一致,-3:密码不能为空
 	 */
-	@RequestMapping(value="helper/savePasswd")
+	@RequestMapping(value="helper/savePasswd", method=RequestMethod.POST)
 	@ResponseBody
-	public int savePasswd(HttpServletRequest request,@ModelAttribute Seller seller){
-		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
-		seller.setSellerId(sellerId);
-		return sellerService.updateSeller(seller);
+	public int savePasswd(HttpServletRequest request,
+			@RequestParam(value = "oldPwd") String oldPwd, 
+			@RequestParam(value = "newPwd") String newPwd, 
+			@RequestParam(value = "repeatNewPwd") String repeatNewPwd
+			){
+		int re = 0;
+		
+		if(StringUtils.isNotEmpty(oldPwd) && StringUtils.isNotEmpty(newPwd) && StringUtils.isNotEmpty(repeatNewPwd)){
+			if(newPwd.equals(repeatNewPwd)){
+				int loginId = LoginUtils.getLoginInfo(request).getSellerLoginId();
+				re = sellerLoginService.changePassword(loginId, newPwd, oldPwd);
+			}else{
+				re = -2;
+			}
+		}else{
+			re = -3;
+		}
+		
+		return re;
 	}
 	
 }

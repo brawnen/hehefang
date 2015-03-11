@@ -26,49 +26,49 @@
 							<div class="form-item">
 								<div class="item-label"><label>公司名称：</label></div>
 								<div class="item-cont">
-									<span>浙江永康电子商务有限公司</span>
+									<span><c:out value="${s.coName }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>营业执照注册号：</label></div>
 								<div class="item-cont">
-									<span>1863567210343113</span>
+									<span><c:out value="${s.coBln }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>法人姓名：</label></div>
 								<div class="item-cont">
-									<span>徐无主</span>
+									<span><c:out value="${s.lpName }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>注册资本：</label></div>
 								<div class="item-cont">
-									<span>50,000 / 万元</span>
+									<span><c:out value="${s.registerCapital }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>经营范围：</label></div>
 								<div class="item-cont">
-									<span>一般经营项目：销售花卉，服装，鞋帽，首饰，针纺织品，文具用品等</span>
+									<span><c:out value="${s.bizScope }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>营业期限：</label></div>
 								<div class="item-cont">
-									<span>2013-10-12 至 2017-12-31</span>
+									<span><fmt:formatDate value="${s.btStartDate }" pattern="yyyy-MM-dd HH:mm:ss" /> 至 <fmt:formatDate value="${s.btEndDate }" pattern="yyyy-MM-dd HH:mm:ss" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>营业执照所在地：</label></div>
 								<div class="item-cont">
-									<span>浙江省</span>
+									<span><c:out value="${s.btGeo }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>入驻时间：</label></div>
 								<div class="item-cont">
-									<span>2014-05-15 12:39:23</span>
+									<span><fmt:formatDate value="${s.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></span>
 								</div>
 							</div>
 						</fieldset>
@@ -77,29 +77,31 @@
 							<div class="form-item">
 								<div class="item-label"><label>联系人姓名：</label></div>
 								<div class="item-cont">
-									<span>洪大</span>
+									<span><c:out value="${s.bizManName  }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>联系人手机号码：</label></div>
 								<div class="item-cont">
-									<span>13646637489</span>
+									<span><c:out value="${s.bizManMobile }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
-								<div class="item-label"><label>联系人固写电话：</label></div>
+								<div class="item-label"><label>联系人固定电话：</label></div>
 								<div class="item-cont">
+								<span>333333333333333</span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>传真号码：</label></div>
 								<div class="item-cont">
+								<span><c:out value="${s.fax }" /></span>
 								</div>
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label>电子邮箱：</label></div>
 								<div class="item-cont">
-									<span>shyiyp@ankang.com</span>
+									<span><c:out value="${s.bizManEmail }" /></span>
 								</div>
 							</div>
 						</fieldset>
@@ -111,70 +113,5 @@
 		</div>
 		<!-- container end -->
 	</div>
-	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>
-	<script type="text/javascript">
-	function checkFromData(){
-		var ret = true;
-		
-		var payeeName = $('input[name=payeeName]'),bankAcctNo = $('input[name=bankAcctNo]'),branchName = $('input[name=branchName]'),branchAddress = $('input[name=branchAddress]');
-	
-		if(!payeeName.val()){
-			payeeName.siblings().eq(1).text('收款单位全称不能为空！');
-			ret = false;
-		}else{
-			payeeName.siblings().eq(1).text('');	
-		}
-		
-		if(!bankAcctNo.val()){
-			bankAcctNo.next().text('收款账号不能为空！');
-			ret = false;
-		}else{
-			bankAcctNo.next().text('');
-		}
-		
-		if(!branchName.val()){
-			branchName.next().text('收款账户开户行不能为空！');
-			ret = false;
-		}else{
-			branchName.next().text('');
-		}
-		
-		if(!branchAddress.val()){
-			branchAddress.siblings().eq(1).text('开户行所在地不能为空！');
-			ret = false;
-		}else{
-			branchAddress.siblings().eq(1).text('');
-		}
-		
-		return ret;
-	}
-	
-	$(function(){
-		$('#savePayee').bind('click',function(){
-			if (!checkFromData()) {
-				return false;
-			}else{
-				$.ajax({
-					url : "${ctx }/helper/savePayee",
-					data : $('#payeeForm').serialize(),
-					type : "post",
-					cache : false,
-					async : false,
-					success : function(data) {
-						if (data > 0) {
-							popWindown("修改成功","submit:收款银行账户资料修改成功！","","1");
-						}else {
-							popWindown("保存失败","issue:网络连接异常，请联系网络管理员！","","1");
-							return;
-						}
-					}
-				});
-			}
-		});
-		
-	});
-	
-
-	</script>
 </body>
 </html>
