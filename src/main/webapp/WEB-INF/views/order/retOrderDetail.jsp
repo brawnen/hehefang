@@ -145,7 +145,7 @@
 							</td>
 							<td>${returnOrderItem.orderItem.prodCode}</td>
 							<td><b>&yen;<fmt:formatNumber value="${returnOrderItem.orderItem.salePrice}" pattern="0.00" /></b></td>
-							<td>${returnOrderItem.orderItem.returnNumber}</td>
+							<td>${returnOrderItem.returnNumber}</td>
 							<td><b>&yen;<fmt:formatNumber value="${returnOrderItem.orderItem.transPrice}" pattern="0.00" /></b></td>
 							<td><p class="warnColor"><b>&yen;<fmt:formatNumber value="${returnOrderItem.retFee}" pattern="0.00" /></b></p></td>
 							<td>
