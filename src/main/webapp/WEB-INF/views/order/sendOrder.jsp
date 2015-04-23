@@ -108,7 +108,7 @@
 							<tr>
 								<td>
 									<div class="order-img">
-										<img src="${my:random(imgGetUrl)}?rid=${orderItem.prodImg}&op=s1_w40_h40">
+										<img src="${my:random(imgGetUrl)}?rid=${orderItem.prodImg}&op=s2_w40_h40">
 									</div>
 								</td>
 								<td class="o-product">

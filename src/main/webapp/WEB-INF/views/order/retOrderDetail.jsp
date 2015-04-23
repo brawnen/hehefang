@@ -56,7 +56,7 @@
 											<ul>
 												<c:forEach items="${returnOrder.evidencePics}" var="pic">
 													<li>
-														<a href="${my:random(imgGetUrl)}?rid=${pic}" target="_blank"><img src="${my:random(imgGetUrl)}?rid=${pic}&op=s1_w40_h40" ></a>
+														<a href="${my:random(imgGetUrl)}?rid=${pic}" target="_blank"><img src="${my:random(imgGetUrl)}?rid=${pic}&op=s2_w40_h40" ></a>
 													</li>
 												</c:forEach>
 											</ul>
@@ -132,7 +132,7 @@
 						<tr>
 							<td>
 								<div class="order-img">
-									<img src="${my:random(imgGetUrl)}?rid=${returnOrderItem.orderItem.prodImg}&op=s1_w40_h40">
+									<img src="${my:random(imgGetUrl)}?rid=${returnOrderItem.orderItem.prodImg}&op=s2_w40_h40">
 								</div>
 							</td>
 							<td class="o-product">
