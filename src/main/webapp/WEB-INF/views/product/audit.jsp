@@ -90,7 +90,7 @@
 								<tr>
 									<td>
 										<div class="pro-img">
-											<img src="${my:random(imgGetUrl)}?rid=${p.imgUrl}" alt="" />
+											<img src="${my:random(imgGetUrl)}?rid=${p.imgUrl}&op=s0_w238_h238" alt="" />
 										</div>
 									</td>
 									<td>${p.prodId }</td>

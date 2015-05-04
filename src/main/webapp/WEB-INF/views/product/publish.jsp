@@ -163,7 +163,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
 								</div>
-								<span class="note errTxt" id='detail_warn'>还可输入<b>30</b>个字!</span>
+								<span class="note" id='detail_warn'>还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>
@@ -235,6 +235,6 @@
 
 	</script>
 	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>	
-	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150210"></script>
+	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150502"></script>
 </body>
 </html>
