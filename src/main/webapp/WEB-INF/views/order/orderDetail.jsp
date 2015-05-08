@@ -49,7 +49,7 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<td>订单编号：${orderCondition.orderCode}</td>
+							<td>订单编号：${order.orderCode}</td>
 							<td>付款方式：<c:out value="${order.strPayMode}" /></td>
 							<td>订单来源：<c:out value="${order.strOrderSource}" /></td>
 						</tr>
@@ -69,7 +69,7 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<td>收货地址：<c:out value="${order.rProvince}"/> <c:out value="${order.rCity}"/> <c:out value="${order.rCounty}"/> <c:out value="${order.rTown}"/> <c:out value="${order.rAddr}"/>，    收件人：<c:out value="${order.rName}" />，     手机：${order.rMobile}</td> 
+							<td>收货地址：<c:out value="${order.rProvince}"/> <c:out value="${order.rCity}"/> <c:out value="${order.rCounty}"/> <c:out value="${order.rTown}"/> <c:out value="${order.rAddr}"/>，    收件人：<c:out value="${order.rName}" />，     联系电话：<c:choose><c:when test="${not empty order.rMobile and not empty order.rPhone}">${order.rMobile}&nbsp;/&nbsp;${order.rPhone}</c:when><c:when test="${not empty order.rMobile}">${order.rMobile}</c:when><c:when test="${not empty order.rPhone}">${order.rPhone}</c:when></c:choose></td> 
 						</tr>
 					</tbody>
 				</table>
@@ -116,10 +116,10 @@
 							</td>
 							<td><c:out value="${orderItem.prodCode}" /></td>
 							<td>
-								<p>&yen;<fmt:formatNumber value="${orderItem.salePrice}" pattern="0.00" /></p>
+								<p>&yen;<fmt:formatNumber value="${orderItem.transPrice}" pattern="0.00" /></p>
 							</td>
 							<td>${orderItem.number}</td>
-							<td><p>&yen;<fmt:formatNumber value="${orderItem.transPrice}" pattern="0.00" /></p></td>
+							<td><p>&yen;<fmt:formatNumber value="${(orderItem.salePrice - orderItem.transPrice) * orderItem.number}" pattern="0.00" /></p></td>
 							<td>
 								<p><c:out value="${order.strOrderStatus}" /></p>
 							</td>

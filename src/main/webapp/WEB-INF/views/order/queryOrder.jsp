@@ -114,7 +114,7 @@
 				 <c:forEach items="${page.result}" var="order">
 					<table class="table table-line table-order">
 						<colgroup>
-							<!-- <col width="86"> -->
+							<col width="86">
 							<col width="280">
 							<col width="140">
 							<col width="107">
@@ -176,7 +176,7 @@
 			<c:otherwise>
 				<table class="table table-line table-order">
 						<colgroup>
-							<!-- <col width="86"> -->
+							<col width="86">
 							<col width="280">
 							<col width="140">
 							<col width="107">
@@ -187,7 +187,7 @@
 						</colgroup>
 						<tbody>
 							<tr class="emptyGoods">
-								<td colspan="6" rowspan="3">暂无符合条件的查询结果</td>
+								<td colspan="7" rowspan="3">暂无符合条件的查询结果</td>
 							</tr>
 						</tbody>
 					</table>
