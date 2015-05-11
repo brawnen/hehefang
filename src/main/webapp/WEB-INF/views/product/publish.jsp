@@ -102,7 +102,7 @@
 												<c:otherwise>
 													<ul>
 													<c:forEach items="${attr.attrValueList }" var="attrValue">
-														<li><label><input type="checkbox" class="chk" name="attrValue" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}"  attrValueName="${attrValue.attrValue}"><c:out value='${attrValue.attrValue }'/></label></li>
+														<li><label><input type="checkbox" onchange="publish.valaidateAttr();" class="chk" name="attrValue" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}"  attrValueName="${attrValue.attrValue}"><c:out value='${attrValue.attrValue }'/></label></li>
 													</c:forEach>
 													</ul>
 												</c:otherwise>
@@ -163,7 +163,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
 								</div>
-								<span class="note" id='detail_warn'>还可输入<b>30</b>个字!</span>
+								<span class="note" id='detail_warn' style="">还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>

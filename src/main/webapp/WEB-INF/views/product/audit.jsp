@@ -125,8 +125,8 @@
 					</c:when>
 					<c:otherwise>
 						<div class="mod-tips fruitless">没有找到符合条件的商品！</div>
-						<div class="mod-tips fruitless">您还没有发布过商品？现在就 <a href="#">发布商品</a></div>
-					</c:otherwise>
+<!-- 						<div class="mod-tips fruitless">您还没有发布过商品？现在就 <a href="#">发布商品</a></div>
+ -->					</c:otherwise>
 				</c:choose>
 				
 				<c:if test="${fn:length(page.result) > 0}">
