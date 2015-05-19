@@ -111,13 +111,16 @@ public class ProductController {
 		}
 
 		BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(bcId);
-		
-		//1. 已选商品品类
-		String pathName = bc.getPathName();
-		if(StringUtils.isNotBlank(pathName)){ 
-			pathName = pathName.trim().replace("|", "<em>&gt;</em>");
-			modelMap.put("pathName",pathName + "<em>&gt;</em>" + bc.getBcName());
-			modelMap.put("pathId", bc.getPathId() + "|" + bcId);
+		if(null != bc){
+			//1. 已选商品品类
+			String pathName = bc.getPathName();
+			if(StringUtils.isNotBlank(pathName)){ 
+				pathName = pathName.trim().replace("|", "<em>&gt;</em>");
+				modelMap.put("pathName",pathName + "<em>&gt;</em>" + bc.getBcName());
+				modelMap.put("pathId", bc.getPathId() + "|" + bcId);
+			}
+		}else{
+			logger.error("ICategoryService#getBaseCategoryInfoByBcId  return null !");
 		}
 		//2. 品牌
 		List<Brand> brandList = sellerBrandService.getValidBrandListOfSeller(sellerId);
@@ -294,8 +297,12 @@ public class ProductController {
 		List<Product> list = page.getResult();
 		for (Product p : list) {
 			BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
-			String displayBcName = bc.getPathName().trim().replace("|", "/");
-			p.setBcName(displayBcName +"/"+ bc.getBcName());
+			if(null != bc){
+				String displayBcName = bc.getPathName().trim().replace("|", "/");
+				p.setBcName(displayBcName +"/"+ bc.getBcName());
+			}else{
+				logger.error("ICategoryService#getBaseCategoryInfoByBcId  return null !");
+			}
 		}
 		
 		modelMap.addAttribute("sortField", sortField);
@@ -324,15 +331,18 @@ public class ProductController {
 		List<Product> list = page.getResult();
 		for (Product p : list) {
 			BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
-			String displayBcName = bc.getPathName().trim().replace("|", "/");
-			p.setBcName(displayBcName +"/"+ bc.getBcName());
+			if(null !=bc){
+				String displayBcName = bc.getPathName().trim().replace("|", "/");
+				p.setBcName(displayBcName +"/"+ bc.getBcName());
+			}else{
+				logger.error("ICategoryService#getBaseCategoryInfoByBcId  return null !");
+			}
 		}
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("productCondition", productCondition);
 		return "/product/audit";
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/image/saveImg")
 	public void uploadProductImg(HttpServletRequest request,
 			HttpServletResponse response) {
