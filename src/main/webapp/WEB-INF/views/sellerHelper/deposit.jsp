@@ -39,8 +39,8 @@
 							<p><strong>开户银行：</strong>建行东大街支行</p>
 							<p><strong>银行账号：</strong>1100 1069 6000 5302 6784</p>
 						</div>
-						<div class="note"><em class="textMark warnColor">*</em>保证金不接受个人帐号汇款！请务必使用企业对公帐号汇款，汇款备注为 “ <b>巨有利保证金</b> ” ，以便核查。</div>
-						<div class="note"><em class="textMark warnColor">*</em>巨有利仅提供如上唯一的保证金收款账号，请勿相信其他任何个人或组织以任何方式提供的银行账号。</div>
+						<div class="note"><em class="textMark warnColor">*</em>保证金不接受个人帐号汇款！请务必使用企业对公帐号汇款，汇款备注为 “ <b>巨友利保证金</b> ” ，以便核查。</div>
+						<div class="note"><em class="textMark warnColor">*</em>巨友利仅提供如上唯一的保证金收款账号，请勿相信其他任何个人或组织以任何方式提供的银行账号。</div>
 					</div>
 					<h3><a href="#" target="_blank">保证金收费标准</a></h3>
 					<h3><a href="#" target="_blank">保证金管理规则</a></h3>

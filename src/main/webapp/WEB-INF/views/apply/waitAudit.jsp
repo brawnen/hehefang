@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>入驻审核-巨有利</title>
+<title>入驻审核-巨友利</title>
 </head>
 <body>
 	<link rel="stylesheet" href="${cssUrl}/css/join.css" />
@@ -132,7 +132,7 @@
 					<i class="icon i-right"></i>
 				</dt>
 				<dd>
-					<h3>欢迎您加入巨有利！</h3>
+					<h3>欢迎您加入巨友利！</h3>
 					<p>您的入驻申请已提交平台，预计将在3-5个工作日内审核完成。</p>
 					<p>您可凭登录账号，登录后查询审核进度；如遇疑问或问题，请与平台客服中心联系！</p>
 					<div class="btnWrap"><a href="javascript:closeApply();" class="btn btn-primary">我知道了</a></div>

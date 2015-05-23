@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>忘记密码-巨有利</title>
+		<title>忘记密码-巨友利</title>
 		<link rel="stylesheet" href="${cssUrl}/css/allstyle.min.css" />
 		<link rel="stylesheet" href="${cssUrl}/css/register.css" />
 		<script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>	

@@ -22,7 +22,7 @@ if(loginName != null) {
 <link rel="stylesheet" href="${cssUrl}/css/register.css" />
 <script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
 <script type="text/javascript" src="${jsUrl}/login.js?t=20150126"></script>
-<title>商家登录-巨有利</title>
+<title>商家登录-巨友利</title>
 </head>
 
 <body id="regsignin">
@@ -71,7 +71,7 @@ if(loginName != null) {
 							<dd class="item-cont"><input type="hidden" id="clientDt" name="clientDt"><input type="submit" class="btn btn-primary loginBtn" value="登&nbsp;&nbsp;&nbsp;录" /></dd>
 						</dl>
 						<dl class="form-item item-join">
-							<dd class="item-cont">还没有巨有利商家账号？<a href="register">立即注册</a></dd>
+							<dd class="item-cont">还没有巨友利商家账号？<a href="register">立即注册</a></dd>
 						</dl>
 					</form>
 				</div>

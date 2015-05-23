@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>概述-巨有利</title>
+<title>概述-巨友利</title>
 </head>
 <body>
 <link rel="stylesheet" href="${cssUrl}/css/helper.css" />

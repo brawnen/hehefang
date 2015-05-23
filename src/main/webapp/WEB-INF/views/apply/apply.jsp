@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>卖家申请-巨有利</title>
+<title>卖家申请-巨友利</title>
 </head>
 <body>	
 	<link rel="stylesheet" href="${cssUrl}/css/join.css?t=20150129" />
@@ -323,7 +323,7 @@
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label class="hide">入驻协议：</label></div>
-								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" id="chkProtocol"/>我已阅读并同意<a href="${ctx}/static/applyDeal.jsp" target="_blank">《巨有利商家入驻条款》</a></label>
+								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" id="chkProtocol"/>我已阅读并同意<a href="${ctx}/static/applyDeal.jsp" target="_blank">《巨友利商家入驻条款》</a></label>
 									<div class="note errTxt" id="protocol_msg"></div>
 								</div>
 							</div>

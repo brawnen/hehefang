@@ -12,7 +12,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
 <link rel="stylesheet" type="text/css" href="${cssUrl}/css/allstyle.min.css"/>
 <script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
-<title><decorator:title default="卖家中心-巨有利"/></title>
+<title><decorator:title default="卖家中心-巨友利"/></title>
 <script type="text/javascript">
 function appendParam(href, menuId) {
 	if(href.indexOf('?') == -1) {

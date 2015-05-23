@@ -58,7 +58,7 @@
 							<dl>
 								<dt class="imgIcon"><i class="icon i-dangerSM"></i></dt>
 								<dd>
-									<p>开票信息请勿必准确，以免影响发票的办理；请有疑问，请与巨有利客服联系，咨询电话：xxx-xxxxxxxx</p>
+									<p>开票信息请勿必准确，以免影响发票的办理；请有疑问，请与巨友利客服联系，咨询电话：xxx-xxxxxxxx</p>
 								</dd>
 							</dl>
 						</div>
