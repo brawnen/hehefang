@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>入驻审核-阿凡达</title>
+<title>入驻审核-巨有利</title>
 </head>
 <body>
 	<link rel="stylesheet" href="${cssUrl}/css/join.css" />
@@ -87,7 +87,7 @@
 									<tr>
 										<td class="table-center">申请资料</td>
 										<td>资料已上传</td>
-										<td>2014-05-12 11:16</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${apply.applyDate}" /></td>
 										<td><i class="icon i-clock"></i>
 											<c:choose>
 												<c:when test="${apply.status=='1'}">待审核</c:when>
@@ -95,16 +95,25 @@
 											</c:choose>
 										</td>
 										<td><c:choose>
-												<c:when test="${apply.status=='1'}">--</c:when>
-												<c:when test="${apply.status=='3'}"><a href="apply">修改</a></c:when>
+												<c:when test="${apply.status=='1'}"><a href="${ctx}/apply/apply">查看</a></c:when>
+												<c:when test="${apply.status=='3'}"><a href="${ctx}/apply/apply">修改</a></c:when>
 											</c:choose></td>
 									</tr>
 									<tr>
 										<td class="table-center">保证金</td>
-										<td>保证金未缴纳，可以发布商品及其他设置，但不能添加活动</td>
-										<td>2014-05-12 11:16</td>
-										<td><i class="icon i-gold"></i>待缴款</td>
-										<td>--</td>
+										<c:choose>
+												<c:when test="${seller.isPaidDeposit=='1'}">
+												<td>保证金已缴纳，可以发布商品及其他设置，可以添加活动</td>
+												<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${apply.applyDate}" /></td>
+												<td><i class="icon i-gold"></i></td>
+												<td></td>
+												</c:when>
+												<c:when test="${seller.isPaidDeposit=='0'}">
+												<td>保证金未缴纳，可以发布商品及其他设置，但不能添加活动</td>
+												<td><i class="icon"></i>待缴款</td>
+												<td></td>
+												</c:when>
+										</c:choose>
 									</tr>
 								</tbody>
 							</table>
@@ -123,7 +132,7 @@
 					<i class="icon i-right"></i>
 				</dt>
 				<dd>
-					<h3>欢迎您加入阿凡达！</h3>
+					<h3>欢迎您加入巨有利！</h3>
 					<p>您的入驻申请已提交平台，预计将在3-5个工作日内审核完成。</p>
 					<p>您可凭登录账号，登录后查询审核进度；如遇疑问或问题，请与平台客服中心联系！</p>
 					<div class="btnWrap"><a href="javascript:closeApply();" class="btn btn-primary">我知道了</a></div>

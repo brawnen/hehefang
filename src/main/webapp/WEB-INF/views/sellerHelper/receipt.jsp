@@ -58,7 +58,7 @@
 							<dl>
 								<dt class="imgIcon"><i class="icon i-dangerSM"></i></dt>
 								<dd>
-									<p>开票信息请勿必准确，以免影响发票的办理；请有疑问，请与阿凡达客服联系，咨询电话：xxx-xxxxxxxx</p>
+									<p>开票信息请勿必准确，以免影响发票的办理；请有疑问，请与巨有利客服联系，咨询电话：xxx-xxxxxxxx</p>
 								</dd>
 							</dl>
 						</div>
@@ -67,7 +67,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>单位全称：</label></div>
 								<div class="item-cont">
-									<span><c:out value="${receipt.coName }" /></span>
+									<span><c:out value="${receipt.coName}" /></span>
 								</div>
 							</div>
 							<div class="form-item">
@@ -110,7 +110,7 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>发票类型：</label></div>
 								<div class="item-cont">
-									<select name=""taxType id="taxType" class="select">
+									<select name="taxType" id="taxType" class="select">
 									<!--     <option value="">全部</option> -->
 									    <option <c:if test="${receipt.taxType == '1'}">selected="selected"</c:if> value="1">一般纳税人</option>
 									    <option <c:if test="${receipt.taxType == '2'}">selected="selected"</c:if> value="2">小规模纳税人</option>
@@ -130,7 +130,7 @@
 											<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgTaxImg">
 										</c:when>
 										<c:otherwise>
-											<img src="${my:random(imgGetUrl).concat('?rid=').concat(receipt.taxImg)}" alt="" id="imgTaxImg">
+											<img src="${my:random(imgGetUrl)}?rid=${receipt.taxImg}" alt="" id="imgTaxImg">
 										</c:otherwise>
 									</c:choose>			
 									<input type="hidden" id="taxImg" name="taxImg" value="${receipt.taxImg}" data-required="true" data-describedby="btImg_msg" data-description="taxImg">
@@ -153,7 +153,7 @@
 											<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgQualiUrl">
 										</c:when>
 										<c:otherwise>
-											<img src="${my:random(imgGetUrl).concat('?rid=').concat(receipt.qualiUrl)}" alt="" id="imgQualiUrl">
+											<img src="${my:random(imgGetUrl)}?rid=${receipt.qualiUrl}" alt="" id="imgQualiUrl">
 										</c:otherwise>
 									</c:choose>			
 									<input type="hidden" id="qualiUrl" name="qualiUrl" value="${receipt.qualiUrl}" data-required="true" data-describedby="qualiUrl_msg" data-description="qualiUrl">

@@ -12,7 +12,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
 <link rel="stylesheet" type="text/css" href="${cssUrl}/css/allstyle.min.css"/>
 <script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
-<title><decorator:title default="卖家中心-阿凡达"/></title>
+<title><decorator:title default="卖家中心-巨有利"/></title>
 <script type="text/javascript">
 function appendParam(href, menuId) {
 	if(href.indexOf('?') == -1) {
@@ -84,19 +84,15 @@ function closeDeposit() {
 		<div id="header">
 			<div class="wrap wrap-brand">
 				<!-- logo -->
-				<div id="logo">
-					<div class="logo"><a href="#" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
+				<div id="logo"  style="height: 50px;">
+					<div class="logo"><a href="http://www.juyouli.com" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
 					<h1>商家中心</h1>
 				</div>
 				<!-- logo end -->
 				<!-- site -->
 				<div id="site">
 					<ul class="item">
-						<li>|</li>
-						<li class="msg">
-							<div class="hd"><i class="icon"></i><a href="#">消息</a><em>2</em></div>
-						</li>
-						<li>|</li>
+						<li>|</li>						
 						<li>
 							<div class="hd"><a href="#">帮助中心</a></div>
 						</li>

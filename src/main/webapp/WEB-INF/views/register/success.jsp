@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${cssUrl}/css/allstyle.min.css" />
 <link rel="stylesheet" href="${cssUrl}/css/register.css" />
 <script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
-<title>注册成功-阿凡达</title>
+<title>注册成功-巨有利</title>
 <script type="text/javascript">
 var count = 5;
 	

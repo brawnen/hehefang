@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>概述-阿凡达</title>
+<title>概述-巨有利</title>
 </head>
 <body>
 <link rel="stylesheet" href="${cssUrl}/css/helper.css" />
@@ -23,7 +23,7 @@
 		<!-- over-left -->
 		<div class="over-left">
 			<div class="overL-hd">
-				<h4>北京宝源昌商贸有限公司</h4>
+				<h4><c:out value="${seller.coName}"/></h4>
 				<p>保证金：<span class="successColor" id="spanDeposit"><c:out value="${seller.isPaidDeposit == '1' ? '已缴纳' : '未缴纳'}"/></span></p>
 				<ul>
 					<li>开店时间：<span><fmt:formatDate value="${seller.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/> </span></li>
