@@ -92,7 +92,7 @@
 				<td>￥<c:out value="${brandShowDetail.orgPrice}"/></td>
 				<td><p><span><c:out value="${brandShowDetail.discount}"/></span> 折</p></td>
 				<td><p class="errTxt">￥<c:out value="${brandShowDetail.showPrice}"/></p></td>
-				<td><p><span><c:out value="${brandShowDetail.showBalance}"/></span>/<span><c:out value="${brandShowDetail.showBalance + (empty(brandShowDetail.saleAmount) ? 0 : brandShowDetail.saleAmount)}"/></span></p></td>
+				<td><p><span><c:out value="${brandShowDetail.showBalance}"/></span>/<span><c:out value="${brandShowDetail.showBalance － (empty(brandShowDetail.saleAmount) ? 0 : brandShowDetail.saleAmount)}"/></span></p></td>
 			</tr>
 		<c:if test="${status.last}">					
 				</tbody>
