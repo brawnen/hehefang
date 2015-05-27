@@ -102,17 +102,18 @@
 									<tr>
 										<td class="table-center">保证金</td>
 										<c:choose>
-												<c:when test="${seller.isPaidDeposit=='1'}">
-												<td>保证金已缴纳，可以发布商品及其他设置，可以添加活动</td>
-												<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${apply.applyDate}" /></td>
-												<td><i class="icon i-gold"></i></td>
-												<td></td>
+												<c:when test="${(not empty seller) and seller.isPaidDeposit=='1'}">
+													<td>保证金已缴纳，可以发布商品及其他设置，可以添加活动</td>
+													<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${seller.depositDate}" /></td>
+													<td><i class="icon i-gold"></i>已缴款</td>
+													<td></td>
 												</c:when>
-												<c:when test="${seller.isPaidDeposit=='0'}">
-												<td>保证金未缴纳，可以发布商品及其他设置，但不能添加活动</td>
-												<td><i class="icon"></i>待缴款</td>
-												<td></td>
-												</c:when>
+												<c:otherwise>
+													<td>保证金未缴纳，可以发布商品及其他设置，但不能添加活动</td>
+													<td></td>
+													<td><i class="icon i-gold"></i>待缴款</td>
+													<td></td>
+												</c:otherwise>
 										</c:choose>
 									</tr>
 								</tbody>
