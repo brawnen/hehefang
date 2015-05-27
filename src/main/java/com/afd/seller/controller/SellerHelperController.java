@@ -68,11 +68,12 @@ public class SellerHelperController {
 		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
 		
 		SellerReceipt sellerReceipt = sellerReceiptService.getSellerReceiptBySellerId(sellerId);
-		if(StringUtils.isNotEmpty(sellerReceipt.getRegisterTel())){
-			sellerReceipt.setRegisterTel(sellerReceipt.getRegisterTel());
-		}
 		
 		if(null != sellerReceipt){
+			if(StringUtils.isNotEmpty(sellerReceipt.getRegisterTel())){
+				sellerReceipt.setRegisterTel(sellerReceipt.getRegisterTel());
+			}
+			
 			Seller seller = sellerService.getSellerById(sellerId);
 			if(null != seller){
 				sellerReceipt.setCoName(seller.getCoName());
