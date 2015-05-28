@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	<div class="bd">
-		<img src="${my:random(imgGetUrl)}?rid=${brandShow.showBannerImg}" alt="">
+		<img src="${my:random(imgGetUrl)}?rid=${brandShow.showBannerImg}&op=s0_w1022_h320" alt="">
 	</div>
 </div>
 <!-- specialmain end  -->
