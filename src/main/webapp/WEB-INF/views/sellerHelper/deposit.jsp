@@ -6,16 +6,6 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>卖家|保证金</title>
-<script type="text/javascript">
-
-function showDeposit() {
-	$('#depositPop, #depositMask').show();
-}
-
-function closeDeposit() {
-	$('#depositPop, #depositMask').hide();
-}
-</script>
 </head>
 <body>
 	<link rel="stylesheet" href="${cssUrl}/css/helper.css" />
@@ -39,7 +29,7 @@ function closeDeposit() {
 								<p>您公司保证金审核未通过，因此暂时不能申请或管理“品牌专场”功能，请尽快完成缴费。</p>
 							    </c:if>
 							    <c:if test="${s.isPaidDeposit == '1'}">
-							    <script type="text/javascript">$(function(){showDeposit()})</script>
+							    <script type="text/javascript">$(function(){showDeposit1()})</script>
 							    </c:if>
 							</dd>
 						</dl>
@@ -61,10 +51,20 @@ function closeDeposit() {
 			</div>
 			<!-- main end -->
 		</div>
+<script type="text/javascript">
+
+function showDeposit1() {
+	$('#depositPop1, #depositMask1').show();
+}
+
+function closeDeposit1() {
+	$('#depositPop1, #depositMask1').hide();
+}
+</script>
 		<!-- container end -->
 	</div>
-		<div class="popup popup-primary" style="width:620px;margin-left:-310px; margin-top:-101px; display: none" id="depositPop">
-		<div class="hd"><h2></h2><i class="close" onclick="javascript:closeDeposit();"></i></div>
+		<div class="popup popup-primary" style="width:620px;margin-left:-310px; margin-top:-101px; display: none" id="depositPop1">
+		<div class="hd"><h2></h2><i class="close" onclick="javascript:closeDeposit1();"></i></div>
 		<div class="bd">
 			<dl class="popup-doc">
 				<dt>
@@ -78,6 +78,6 @@ function closeDeposit() {
 			</dl>
 		</div>
 	</div>
-	<div class="mask" id="depositMask" style="display: none"></div>
+	<div class="mask" id="depositMask1" style="display: none"></div>
 </body>
 </html>
