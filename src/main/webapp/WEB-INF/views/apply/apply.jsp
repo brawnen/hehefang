@@ -323,7 +323,7 @@
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label class="hide">入驻协议：</label></div>
-								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" id="chkProtocol"/>我已阅读并同意<a href="${ctx}/static/deal2.html" target="_blank">《巨友利商家入驻条款》</a></label>
+								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" id="chkProtocol"/>我已阅读并同意<a href="http://css.seller.juyouli.com/deal1.html" target="_blank">《巨友利商家入驻条款》</a></label>
 									<div class="note errTxt" id="protocol_msg"></div>
 								</div>
 							</div>
