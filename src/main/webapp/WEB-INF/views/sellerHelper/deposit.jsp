@@ -6,6 +6,16 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>卖家|保证金</title>
+<script type="text/javascript">
+
+function showDeposit() {
+	$('#depositPop, #depositMask').show();
+}
+
+function closeDeposit() {
+	$('#depositPop, #depositMask').hide();
+}
+</script>
 </head>
 <body>
 	<link rel="stylesheet" href="${cssUrl}/css/helper.css" />
@@ -28,6 +38,9 @@
 								<c:if test="${s.isPaidDeposit == '0'}">
 								<p>您公司保证金审核未通过，因此暂时不能申请或管理“品牌专场”功能，请尽快完成缴费。</p>
 							    </c:if>
+							    <c:if test="${s.isPaidDeposit == '1'}">
+							    <script type="text/javascript">$(function(){showDeposit()})</script>
+							    </c:if>
 							</dd>
 						</dl>
 					</div>
@@ -42,13 +55,29 @@
 						<div class="note"><em class="textMark warnColor">*</em>保证金不接受个人帐号汇款！请务必使用企业对公帐号汇款，汇款备注为 “ <b>巨友利保证金</b> ” ，以便核查。</div>
 						<div class="note"><em class="textMark warnColor">*</em>巨友利仅提供如上唯一的保证金收款账号，请勿相信其他任何个人或组织以任何方式提供的银行账号。</div>
 					</div>
-					<h3><a href="#" target="_blank">保证金收费标准</a></h3>
-					<h3><a href="#" target="_blank">保证金管理规则</a></h3>
+					<h3><a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">保证金收费标准</a></h3>
+					<h3><a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">保证金管理规则</a></h3>
 				</div>
 			</div>
 			<!-- main end -->
 		</div>
 		<!-- container end -->
 	</div>
+		<div class="popup popup-primary" style="width:620px;margin-left:-310px; margin-top:-101px; display: none" id="depositPop">
+		<div class="hd"><h2></h2><i class="close" onclick="javascript:closeDeposit();"></i></div>
+		<div class="bd">
+			<dl class="popup-doc">
+				<dt>
+					<i class="icon i-right"></i>
+				</dt>
+				<dd>
+					<h3>保证金已缴纳 ！</h3>
+					<p>您公司保证金已确认到账，请尽快发布品牌特卖活动。</p>
+					<div class="btnWrap"><a href="javascript:;" class="btn btn-primary">我知道了</a></div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="mask" id="depositMask" style="display: none"></div>
 </body>
 </html>

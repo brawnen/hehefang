@@ -13,13 +13,13 @@
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
 		<constructor-arg ref="sentinelConfig" />
 	</bean> -->
-
+<beans profile="develop">
 	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >  
-        <property name="hostName" value="10.25.0.248"/>  
+        <property name="hostName" value="118.144.78.231"/>  
         <property name="port" value="6479"/> 
 	</bean> 
-		
-	<beans profile="develop">
+</beans>		
+	<beans profile="develop1">
 		<bean id="sentinelConfig"
 			class="org.springframework.data.redis.connection.RedisSentinelConfigurationEX">
 			<property name="masterName" value="master-dev" />

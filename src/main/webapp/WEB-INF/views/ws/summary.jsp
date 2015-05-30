@@ -59,15 +59,15 @@
 			<div class="guide">
 				<h4>新手指南</h4>
 				<ul>
-					<li>•<a href="#">商家操作指南手册</a></li>
-					<li>•<a href="#">商家品控指导手册</a></li>
-					<li>•<a href="#">商家违规处罚规则</a></li>
-					<li>•<a href="#">商家合作协议</a></li>
-					<li>•<a href="#">100%正品保证</a></li>
-					<li>•<a href="#">专场包邮服务</a></li>
-					<li>•<a href="#">48小时发货服务</a></li>
-					<li>•<a href="#">7天无理由退货服务</a></li>
-					<li>•<a href="#">发票服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家操作指南手册</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家品控指导手册</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家违规处罚规则</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家合作协议</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">100%正品保证</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">专场包邮服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">48小时发货服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">7天无理由退货服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">发票服务</a></li>
 				</ul>
 			</div>
 			<div class="sideImg">

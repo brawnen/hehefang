@@ -166,4 +166,12 @@ public class SellerHelperController {
 		return re;
 	}
 	
+	/**
+	 *  ajax调用：保存收款银行账户
+	 * @return
+	 */
+	@RequestMapping(value="helper/settleaccounts")
+	public String settleaccounts(HttpServletRequest request,@ModelAttribute Seller seller){
+		return "sellerHelper/settleaccounts";
+	}
 }

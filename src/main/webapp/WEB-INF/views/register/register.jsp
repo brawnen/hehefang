@@ -91,7 +91,7 @@
 						<dl class="form-item item-agree">
 							<dt class="item-label"></dt>
 							<dd class="item-cont">
-								<p><input type="checkbox" name="chkAgreement" id="chkAgreement" value="" class="chk" checked="checked" /><label for="chkAgreement">我已阅读并同意</label><a href="#">《巨友利注册服务协议》</a><span class="errTxt" id="agreement_msg" style="display:none">请接受服务条款</span></p>
+								<p><input type="checkbox" name="chkAgreement" id="chkAgreement" value="" class="chk" checked="checked" /><label for="chkAgreement">我已阅读并同意</label><a href="${ctx}/static/deal1.html" target="_blank" >《巨友利注册服务协议》</a><span class="errTxt" id="agreement_msg" style="display:none">请接受服务条款</span></p>
 								<input type="submit" value="同意协议并注册"  class="btn btn-primary regBtn">
 							</dd>
 						</dl>

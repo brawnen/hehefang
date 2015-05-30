@@ -51,6 +51,8 @@
 					<li class="nav-02"><a href="#"><i class="icon"></i>商品管理</a></li>
 					<li class="nav-03"><a href="#"><i class="icon"></i>品牌特卖</a></li>
 					<li class="nav-04"><a href="#"><i class="icon"></i>交易管理</a></li>
+					<li class="nav-05"><a href="#"><i class="icon"></i>专场结算</a></li>
+					
 				</ul>
 			</div>
 		</div>
