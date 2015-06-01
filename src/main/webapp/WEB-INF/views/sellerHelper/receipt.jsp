@@ -67,7 +67,8 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>单位全称：</label></div>
 								<div class="item-cont">
-									<span><c:out value="${receipt.coName}" /></span>
+									<input type="text" class="txt lg w-lgl" value='<c:out value="${receipt.coName}" />'/>
+									<div class="note errTxt">错误信息</div>
 								</div>
 							</div>
 							<div class="form-item">
@@ -124,7 +125,7 @@
 									<p class="lightColor">（需加盖公司公章）</p>
 								</div>
 								<div class="item-cont">
-									<div class="mod-upload">
+									<div class="mod-upload" style="position:relative">
 									<c:choose>
 										<c:when test="${empty(receipt.taxImg)}">
 											<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgTaxImg">
@@ -147,7 +148,7 @@
 									<p class="lightColor">（需加盖公司公章）</p>
 								</div>
 								<div class="item-cont">
-									<div class="mod-upload">
+									<div class="mod-upload" style="position:relative">
 									<c:choose>
 										<c:when test="${empty(receipt.qualiUrl)}">
 											<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgQualiUrl">
