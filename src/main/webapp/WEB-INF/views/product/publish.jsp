@@ -67,17 +67,10 @@
 								</div>
 								<div class="note errTxt"></div>
 							</div>
-	<!-- 						<div class="form-item">
-								<div class="item-label"><label><em>*</em>产地：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg" id="origin" name="origin" ></div>
-							</div>
-							<div class="form-item">
-								<div class="item-label"><label><em>*</em>材质：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lg" id="material" name="material" ></div>
-							</div> -->
-							<div class="form-item">
-							<c:if test="${!empty(bc.attrList)}">
-								<c:forEach items="${bc.attrList}" var="attr">
+
+						<c:if test="${!empty(bc.attrList)}">
+							<c:forEach items="${bc.attrList}" var="attr">
+								<div class="form-item">
 									<div class="item-label">
 										<c:choose>
 											<c:when test="${attr.isRequire}">
@@ -110,9 +103,10 @@
 										</div>
 									</div>
 									<input type="hidden" name="attr" attrId="${attr.attrId}" attrName="${attr.attrName}" displayMode="${attr.displayMode}" require="${attr.isRequire ? 'true' : 'false'}"/>
-								</c:forEach>
-							</c:if>	
-							</div>
+								</div>
+							</c:forEach>
+						</c:if>	
+							
 							<div class="note errTxt"></div>
 							<div class="form-item item-color">
 								<c:if test="${!empty(bc.specList)}">
