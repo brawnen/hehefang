@@ -126,9 +126,9 @@
 						<thead>
 							<tr>
 								<td colspan="8" class="o-select">
-									<span>订单编号：<a href="#" target="_blank">${order.orderCode}</a></span>
+									<span>订单编号：<a href="${ctx}/order/orderDetail?m=4001&orderId=${order.orderId}" target="_blank">${order.orderCode}</a></span>
 									<span>订单提交时间：<fmt:formatDate value="${order.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-									<span>专场ID：<a href="#" target="_blank">${order.brandShowId}</a></span>
+									<span>专场ID：<a href="${ctx}/brandShow/detailView?m=3001&brandShowId=${order.brandShowId}" target="_blank">${order.brandShowId}</a></span>
 								</td>
 							</tr>
 						</thead>
