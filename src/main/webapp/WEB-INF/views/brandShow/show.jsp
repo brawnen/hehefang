@@ -85,7 +85,7 @@
 							<option value="${brand.brandId}" ${brandShow.brandId == brand.brandId ? 'selected="selected"' : ''}><c:out value="${brand.showName}"/></option>
 						</c:forEach>						
 					</select>
-					<span class="note">只可选择已审核通过的品牌</span>&nbsp;&nbsp;<a href="${ctx}/product/brandPage">申请新品牌</a>
+					<span class="note">只可选择已审核通过的品牌</span>&nbsp;&nbsp;<a href="${ctx}/product/brandPage?m=2004">申请新品牌</a>
 					<div class="note errTxt" id="brandId_msg"></div>
 				</div>
 			</div>
