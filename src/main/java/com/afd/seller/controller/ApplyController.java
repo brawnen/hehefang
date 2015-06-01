@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.afd.common.util.RequestUtils;
+import com.afd.model.seller.Seller;
 import com.afd.model.seller.SellerApply;
 import com.afd.model.seller.SellerAudit;
 import com.afd.model.seller.SellerLogin;
@@ -114,7 +115,9 @@ public class ApplyController {
 				"apply",
 				applyService.getSellerApplyByLoginId(LoginUtils.getLoginInfo(
 						request).getSellerLoginId()));
-
+		 Seller seller = sellerService.getSellerById(LoginUtils.getLoginInfo(
+						request).getSellerLoginId());
+		 request.setAttribute("seller", seller);
 		return "/apply/waitAudit";
 	}
 

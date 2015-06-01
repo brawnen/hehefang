@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>品牌特卖-阿凡达</title>
+<title>品牌特卖-巨友利</title>
 </head>
 <body>
 
@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	<div class="bd">
-		<img src="${my:random(imgGetUrl)}?rid=${brandShow.showBannerImg}" alt="">
+		<img src="${my:random(imgGetUrl)}?rid=${brandShow.showBannerImg}&op=s0_w1022_h320" alt="">
 	</div>
 </div>
 <!-- specialmain end  -->
@@ -92,7 +92,7 @@
 				<td>￥<c:out value="${brandShowDetail.orgPrice}"/></td>
 				<td><p><span><c:out value="${brandShowDetail.discount}"/></span> 折</p></td>
 				<td><p class="errTxt">￥<c:out value="${brandShowDetail.showPrice}"/></p></td>
-				<td><p><span><c:out value="${brandShowDetail.showBalance}"/></span>/<span><c:out value="${brandShowDetail.showBalance + (empty(brandShowDetail.saleAmount) ? 0 : brandShowDetail.saleAmount)}"/></span></p></td>
+				<td><p><span><c:out value="${brandShowDetail.showBalance}"/></span>/<span><c:out value="${brandShowDetail.showBalance - (empty(brandShowDetail.saleAmount) ? 0 : brandShowDetail.saleAmount)}"/></span></p></td>
 			</tr>
 		<c:if test="${status.last}">					
 				</tbody>

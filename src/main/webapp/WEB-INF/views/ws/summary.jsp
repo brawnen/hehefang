@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>概述-阿凡达</title>
+<title>概述-巨友利</title>
 </head>
 <body>
 <link rel="stylesheet" href="${cssUrl}/css/helper.css" />
@@ -23,7 +23,7 @@
 		<!-- over-left -->
 		<div class="over-left">
 			<div class="overL-hd">
-				<h4>北京宝源昌商贸有限公司</h4>
+				<h4><c:out value="${seller.coName}"/></h4>
 				<p>保证金：<span class="successColor" id="spanDeposit"><c:out value="${seller.isPaidDeposit == '1' ? '已缴纳' : '未缴纳'}"/></span></p>
 				<ul>
 					<li>开店时间：<span><fmt:formatDate value="${seller.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/> </span></li>
@@ -59,15 +59,15 @@
 			<div class="guide">
 				<h4>新手指南</h4>
 				<ul>
-					<li>•<a href="#">商家操作指南手册</a></li>
-					<li>•<a href="#">商家品控指导手册</a></li>
-					<li>•<a href="#">商家违规处罚规则</a></li>
-					<li>•<a href="#">商家合作协议</a></li>
-					<li>•<a href="#">100%正品保证</a></li>
-					<li>•<a href="#">专场包邮服务</a></li>
-					<li>•<a href="#">48小时发货服务</a></li>
-					<li>•<a href="#">7天无理由退货服务</a></li>
-					<li>•<a href="#">发票服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家操作指南手册</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家品控指导手册</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家违规处罚规则</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">商家合作协议</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">100%正品保证</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">专场包邮服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">48小时发货服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">7天无理由退货服务</a></li>
+					<li>•<a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">发票服务</a></li>
 				</ul>
 			</div>
 			<div class="sideImg">

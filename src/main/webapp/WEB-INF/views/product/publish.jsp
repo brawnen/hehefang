@@ -157,7 +157,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
 								</div>
-								<span class="note" id='detail_warn' style="">还可输入<b>30</b>个字!</span>
+								<span class="note" id='detail_warn' style="padding-left: 30px;">还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>

@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>忘记密码-阿凡达</title>
+		<title>忘记密码-巨友利</title>
 		<link rel="stylesheet" href="${cssUrl}/css/allstyle.min.css" />
 		<link rel="stylesheet" href="${cssUrl}/css/register.css" />
 		<script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
@@ -19,8 +19,8 @@
 		<div id="header">
 			<div class="wrap">
 				<!-- logo -->
-				<div id="logo">
-					<div class="logo"><a href="#" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
+				<div id="logo"  style="height: 50px;">
+					<div class="logo"><a href="http://www.juyouli.com" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
 					<h1>商家中心</h1>
 				</div>
 				<!-- logo end -->

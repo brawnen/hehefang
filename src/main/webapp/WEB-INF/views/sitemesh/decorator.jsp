@@ -12,7 +12,7 @@
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
 <link rel="stylesheet" type="text/css" href="${cssUrl}/css/allstyle.min.css"/>
 <script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
-<title><decorator:title default="卖家中心-阿凡达"/></title>
+<title><decorator:title default="卖家中心-巨友利"/></title>
 <script type="text/javascript">
 function appendParam(href, menuId) {
 	if(href.indexOf('?') == -1) {
@@ -84,19 +84,15 @@ function closeDeposit() {
 		<div id="header">
 			<div class="wrap wrap-brand">
 				<!-- logo -->
-				<div id="logo">
-					<div class="logo"><a href="#" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
+				<div id="logo"  style="height: 50px;">
+					<div class="logo"><a href="http://www.juyouli.com" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
 					<h1>商家中心</h1>
 				</div>
 				<!-- logo end -->
 				<!-- site -->
 				<div id="site">
 					<ul class="item">
-						<li>|</li>
-						<li class="msg">
-							<div class="hd"><i class="icon"></i><a href="#">消息</a><em>2</em></div>
-						</li>
-						<li>|</li>
+						<li>|</li>						
 						<li>
 							<div class="hd"><a href="#">帮助中心</a></div>
 						</li>
@@ -119,6 +115,7 @@ function closeDeposit() {
 					<li class="nav-02" b="20"><a href="#"><i class="icon"></i>商品管理</a></li>
 					<li class="nav-03" b="30"><a href="#"><i class="icon"></i>品牌特卖</a></li>
 					<li class="nav-04" b="40"><a href="#"><i class="icon"></i>交易管理</a></li>
+					<li class="nav-05" b="50"><a href="#"><i class="icon"></i>专场结算</a></li>
 				</ul>
 			</div>
 		</div>
@@ -150,6 +147,7 @@ function closeDeposit() {
 							<li b="40" m="4002"><a href="${ctx}/order/sendOrder"><i class="icon"></i>订单发货</a></li>
 							<li b="40" m="4003"><a href="${ctx}/order/returnOrder"><i class="icon"></i>退货管理</a></li>
 							
+							<li b="50" m="5001"><a href="${ctx}/helper/settleaccounts"><i class="icon"></i>专场结算</a></li>
 						</ul>
 					</div>
 				</div>

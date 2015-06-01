@@ -44,7 +44,7 @@
 							<div class="form-item">
 								<div class="item-label"><label>注册资本：</label></div>
 								<div class="item-cont">
-									<span><c:out value="${s.registerCapital }" /></span>
+									<span><c:out value="${s.registerCapital }" />万元</span>
 								</div>
 							</div>
 							<div class="form-item">
@@ -84,12 +84,6 @@
 								<div class="item-label"><label>联系人手机号码：</label></div>
 								<div class="item-cont">
 									<span><c:out value="${s.bizManMobile }" /></span>
-								</div>
-							</div>
-							<div class="form-item">
-								<div class="item-label"><label>联系人固定电话：</label></div>
-								<div class="item-cont">
-								<span>333333333333333</span>
 								</div>
 							</div>
 							<div class="form-item">

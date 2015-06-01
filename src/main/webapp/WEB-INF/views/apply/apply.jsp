@@ -2,14 +2,13 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="/common/common.jsp"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>卖家申请-阿凡达</title>
+<title>卖家申请-巨友利</title>
 </head>
 <body>	
 	<link rel="stylesheet" href="${cssUrl}/css/join.css?t=20150129" />
@@ -164,7 +163,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBtImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.btImg)}" alt="" id="imgBtImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.btImg}" alt="" id="imgBtImg">
 													</c:otherwise>
 												</c:choose>													
 												<input type="hidden" id="btImg" name="btImg" value="${data.btImg}" data-required="true" data-describedby="btImg_msg" data-description="btImg">
@@ -179,7 +178,7 @@
 										</td>
 										<td>
 											<div class="mod-UploadPreview">
-												<div class="imgBox"><img src="${cssUrl}/img/temp/zhengjian.png" alt="" class=""></div>
+												<div class="imgBox"><img width="180" height="129" src="${cssUrl}/img/temp/yingye.png" alt="" class=""></div>
 											</div>
 										</td>
 									</tr>
@@ -195,7 +194,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgOrgCodeImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.orgCodeImg)}" alt="" id="imgOrgCodeImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.orgCodeImg}" alt="" id="imgOrgCodeImg">
 													</c:otherwise>
 												</c:choose>			
 												<input type="hidden" id="orgCodeImg" name="orgCodeImg" value="${data.orgCodeImg}" data-required="true" data-describedby="orgCodeImg_msg" data-description="orgCodeImg">											
@@ -211,7 +210,7 @@
 										</td>
 										<td>
 											<div class="mod-UploadPreview">
-												<div class="imgBox"><img src="${cssUrl}/img/temp/zhengjian.png" alt="" class=""></div>
+												<div class="imgBox"><img width="180" height="129" src="${cssUrl}/img/temp/zuzhi.jpg" alt="" class=""></div>
 											</div>
 										</td>
 									</tr>
@@ -227,7 +226,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgTaxImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.taxImg)}" alt="" id="imgTaxImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.taxImg}" alt="" id="imgTaxImg">
 													</c:otherwise>
 												</c:choose>		
 												<input type="hidden" id="taxImg" name="taxImg" value="${data.taxImg}" data-required="true" data-describedby="taxImg_msg" data-description="taxImg">																							
@@ -243,7 +242,7 @@
 										</td>
 										<td>
 											<div class="mod-UploadPreview">
-												<div class="imgBox"><img src="${cssUrl}/img/temp/zhengjian.png" alt="" class=""></div>
+												<div class="imgBox"><img width="180" height="129" src="${cssUrl}/img/temp/shuiwu.jpg" alt="" class=""></div>
 											</div>
 										</td>
 									</tr>
@@ -259,7 +258,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBankLicenseImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl).concat('?rid=').concat(data.bankLicenseImg)}" alt="" id="imgBankLicenseImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.bankLicenseImg}" alt="" id="imgBankLicenseImg">
 													</c:otherwise>
 												</c:choose>		
 												<input type="hidden" id="bankLicenseImg" name="bankLicenseImg" value="${data.bankLicenseImg}" data-required="true" data-describedby="bankLicenseImg_msg" data-description="bankLicenseImg">																							
@@ -275,7 +274,7 @@
 										</td>
 										<td>
 											<div class="mod-UploadPreview">
-												<div class="imgBox"><img src="${cssUrl}/img/temp/zhengjian.png" alt="" class=""></div>
+												<div class="imgBox"><img width="180" height="129" src="${cssUrl}/img/temp/kaihu.jpg" alt="" class=""></div>
 											</div>
 										</td>
 									</tr>
@@ -324,7 +323,7 @@
 							</div>
 							<div class="form-item">
 								<div class="item-label"><label class="hide">入驻协议：</label></div>
-								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" id="chkProtocol"/>我已阅读并同意<a href="${ctx}/static/applyDeal.jsp" target="_blank">《阿凡达商家入驻条款》</a></label>
+								<div class="item-cont"><label><input type="checkbox" class="chk" checked="checked" id="chkProtocol"/>我已阅读并同意<a href="http://css.seller.juyouli.com/deal1.html" target="_blank">《巨友利商家入驻条款》</a></label>
 									<div class="note errTxt" id="protocol_msg"></div>
 								</div>
 							</div>

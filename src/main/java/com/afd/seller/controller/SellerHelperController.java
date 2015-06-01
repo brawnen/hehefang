@@ -68,9 +68,20 @@ public class SellerHelperController {
 		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
 		
 		SellerReceipt sellerReceipt = sellerReceiptService.getSellerReceiptBySellerId(sellerId);
+		
 		if(null != sellerReceipt){
+			if(StringUtils.isNotEmpty(sellerReceipt.getRegisterTel())){
+				sellerReceipt.setRegisterTel(sellerReceipt.getRegisterTel());
+			}
+			
+			Seller seller = sellerService.getSellerById(sellerId);
+			if(null != seller){
+				sellerReceipt.setCoName(seller.getCoName());
+			}
+			
 			modelMap.put("receipt",sellerReceipt);
 		}
+		
 		return "sellerHelper/receipt";
 	}
 	
@@ -82,7 +93,13 @@ public class SellerHelperController {
 	@ResponseBody
 	public int toSaveReceipt(HttpServletRequest request,@ModelAttribute SellerReceipt sellerReceipt){
 		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
-		sellerReceipt.setSellerId(sellerId);
+		sellerReceipt.setSellerId(sellerId);	
+		String tel=sellerReceipt.getTelNo();
+		if (!sellerReceipt.getTelArea().trim().equals(""))
+			tel=sellerReceipt.getTelArea()+"-"+tel;
+		if (!sellerReceipt.getTelExt().trim().equals(""))
+			tel=tel+"-"+sellerReceipt.getTelNo();
+		sellerReceipt.setRegisterTel(tel);
 		return sellerReceiptService.updateSellerReceipt(sellerReceipt);
 	}	
 	
@@ -149,4 +166,12 @@ public class SellerHelperController {
 		return re;
 	}
 	
+	/**
+	 *  结算
+	 * @return
+	 */
+	@RequestMapping(value="helper/settleaccounts")
+	public String settleaccounts(HttpServletRequest request,@ModelAttribute Seller seller){
+		return "sellerHelper/settleaccounts";
+	}
 }

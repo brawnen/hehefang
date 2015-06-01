@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${cssUrl}/css/register.css" />
 <script type="text/javascript" src="${jsUrl}/g.js?t=20150126"></script>
 <script type="text/javascript" src="${jsUrl}/register.js?t=20150126"></script>
-<title>商家注册-阿凡达</title>
+<title>商家注册-巨友利</title>
 <style type="text/css">
 	.success-gou{
 		background: url(img/reg-wraning.png) no-repeat right 4px;
@@ -26,8 +26,8 @@
 		<div id="header">
 			<div class="wrap">
 				<!-- logo -->
-				<div id="logo">
-					<div class="logo"><a href="#" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
+				<div id="logo"  style="height: 50px;">
+					<div class="logo"><a href="http://www.juyouli.com" title="logo"><img src="${cssUrl}/img/logo.png" alt="logo" /></a></div>
 					<h1>商家中心</h1>
 				</div>
 				<!-- logo end -->
@@ -91,14 +91,14 @@
 						<dl class="form-item item-agree">
 							<dt class="item-label"></dt>
 							<dd class="item-cont">
-								<p><input type="checkbox" name="chkAgreement" id="chkAgreement" value="" class="chk" checked="checked" /><label for="chkAgreement">我已阅读并同意</label><a href="#">《阿凡达注册服务协议》</a><span class="errTxt" id="agreement_msg" style="display:none">请接受服务条款</span></p>
+								<p><input type="checkbox" name="chkAgreement" id="chkAgreement" value="" class="chk" checked="checked" /><label for="chkAgreement">我已阅读并同意</label><a href="http://css.seller.juyouli.com/deal2.html" target="_blank" >《巨友利注册服务协议》</a><span class="errTxt" id="agreement_msg" style="display:none">请接受服务条款</span></p>
 								<input type="submit" value="同意协议并注册"  class="btn btn-primary regBtn">
 							</dd>
 						</dl>
 					</form>
 					<div class="reg-login">
 						<img src="${cssUrl}/img/register.png" alt="">
-						<p>已有阿凡达商家账号？</p>
+						<p>已有巨友利商家账号？</p>
 						<a href="${ctx}/login" class="btn btn-def">立即登录</a>
 					</div>
 				</div>

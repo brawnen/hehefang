@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-<title>品牌特卖-阿凡达</title>
+<title>品牌特卖-巨友利</title>
 </head>
 <body>
 
@@ -105,7 +105,7 @@
 					<span class="note">图片大小必须为：1920px*400px，图片格式为：png/jpg/jpeg</span>&nbsp;&nbsp;
 					<div class="item-preview preview1" style="width: 576px"><c:choose>
 						<c:when test="${empty(brandShow.showBannerImg)}"><img src="${cssUrl}/img/prve1.jpg" alt="" id="imgShowBannerImg"/>	</c:when>
-						<c:otherwise><img src="${my:random(imgGetUrl).concat('?rid=').concat(brandShow.showBannerImg)}" alt="" id="imgShowBannerImg"/></c:otherwise>
+						<c:otherwise><img src="${my:random(imgGetUrl)}rid=${brandShow.showBannerImg}" alt="" id="imgShowBannerImg"/></c:otherwise>
 					</c:choose>		
 					</div>			
 					<div class="note errTxt" id="showBannerImg_msg"></div>				
@@ -116,10 +116,10 @@
 				<div class="item-cont">
 					<input type="button" class="btn btn-def" value="上传图片" id="btnHomeBannerImg"/>
 					<input type="hidden" id="homeBannerImg" name="homeBannerImg" value="${brandShow.homeBannerImg}" data-required="true" data-describedby="homeBannerImg_msg" data-description="homeBannerImg">
-					<span class="note">建议选用专场页Banner缩略图，图片大小为：440*180px，图片格式为：png/jpg/jpeg</span>&nbsp;&nbsp;
+					<span class="note">建议选用专场页Banner缩略图，图片大小为：468*240px，图片格式为：png/jpg/jpeg</span>&nbsp;&nbsp;
 					<div class="item-preview preview2" style="width: 220px"><c:choose>					
 						<c:when test="${empty(brandShow.homeBannerImg)}"><img src="${cssUrl}/img/prve2.jpg" alt="" id="imgHomeBannerImg" style="width: 576px"/>	</c:when>
-						<c:otherwise><img src="${my:random(imgGetUrl).concat('?rid=').concat(brandShow.homeBannerImg)}" alt="" id="imgHomeBannerImg" style="width: 576px"/></c:otherwise>
+						<c:otherwise><img src="${my:random(imgGetUrl)}?rid=${brandShow.homeBannerImg}&op=s0_w468_h240" alt="" id="imgHomeBannerImg"/></c:otherwise>
 						</c:choose></div>
 					<div class="note errTxt" id="homeBannerImg_msg"></div>	
 				</div>
