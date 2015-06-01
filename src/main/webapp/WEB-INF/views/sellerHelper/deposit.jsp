@@ -73,7 +73,7 @@ function closeDeposit1() {
 				<dd>
 					<h3>保证金已缴纳 ！</h3>
 					<p>您公司保证金已确认到账，请尽快发布品牌特卖活动。</p>
-					<div class="btnWrap"><a href="javascript:;" class="btn btn-primary">我知道了</a></div>
+					<div class="btnWrap"><a href="javascript:closeDeposit1();" class="btn btn-primary">我知道了</a></div>
 				</dd>
 			</dl>
 		</div>
