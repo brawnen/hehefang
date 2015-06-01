@@ -175,7 +175,7 @@
 								</div>
 							</div>
 							<div class="form-item">
-								<div class="item-label"><label><em>*</em>收件人电话：</label></div>
+								<div class="item-label"><label><em>*</em>收件人手机号：</label></div>
 								<div class="item-cont">
 									<input type="text" class="txt lg w-lgl" id="rMobile" name="rMobile" value="<c:out value="${receipt.rMobile }" />" data-required="true" data-describedby="rMobile_msg" data-description="rMobile" data-pattern="^[1]\d{10}$" maxlength="11" />
 									<div class="note errTxt" id="rMobile_msg"></div>
@@ -190,7 +190,7 @@
 							</div>
 							<div class="form-item">
 								<div class="item-cont">
-									<input type="button" value="保 存" onclick="saveReceipt()" class="btn btn-primary lg p-xl">
+									<input type="submit" value="保 存" onclick="saveReceipt()" class="btn btn-primary lg p-xl">
 								</div>
 							</div>
 						</fieldset>
