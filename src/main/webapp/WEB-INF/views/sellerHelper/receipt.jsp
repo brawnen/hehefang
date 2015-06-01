@@ -67,8 +67,8 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>单位全称：</label></div>
 								<div class="item-cont">
-									<input type="text" class="txt lg w-lgl" value='<c:out value="${receipt.coName}" />'/>
-									<div class="note errTxt">错误信息</div>
+									<input type="text" class="txt lg w-lgl" dblength="33" id="coName" name="coName"　value="<c:out value="${receipt.coName}" />"　data-required="true" data-describedby="coName_msg" data-description="coName"　/>
+									<div class="note errTxt"></div>
 								</div>
 							</div>
 							<div class="form-item">
@@ -191,7 +191,7 @@
 							</div>
 							<div class="form-item">
 								<div class="item-cont">
-									<input type="submit" value="保 存" onclick="saveReceipt()" class="btn btn-primary lg p-xl">
+									<input type="submit" value="保 存"  class="btn btn-primary lg p-xl">
 								</div>
 							</div>
 						</fieldset>
