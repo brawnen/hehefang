@@ -94,11 +94,16 @@ public class SellerHelperController {
 	public int toSaveReceipt(HttpServletRequest request,@ModelAttribute SellerReceipt sellerReceipt){
 		int sellerId = LoginUtils.getLoginInfo(request).getSellerId();
 		sellerReceipt.setSellerId(sellerId);	
-		String tel=sellerReceipt.getTelNo();
-		if (!sellerReceipt.getTelArea().trim().equals(""))
-			tel=sellerReceipt.getTelArea()+"-"+tel;
-		if (!sellerReceipt.getTelExt().trim().equals(""))
-			tel=tel+"-"+sellerReceipt.getTelNo();
+		
+		String tel = sellerReceipt.getTelNo();
+		
+		if(StringUtils.isNotEmpty(sellerReceipt.getTelArea()) && sellerReceipt.getTelArea().trim().length()>0){
+			tel = sellerReceipt.getTelArea() + "-" + tel;
+		}
+		if(StringUtils.isNotEmpty(sellerReceipt.getTelExt()) && sellerReceipt.getTelExt().trim().length()>0){
+			tel += "-" + sellerReceipt.getTelExt().trim();
+		}
+		
 		sellerReceipt.setRegisterTel(tel);
 		return sellerReceiptService.updateSellerReceipt(sellerReceipt);
 	}	
