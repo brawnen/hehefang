@@ -95,7 +95,7 @@
 											</c:choose>
 										</td>
 										<td><c:choose>
-												<c:when test="${apply.status=='1'}"><a href="${ctx}/apply/apply">查看</a></c:when>
+												<%-- <c:when test="${apply.status=='1'}"><a href="${ctx}/apply/apply">查看</a></c:when> --%>
 												<c:when test="${apply.status=='3'}"><a href="${ctx}/apply/apply">修改</a></c:when>
 											</c:choose></td>
 									</tr>
