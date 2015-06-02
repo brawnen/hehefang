@@ -118,7 +118,7 @@
 					<input type="hidden" id="homeBannerImg" name="homeBannerImg" value="${brandShow.homeBannerImg}" data-required="true" data-describedby="homeBannerImg_msg" data-description="homeBannerImg">
 					<span class="note">建议选用专场页Banner缩略图，图片大小为：468*240px，图片格式为：png/jpg/jpeg</span>&nbsp;&nbsp;
 					<div class="item-preview preview2" style="width: 220px"><c:choose>					
-						<c:when test="${empty(brandShow.homeBannerImg)}"><img src="${cssUrl}/img/prve2.jpg" alt="" id="imgHomeBannerImg" style="width: 576px"/>	</c:when>
+						<c:when test="${empty(brandShow.homeBannerImg)}"><img src="${cssUrl}/img/prve2.jpg" alt="" id="imgHomeBannerImg" />	</c:when>
 						<c:otherwise><img src="${my:random(imgGetUrl)}?rid=${brandShow.homeBannerImg}&op=s0_w468_h240" alt="" id="imgHomeBannerImg"/></c:otherwise>
 						</c:choose></div>
 					<div class="note errTxt" id="homeBannerImg_msg"></div>	
