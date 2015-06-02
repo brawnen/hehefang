@@ -296,7 +296,7 @@ public class ProductController {
 		page = productService.searchOnlineProductPage(productCondition, sortField, sortDirection, page);
 		List<Product> list = page.getResult();
 		for (Product p : list) {
-			BaseCategoryInfoVO bc = this.categoryService.getBaseCategoryInfoByBcId(p.getBcId());
+			BaseCategory bc = this.categoryService.getByBcId(p.getBcId());
 			if(null != bc){
 				String displayBcName = bc.getPathName().trim().replace("|", "/");
 				p.setBcName(displayBcName +"/"+ bc.getBcName());
