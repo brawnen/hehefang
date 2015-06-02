@@ -67,10 +67,17 @@
 								</div>
 								<div class="note errTxt"></div>
 							</div>
-
-						<c:if test="${!empty(bc.attrList)}">
-							<c:forEach items="${bc.attrList}" var="attr">
-								<div class="form-item">
+	<!-- 						<div class="form-item">
+								<div class="item-label"><label><em>*</em>产地：</label></div>
+								<div class="item-cont"><input type="text" class="txt lg" id="origin" name="origin" ></div>
+							</div>
+							<div class="form-item">
+								<div class="item-label"><label><em>*</em>材质：</label></div>
+								<div class="item-cont"><input type="text" class="txt lg w-lg" id="material" name="material" ></div>
+							</div> -->
+							<div class="form-item">
+							<c:if test="${!empty(bc.attrList)}">
+								<c:forEach items="${bc.attrList}" var="attr">
 									<div class="item-label">
 										<c:choose>
 											<c:when test="${attr.isRequire}">
@@ -103,10 +110,9 @@
 										</div>
 									</div>
 									<input type="hidden" name="attr" attrId="${attr.attrId}" attrName="${attr.attrName}" displayMode="${attr.displayMode}" require="${attr.isRequire ? 'true' : 'false'}"/>
-								</div>
-							</c:forEach>
-						</c:if>	
-							
+								</c:forEach>
+							</c:if>	
+							</div>
 							<div class="note errTxt"></div>
 							<div class="form-item item-color">
 								<c:if test="${!empty(bc.specList)}">
@@ -156,8 +162,8 @@
 									<div class="editer">
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
-									<span class="note" id='detail_warn'>还可输入<b>30</b>个字!</span>
 								</div>
+								<span class="note" id='detail_warn' style="padding-left: 30px;">还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>
