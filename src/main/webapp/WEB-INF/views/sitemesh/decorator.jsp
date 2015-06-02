@@ -63,7 +63,7 @@ $(function() {
 	
 	sItem.addClass('curr');
 	
-	$('#smallMenu').find('li[b!="' + b + '"]').hide();
+	$('#smallMenu').find('li[b="' + b + '"]').show();
 	
 	var bItem = $('#bigMenu').find('li[b="' + b + '"]');
 	bItem.addClass('curr');
@@ -127,27 +127,27 @@ function closeDeposit() {
 				<div id="aside">
 					<div id="asideNav">
 						<ul id="smallMenu">
-							<li b="10" m="1001"><a href="${ctx}/ws/summary"><i class="icon"></i>概览</a></li>
-							<li b="10" m="1002"><a href="${ctx}/helper/deposit"><i class="icon"></i>保证金</a></li>
-							<li b="10" m="1003"><a href="${ctx}/helper/payee"><i class="icon"></i>收款银行账户</a></li>
-							<li b="10" m="1004"><a href="${ctx}/helper/receipt"><i class="icon"></i>开票信息</a></li>
-							<li b="10" m="1005"><a href="${ctx}/helper/sellerInfo"><i class="icon"></i>基本信息</a></li>
-							<li b="10" m="1006"><a href="${ctx}/helper/retAddrlist"><i class="icon"></i>退货地址</a></li>
-							<li b="10" m="1007"><a href="${ctx}/helper/setPasswd"><i class="icon"></i>修改密码</a></li>
+							<li b="10" m="1001" style="display: none" ><a href="${ctx}/ws/summary"><i class="icon"></i>概览</a></li>
+							<li b="10" m="1002" style="display: none" ><a href="${ctx}/helper/deposit"><i class="icon"></i>保证金</a></li>
+							<li b="10" m="1003" style="display: none" ><a href="${ctx}/helper/payee"><i class="icon"></i>收款银行账户</a></li>
+							<li b="10" m="1004" style="display: none" ><a href="${ctx}/helper/receipt"><i class="icon"></i>开票信息</a></li>
+							<li b="10" m="1005" style="display: none" ><a href="${ctx}/helper/sellerInfo"><i class="icon"></i>基本信息</a></li>
+							<li b="10" m="1006" style="display: none" ><a href="${ctx}/helper/retAddrlist"><i class="icon"></i>退货地址</a></li>
+							<li b="10" m="1007" style="display: none" ><a href="${ctx}/helper/setPasswd"><i class="icon"></i>修改密码</a></li>
 							
-							<li b="20" m="2001"><a href="${ctx}/product/category"><i class="icon"></i>发布新商品</a></li>
-							<li b="20" m="2002"><a href="${ctx}/product/online"><i class="icon"></i>在售商品管理</a></li>
-							<li b="20" m="2003"><a href="${ctx}/product/audit"><i class="icon"></i>审核中商品</a></li>
-							<li b="20" m="2004"><a href="${ctx}/product/brand"><i class="icon"></i>品牌管理</a></li>
+							<li b="20" m="2001" style="display: none" ><a href="${ctx}/product/category"><i class="icon"></i>发布新商品</a></li>
+							<li b="20" m="2002" style="display: none" ><a href="${ctx}/product/online"><i class="icon"></i>在售商品管理</a></li>
+							<li b="20" m="2003" style="display: none" ><a href="${ctx}/product/audit"><i class="icon"></i>审核中商品</a></li>
+							<li b="20" m="2004" style="display: none" ><a href="${ctx}/product/brand"><i class="icon"></i>品牌管理</a></li>
 							
-							<li b="30" m="3001"><a href="${ctx}/brandShow/list"><i class="icon"></i>特卖专场列表</a></li>
-							<li b="30" m="3002"><a href="${ctx}/brandShow/show"><i class="icon"></i>新建品牌特卖</a></li>
+							<li b="30" m="3001" style="display: none" ><a href="${ctx}/brandShow/list"><i class="icon"></i>特卖专场列表</a></li>
+							<li b="30" m="3002" style="display: none" ><a href="${ctx}/brandShow/show"><i class="icon"></i>新建品牌特卖</a></li>
 							
-							<li b="40" m="4001"><a href="${ctx}/order/queryOrder"><i class="icon"></i>全部订单</a></li>
-							<li b="40" m="4002"><a href="${ctx}/order/sendOrder"><i class="icon"></i>订单发货</a></li>
-							<li b="40" m="4003"><a href="${ctx}/order/returnOrder"><i class="icon"></i>退货管理</a></li>
+							<li b="40" m="4001" style="display: none" ><a href="${ctx}/order/queryOrder"><i class="icon"></i>全部订单</a></li>
+							<li b="40" m="4002" style="display: none" ><a href="${ctx}/order/sendOrder"><i class="icon"></i>订单发货</a></li>
+							<li b="40" m="4003" style="display: none" ><a href="${ctx}/order/returnOrder"><i class="icon"></i>退货管理</a></li>
 							
-							<li b="50" m="5001"><a href="${ctx}/helper/settleaccounts"><i class="icon"></i>专场结算</a></li>
+							<li b="50" m="5001" style="display: none" ><a href="${ctx}/helper/settleaccounts"><i class="icon"></i>专场结算</a></li>
 						</ul>
 					</div>
 				</div>
