@@ -67,56 +67,50 @@
 								</div>
 								<div class="note errTxt"></div>
 							</div>
-	<!-- 						<div class="form-item">
-								<div class="item-label"><label><em>*</em>产地：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg" id="origin" name="origin" ></div>
-							</div>
-							<div class="form-item">
-								<div class="item-label"><label><em>*</em>材质：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lg" id="material" name="material" ></div>
-							</div> -->
-							<div class="form-item">
+							
 							<c:if test="${!empty(bc.attrList)}">
 								<c:forEach items="${bc.attrList}" var="attr">
-									<div class="item-label">
-										<c:choose>
-											<c:when test="${attr.isRequire}">
-												<label><em>*</em>${attr.attrName}：</label>
-											</c:when>
-											<c:otherwise>
-												<label>${attr.attrName}：</label>
-											</c:otherwise>
-										</c:choose>
-									</div>
-									<div class="item-cont">
-										<div class="mod-attrChk">
+									<div class="form-item">
+										<div class="item-label">
 											<c:choose>
-												<c:when test="${attr.displayMode == 1 }">
-													<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr();">
-														<option value=""></option>
-														<c:forEach items="${attr.attrValueList }" var="attrValue" >
-															<option value="${attrValue.attrValueId }|||${attrValue.attrValue }" attrValueId="${attrValue.attrValueId}"><c:out value='${attrValue.attrValue }'/></option>
-														</c:forEach>
-													</select>
+												<c:when test="${attr.isRequire}">
+													<label><em>*</em>${attr.attrName}：</label>
 												</c:when>
 												<c:otherwise>
-													<ul>
-													<c:forEach items="${attr.attrValueList }" var="attrValue">
-														<li><label><input type="checkbox" onchange="publish.valaidateAttr();" class="chk" name="attrValue" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}"  attrValueName="${attrValue.attrValue}"><c:out value='${attrValue.attrValue }'/></label></li>
-													</c:forEach>
-													</ul>
+													<label>${attr.attrName}：</label>
 												</c:otherwise>
 											</c:choose>
 										</div>
+										<div class="item-cont">
+											<div class="mod-attrChk">
+												<c:choose>
+													<c:when test="${attr.displayMode == 1 }">
+														<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr();">
+															<option value=""></option>
+															<c:forEach items="${attr.attrValueList }" var="attrValue" >
+																<option value="${attrValue.attrValueId }|||${attrValue.attrValue }" attrValueId="${attrValue.attrValueId}"><c:out value='${attrValue.attrValue }'/></option>
+															</c:forEach>
+														</select>
+													</c:when>
+													<c:otherwise>
+														<ul>
+														<c:forEach items="${attr.attrValueList }" var="attrValue">
+															<li><label><input type="checkbox" onchange="publish.valaidateAttr();" class="chk" name="attrValue" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}"  attrValueName="${attrValue.attrValue}"><c:out value='${attrValue.attrValue }'/></label></li>
+														</c:forEach>
+														</ul>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+										<input type="hidden" name="attr" attrId="${attr.attrId}" attrName="${attr.attrName}" displayMode="${attr.displayMode}" require="${attr.isRequire ? 'true' : 'false'}"/>
 									</div>
-									<input type="hidden" name="attr" attrId="${attr.attrId}" attrName="${attr.attrName}" displayMode="${attr.displayMode}" require="${attr.isRequire ? 'true' : 'false'}"/>
 								</c:forEach>
 							</c:if>	
-							</div>
-							<div class="note errTxt"></div>
-							<div class="form-item item-color">
-								<c:if test="${!empty(bc.specList)}">
-									<c:forEach items="${bc.specList}" var="spec" varStatus="var">
+							<div class="note errTxt" id="attrValueErr"></div>
+							
+							<c:if test="${!empty(bc.specList)}">
+								<c:forEach items="${bc.specList}" var="spec" varStatus="var">
+									<div class="form-item item-color">
 									<div class="item-label"><label><em>*</em>${spec.specName }：</label></div>
 									<div class="item-cont">
 										<div class="mod-attrChk">
@@ -134,9 +128,9 @@
 											</ul>
 										</div>
 									</div>
-									</c:forEach>
-								</c:if>
-							</div>
+									</div>
+								</c:forEach>
+							</c:if>
 							<div class="note errTxt" id="spacErr"></div>
 							<div class="form-item sku-attr">
 								<div class="item-label" style="display: none;"><label><em>*</em>SKU销售属性：</label></div>
@@ -163,7 +157,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
 								</div>
-								<span class="note" id='detail_warn' style="padding-left: 30px;">还可输入<b>30</b>个字!</span>
+								<span class="note" id='detail_warn' style="padding-left: 110px;">还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>
@@ -235,6 +229,6 @@
 
 	</script>
 	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>	
-	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150502"></script>
+	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150603"></script>
 </body>
 </html>
