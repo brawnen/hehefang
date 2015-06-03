@@ -15,6 +15,7 @@
 		var imgGetUrl = '${my:random(imgGetUrl)}';
 	</script>	
 	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>
+       <script type="text/javascript" src="${jsUrl}/jquery-validate.min.js?t=20150601"></script>
 	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>
 	<script type="text/javascript" src="${jsUrl}/receipt.js?t=20150129"></script>
 	<style>
@@ -67,8 +68,8 @@
 							<div class="form-item">
 								<div class="item-label"><label><em>*</em>单位全称：</label></div>
 								<div class="item-cont">
-									<input type="text" class="txt lg w-lgl" dblength="33" id="coName" name="coName"　value="<c:out value="${receipt.coName}" />"　data-required="true" data-describedby="coName_msg" data-description="coName"　/>
-									<div class="note errTxt"></div>
+									<input type="text" class="txt lg w-lgl" dblength="33" id="coName" name="coName" value="<c:out value="${receipt.coName}"/>" data-required="true" data-describedby="coName_msg" data-description="coName"/>
+									<div class="note errTxt" id="coName_msg"></div>
 								</div>
 							</div>
 							<div class="form-item">
@@ -134,7 +135,7 @@
 											<img src="${my:random(imgGetUrl)}?rid=${receipt.taxImg}" alt="" id="imgTaxImg">
 										</c:otherwise>
 									</c:choose>			
-									<input type="hidden" id="taxImg" name="taxImg" value="${receipt.taxImg}" data-required="true" data-describedby="btImg_msg" data-description="taxImg">
+									<input type="hidden" id="taxImg" name="taxImg" value="${receipt.taxImg}" data-describedby="btImg_msg" data-description="taxImg">
 									</div>
 									<p class="submit-btn">
 									<input type="button" class="btn btn-def" value="上 传" id="btnTaxImg">
@@ -157,7 +158,7 @@
 											<img src="${my:random(imgGetUrl)}?rid=${receipt.qualiUrl}" alt="" id="imgQualiUrl">
 										</c:otherwise>
 									</c:choose>			
-									<input type="hidden" id="qualiUrl" name="qualiUrl" value="${receipt.qualiUrl}" data-required="true" data-describedby="qualiUrl_msg" data-description="qualiUrl">
+									<input type="hidden" id="qualiUrl" name="qualiUrl" value="${receipt.qualiUrl}" data-describedby="qualiUrl_msg" data-description="qualiUrl">
 									</div>
 									<p class="submit-btn">
 									<input type="button" class="btn btn-def" value="上 传" id="btnQualiUrl">
