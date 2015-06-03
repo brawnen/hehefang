@@ -67,14 +67,6 @@
 								</div>
 								<div class="note errTxt"></div>
 							</div>
-	<!-- 						<div class="form-item">
-								<div class="item-label"><label><em>*</em>产地：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg" id="origin" name="origin" ></div>
-							</div>
-							<div class="form-item">
-								<div class="item-label"><label><em>*</em>材质：</label></div>
-								<div class="item-cont"><input type="text" class="txt lg w-lg" id="material" name="material" ></div>
-							</div> -->
 							<div class="form-item">
 							<c:if test="${!empty(bc.attrList)}">
 								<c:forEach items="${bc.attrList}" var="attr">
@@ -113,30 +105,31 @@
 								</c:forEach>
 							</c:if>	
 							</div>
-							<div class="note errTxt"></div>
-							<div class="form-item item-color">
+							
 								<c:if test="${!empty(bc.specList)}">
+									<div class="note errTxt"></div>
 									<c:forEach items="${bc.specList}" var="spec" varStatus="var">
-									<div class="item-label"><label><em>*</em>${spec.specName }：</label></div>
-									<div class="item-cont">
-										<div class="mod-attrChk">
-											<ul var="${var.count }" specId="${spec.specId}">
-												<c:forEach items="${spec.specValueList }" var="specValue">
-												<li>
-													<input type="checkbox" class="chk" id="specValue" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();">
-													<c:if test="${!empty(specValue.imgUrl)}">
-														<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
-													</c:if>
-													<label name="specValueTxt" >${specValue.specValueName }</label>
-													<input type="text" class="txt" value="<c:out value='${specValue.specValueName}'/>">
-												</li>
-												</c:forEach>
-											</ul>
+										<div class="form-item item-color">
+										<div class="item-label"><label><em>*</em>${spec.specName }：</label></div>
+										<div class="item-cont">
+											<div class="mod-attrChk">
+												<ul var="${var.count }" specId="${spec.specId}">
+													<c:forEach items="${spec.specValueList }" var="specValue">
+													<li>
+														<input type="checkbox" class="chk" id="specValue" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();">
+														<c:if test="${!empty(specValue.imgUrl)}">
+															<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
+														</c:if>
+														<label name="specValueTxt" >${specValue.specValueName }</label>
+														<input type="text" class="txt" value="<c:out value='${specValue.specValueName}'/>">
+													</li>
+													</c:forEach>
+												</ul>
+											</div>
 										</div>
-									</div>
+										</div>
 									</c:forEach>
 								</c:if>
-							</div>
 							<div class="note errTxt" id="spacErr"></div>
 							<div class="form-item sku-attr">
 								<div class="item-label" style="display: none;"><label><em>*</em>SKU销售属性：</label></div>
@@ -163,7 +156,7 @@
 										<textarea id="detail" name="detail" style="width: 800px; height: 400px;"><c:out value="${p.detail}"/></textarea>
 									</div>
 								</div>
-								<span class="note" id='detail_warn' style="padding-left: 30px;">还可输入<b>30</b>个字!</span>
+								<span class="note" id='detail_warn' style="padding-left: 110px;">还可输入<b>30</b>个字!</span>
 							</div>
 							<div class="form-item">
 								<div class="item-label"></div>
