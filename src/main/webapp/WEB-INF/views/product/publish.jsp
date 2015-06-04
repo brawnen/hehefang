@@ -230,7 +230,6 @@
 
 	</script>
 	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>	
-	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150603"></script>
-	<script type="text/javascript" src="${ctx}/static/publish.js?t=20150607"></script>	
+	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150604"></script>
 </body>
 </html>

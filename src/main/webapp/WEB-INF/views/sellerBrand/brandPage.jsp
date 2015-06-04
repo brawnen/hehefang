@@ -21,7 +21,7 @@
 		var f = '${param.f}';
 	</script>	
 	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>
-	<script type="text/javascript" src="${jsUrl}/brandPage.js?t=20150129"></script>
+	<script type="text/javascript" src="${jsUrl}/brandPage.js?t=20150604"></script>
 	<script type="text/javascript">
 		$(function(){
 			if(f) $('#popBrand, #maskBrand').show();
@@ -127,7 +127,7 @@
 									<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgTrademarkCert">
 								</c:when>
 								<c:otherwise>
-									<img src="${my:random(imgGetUrl).concat('?rid=').concat(sellerBrand.trademarkCert)}" alt="" id="imgTrademarkCert">
+									<img src="${my:random(imgGetUrl).concat('?rid=').concat(sellerBrand.trademarkCert)}&op=s2_w97_h97" alt="" id="imgTrademarkCert">
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -147,7 +147,7 @@
 									<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgAuthCert">
 								</c:when>
 								<c:otherwise>
-									<img src="${my:random(imgGetUrl).concat('?rid=').concat(sellerBrand.authCert)}" alt="" id="imgAuthCert">
+									<img src="${my:random(imgGetUrl).concat('?rid=').concat(sellerBrand.authCert)}&op=s2_w97_h97" alt="" id="imgAuthCert">
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -167,7 +167,7 @@
 									<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgOtherCert">
 								</c:when>
 								<c:otherwise>
-									<img src="${my:random(imgGetUrl).concat('?rid=').concat(sellerBrand.otherCert)}" alt="" id="imgOtherCert">
+									<img src="${my:random(imgGetUrl).concat('?rid=').concat(sellerBrand.otherCert)}&op=s2_w97_h97" alt="" id="imgOtherCert">
 								</c:otherwise>
 							</c:choose>
 						</div>

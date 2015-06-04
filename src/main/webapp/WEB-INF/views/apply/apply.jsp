@@ -19,7 +19,7 @@
 		var imgGetUrl = '${my:random(imgGetUrl)}';
 	</script>	
 	<script type="text/javascript" src="${ctx}/uploadify/jquery.uploadify.min.js?t=20150129"></script>
-	<script type="text/javascript" src="${jsUrl}/apply.js?t=20150129"></script>
+	<script type="text/javascript" src="${jsUrl}/apply.js?t=20150604"></script>
 	<style>
 		.uploadBtn{
 		 	cursor:hand;
@@ -163,7 +163,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBtImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl)}?rid=${data.btImg}" alt="" id="imgBtImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.btImg}&op=s2_w97_h97" alt="" id="imgBtImg">
 													</c:otherwise>
 												</c:choose>													
 												<input type="hidden" id="btImg" name="btImg" value="${data.btImg}" data-required="true" data-describedby="btImg_msg" data-description="btImg">
@@ -194,7 +194,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgOrgCodeImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl)}?rid=${data.orgCodeImg}" alt="" id="imgOrgCodeImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.orgCodeImg}&op=s2_w97_h97" alt="" id="imgOrgCodeImg">
 													</c:otherwise>
 												</c:choose>			
 												<input type="hidden" id="orgCodeImg" name="orgCodeImg" value="${data.orgCodeImg}" data-required="true" data-describedby="orgCodeImg_msg" data-description="orgCodeImg">											
@@ -226,7 +226,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgTaxImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl)}?rid=${data.taxImg}" alt="" id="imgTaxImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.taxImg}&op=s2_w97_h97" alt="" id="imgTaxImg">
 													</c:otherwise>
 												</c:choose>		
 												<input type="hidden" id="taxImg" name="taxImg" value="${data.taxImg}" data-required="true" data-describedby="taxImg_msg" data-description="taxImg">																							
@@ -258,7 +258,7 @@
 														<img src="${cssUrl}/img/upload_img.jpg" alt="" id="imgBankLicenseImg">
 													</c:when>
 													<c:otherwise>
-														<img src="${my:random(imgGetUrl)}?rid=${data.bankLicenseImg}" alt="" id="imgBankLicenseImg">
+														<img src="${my:random(imgGetUrl)}?rid=${data.bankLicenseImg}&op=s2_w97_h97" alt="" id="imgBankLicenseImg">
 													</c:otherwise>
 												</c:choose>		
 												<input type="hidden" id="bankLicenseImg" name="bankLicenseImg" value="${data.bankLicenseImg}" data-required="true" data-describedby="bankLicenseImg_msg" data-description="bankLicenseImg">																							

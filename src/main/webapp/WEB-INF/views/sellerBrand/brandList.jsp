@@ -49,7 +49,7 @@
 				<tr>
 					<td>
 						<div class="brand-img">
-							<img src="${my:random(imgGetUrl)}?rid=${brand.logoUrl}" alt="" />
+							<img src="${my:random(imgGetUrl)}?rid=${brand.logoUrl}&op=s2_w80_h80" alt="" />
 						</div>
 					</td>
 					<td><c:out value="${brand.showName}"/></td>

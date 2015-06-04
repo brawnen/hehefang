@@ -13,7 +13,7 @@
 <body>
 
 <link rel="stylesheet" href="${cssUrl}/css/product.css" />
-<script type="text/javascript" src="${jsUrl}/brandDetail.js?t=20150129"></script>
+<script type="text/javascript" src="${jsUrl}/brandDetail.js?t=20150604"></script>
 <script type="text/javascript">
 		var ctx = '${ctx}';
 		var brandId = ${brandShow.brandId};
@@ -67,7 +67,7 @@
 		</div>
 	</div>
 	<div class="bd">
-		<img src="${my:random(imgGetUrl)}?rid=${brandShow.showBannerImg}" alt="">
+		<img src="${my:random(imgGetUrl)}?rid=${brandShow.showBannerImg}&op=s2_w1022_h320" alt="">
 	</div>
 </div>
 <!-- specialmain end  -->
@@ -111,7 +111,7 @@
 				<tbody class="interleave-even">
 			</c:if>
 					<tr>
-						<td><img style="width:50px;height:50px;" src="${my:random(imgGetUrl)}?rid=${brandShowDetail.prodImg}" alt=""></td>
+						<td><img src="${my:random(imgGetUrl)}?rid=${brandShowDetail.prodImg}&op=s2_w50_h50" alt=""></td>
 						<td><p><c:out value="${fn:replace(fn:replace(brandShowDetail.skuSpecName, ':::', ' : '), '|||', '</p><p>')}" escapeXml="false"/></p></td>
 						<td>￥<c:out value="${brandShowDetail.orgPrice}"/></td>
 						<td>
