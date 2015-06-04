@@ -82,10 +82,10 @@
 											</c:choose>
 										</div>
 										<div class="item-cont">
-											<div class="mod-attrChk">
+											<div class="mod-attrChk" id="attrValAnc${attr.attrId}">
 												<c:choose>
 													<c:when test="${attr.displayMode == 1 }">
-														<select  id="attrValue" name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr();">
+														<select name="attrValue" attrId="${attr.attrId}" class="select" onchange="publish.valaidateAttr('${attr.attrId}');">
 															<option value=""></option>
 															<c:forEach items="${attr.attrValueList }" var="attrValue" >
 																<option value="${attrValue.attrValueId }|||${attrValue.attrValue }" attrValueId="${attrValue.attrValueId}"><c:out value='${attrValue.attrValue }'/></option>
@@ -95,7 +95,7 @@
 													<c:otherwise>
 														<ul>
 														<c:forEach items="${attr.attrValueList }" var="attrValue">
-															<li><label><input type="checkbox" onchange="publish.valaidateAttr();" class="chk" name="attrValue" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}"  attrValueName="${attrValue.attrValue}"><c:out value='${attrValue.attrValue }'/></label></li>
+															<li><label><input type="checkbox" onchange="publish.valaidateAttr('${attr.attrId}');" class="chk" name="attrValue" attrId="${attr.attrId}" attrValueId="${attrValue.attrValueId}"  attrValueName="${attrValue.attrValue}"><c:out value='${attrValue.attrValue }'/></label></li>
 														</c:forEach>
 														</ul>
 													</c:otherwise>
@@ -103,35 +103,36 @@
 											</div>
 										</div>
 										<input type="hidden" name="attr" attrId="${attr.attrId}" attrName="${attr.attrName}" displayMode="${attr.displayMode}" require="${attr.isRequire ? 'true' : 'false'}"/>
+										<div class="note errTxt" id="attrValueErr${attr.attrId}"></div>
 									</div>
 								</c:forEach>
 							</c:if>	
-							<div class="note errTxt" id="attrValueErr"></div>
 							
 							<c:if test="${!empty(bc.specList)}">
 								<c:forEach items="${bc.specList}" var="spec" varStatus="var">
 									<div class="form-item item-color">
-									<div class="item-label"><label><em>*</em>${spec.specName }：</label></div>
-									<div class="item-cont">
-										<div class="mod-attrChk">
-											<ul var="${var.count }" specId="${spec.specId}">
-												<c:forEach items="${spec.specValueList }" var="specValue">
-												<li>
-													<input type="checkbox" class="chk" id="specValue" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec();">
-													<c:if test="${!empty(specValue.imgUrl)}">
-														<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
-													</c:if>
-													<label name="specValueTxt" >${specValue.specValueName }</label>
-													<input type="text" class="txt" value="<c:out value='${specValue.specValueName}'/>">
-												</li>
-												</c:forEach>
-											</ul>
+										<div class="item-label"><label><em>*</em>${spec.specName }：</label></div>
+										<div class="item-cont">
+											<div class="mod-attrChk">
+												<ul var="${var.count }" specId="${spec.specId}" specName="${spec.specName}" id="specValAnc${spec.specId}">
+													<c:forEach items="${spec.specValueList }" var="specValue">
+													<li>
+														<input type="checkbox" class="chk" name="specValue" skuSpecName="${spec.specName}" skuSpecId="${spec.specId}" specValueId="${specValue.specValueId}" specOrder="${spec.displayOrder}" onchange="publish.generateSku(this);publish.validateSpec(this);">
+														<c:if test="${!empty(specValue.imgUrl)}">
+															<img  name="colorIcon" colorName="${specValue.specValueName }"  src="${specValue.imgUrl }" alt="" class="colorBlock">
+														</c:if>
+														<label name="specValueTxt" >${specValue.specValueName }</label>
+														<input type="text" class="txt" value="<c:out value='${specValue.specValueName}'/>">
+													</li>
+													</c:forEach>
+												</ul>
+											</div>
 										</div>
-									</div>
+										<div class="note errTxt" id="spacErr${spec.specId}"></div>
 									</div>
 								</c:forEach>
 							</c:if>
-							<div class="note errTxt" id="spacErr"></div>
+							
 							<div class="form-item sku-attr">
 								<div class="item-label" style="display: none;"><label><em>*</em>SKU销售属性：</label></div>
  								<div class="item-cont" id="genSpec">
@@ -230,5 +231,6 @@
 	</script>
 	<script type="text/javascript" src="${jsUrl}/popWindown.js?t=20150210"></script>	
 	<script type="text/javascript" src="${jsUrl}/publish.js?t=20150603"></script>
+	<script type="text/javascript" src="${ctx}/static/publish.js?t=20150607"></script>	
 </body>
 </html>
