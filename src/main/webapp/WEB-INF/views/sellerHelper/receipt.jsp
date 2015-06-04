@@ -90,8 +90,10 @@
 								<div class="item-label"><label><em>*</em>公司注册电话：</label></div>
 								<div class="item-cont">
 									<div class="txt-tel">
-										<input type="text" class="txt lg telArea"  id="telArea" name="telArea" value="${receipt.telArea}" maxlength="4" ><i>-</i><input type="text" class="txt lg telNum" id="telNo" name="telNo" value="${receipt.telNo}" maxlength="8"><i>-</i><input type="text" class="txt lg telExt" id="telExt" name="telExt" value="${receipt.telExt}" maxlength="4">
-										<div class="note errTxt" id="telArea"></div>
+										<input type="text" class="txt lg telArea" data-pattern="^\d{3,4}$"  id="telArea" name="telArea" ata-required="true" value="${receipt.telArea}" maxlength="4"  data-description="telArea" data-describedby="telNo_msg" ><i>-</i>
+										<input type="text" class="txt lg telNum" id="telNo" data-required="true" name="telNo" data-pattern="^\d{8}$" data-description="telNo"  data-describedby="telNo_msg" value="${receipt.telNo}" maxlength="8"><i>-</i>
+										<input type="text" class="txt lg telExt" id="telExt" name="telExt" data-pattern="^\d{1,4}$" data-description="telExt"  data-describedby="telNo_msg" value="${receipt.telExt}" maxlength="4">
+										<div class="note errTxt" id="telNo_msg"></div>
 									</div>
 								</div>
 							</div>
@@ -135,7 +137,7 @@
 											<img src="${my:random(imgGetUrl)}?rid=${receipt.taxImg}" alt="" id="imgTaxImg">
 										</c:otherwise>
 									</c:choose>			
-									<input type="hidden" id="taxImg" name="taxImg" value="${receipt.taxImg}" data-describedby="btImg_msg" data-description="taxImg">
+									<input type="hidden" id="taxImg" name="taxImg" data-required="true" value="${receipt.taxImg}" data-describedby="taxImg_msg" data-description="taxImg">
 									</div>
 									<p class="submit-btn">
 									<input type="button" class="btn btn-def" value="上 传" id="btnTaxImg">
@@ -158,7 +160,7 @@
 											<img src="${my:random(imgGetUrl)}?rid=${receipt.qualiUrl}" alt="" id="imgQualiUrl">
 										</c:otherwise>
 									</c:choose>			
-									<input type="hidden" id="qualiUrl" name="qualiUrl" value="${receipt.qualiUrl}" data-describedby="qualiUrl_msg" data-description="qualiUrl">
+									<input type="hidden" id="qualiUrl" name="qualiUrl" data-required="true" value="${receipt.qualiUrl}" data-describedby="qualiUrl_msg" data-description="qualiUrl">
 									</div>
 									<p class="submit-btn">
 									<input type="button" class="btn btn-def" value="上 传" id="btnQualiUrl">
