@@ -30,7 +30,7 @@
 					<ul class="item">
 						<li>|</li>						
 						<li>
-							<div class="hd"><a href="http://help.juyouli.com/seller/shangjiaruzhu.html">帮助中心</a></div>
+							<div class="hd"><a href="http://help.juyouli.com/seller/shangjiaruzhu.html" target="_blank">帮助中心</a></div>
 						</li>
 					</ul>
 				</div>
