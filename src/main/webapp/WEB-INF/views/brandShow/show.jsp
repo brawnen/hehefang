@@ -105,7 +105,7 @@
 					<span class="note">图片大小必须为：1920px*400px，图片格式为：png/jpg/jpeg</span>&nbsp;&nbsp;
 					<div class="item-preview preview1"><c:choose>
 						<c:when test="${empty(brandShow.showBannerImg)}"><img src="${cssUrl}/img/prve1.jpg" alt="" id="imgShowBannerImg"/>	</c:when>
-						<c:otherwise><img src="${my:random(imgGetUrl)}rid=${brandShow.showBannerImg}&op=s2_w576_h111" alt="" id="imgShowBannerImg"/></c:otherwise>
+						<c:otherwise><img src="${my:random(imgGetUrl)}?rid=${brandShow.showBannerImg}&op=s2_w576_h111" alt="" id="imgShowBannerImg"/></c:otherwise>
 					</c:choose>		
 					</div>			
 					<div class="note errTxt" id="showBannerImg_msg"></div>				
